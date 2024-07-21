@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *SearchMilestonesReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/search/milestones] searchMilestones", response, response.Code())
 	}
 }
 
@@ -63,7 +64,7 @@ SearchMilestonesOK describes a response with status code 200, with default heade
 Resource
 */
 type SearchMilestonesOK struct {
-	Payload *models.MilestoneSearchResults
+	Payload *models.ObjectiveSearchResults
 }
 
 // IsSuccess returns true when this search milestones o k response has a 2xx status code
@@ -91,21 +92,28 @@ func (o *SearchMilestonesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the search milestones o k response
+func (o *SearchMilestonesOK) Code() int {
+	return 200
+}
+
 func (o *SearchMilestonesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesOK %s", 200, payload)
 }
 
 func (o *SearchMilestonesOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesOK %s", 200, payload)
 }
 
-func (o *SearchMilestonesOK) GetPayload() *models.MilestoneSearchResults {
+func (o *SearchMilestonesOK) GetPayload() *models.ObjectiveSearchResults {
 	return o.Payload
 }
 
 func (o *SearchMilestonesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.MilestoneSearchResults)
+	o.Payload = new(models.ObjectiveSearchResults)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -154,12 +162,19 @@ func (o *SearchMilestonesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the search milestones bad request response
+func (o *SearchMilestonesBadRequest) Code() int {
+	return 400
+}
+
 func (o *SearchMilestonesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesBadRequest %s", 400, payload)
 }
 
 func (o *SearchMilestonesBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesBadRequest %s", 400, payload)
 }
 
 func (o *SearchMilestonesBadRequest) GetPayload() *models.MaxSearchResultsExceededError {
@@ -216,12 +231,17 @@ func (o *SearchMilestonesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the search milestones not found response
+func (o *SearchMilestonesNotFound) Code() int {
+	return 404
+}
+
 func (o *SearchMilestonesNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesNotFound", 404)
 }
 
 func (o *SearchMilestonesNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesNotFound", 404)
 }
 
 func (o *SearchMilestonesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,12 +287,17 @@ func (o *SearchMilestonesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the search milestones unprocessable entity response
+func (o *SearchMilestonesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *SearchMilestonesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesUnprocessableEntity", 422)
 }
 
 func (o *SearchMilestonesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/search/milestones][%d] searchMilestonesUnprocessableEntity", 422)
 }
 
 func (o *SearchMilestonesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

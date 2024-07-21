@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *CreateStoryReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/stories] createStory", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *CreateStoryCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create story created response
+func (o *CreateStoryCreated) Code() int {
+	return 201
+}
+
 func (o *CreateStoryCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryCreated %s", 201, payload)
 }
 
 func (o *CreateStoryCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryCreated %s", 201, payload)
 }
 
 func (o *CreateStoryCreated) GetPayload() *models.Story {
@@ -153,12 +161,17 @@ func (o *CreateStoryBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create story bad request response
+func (o *CreateStoryBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateStoryBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryBadRequest", 400)
 }
 
 func (o *CreateStoryBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryBadRequest", 400)
 }
 
 func (o *CreateStoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *CreateStoryNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the create story not found response
+func (o *CreateStoryNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateStoryNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryNotFound", 404)
 }
 
 func (o *CreateStoryNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryNotFound", 404)
 }
 
 func (o *CreateStoryNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *CreateStoryUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the create story unprocessable entity response
+func (o *CreateStoryUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *CreateStoryUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryUnprocessableEntity", 422)
 }
 
 func (o *CreateStoryUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/stories][%d] createStoryUnprocessableEntity", 422)
 }
 
 func (o *CreateStoryUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

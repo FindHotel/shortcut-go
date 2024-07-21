@@ -29,6 +29,10 @@ type IterationStats struct {
 	// Required: true
 	NumPoints *int64 `json:"num_points"`
 
+	// The total number of backlog points in this Iteration.
+	// Required: true
+	NumPointsBacklog *int64 `json:"num_points_backlog"`
+
 	// The total number of completed points in this Iteration.
 	// Required: true
 	NumPointsDone *int64 `json:"num_points_done"`
@@ -44,6 +48,10 @@ type IterationStats struct {
 	// The total number of documents related to an Iteration
 	// Required: true
 	NumRelatedDocuments *int64 `json:"num_related_documents"`
+
+	// The total number of backlog Stories in this Iteration.
+	// Required: true
+	NumStoriesBacklog *int64 `json:"num_stories_backlog"`
 
 	// The total number of done Stories in this Iteration.
 	// Required: true
@@ -70,6 +78,10 @@ func (m *IterationStats) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateNumPointsBacklog(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateNumPointsDone(formats); err != nil {
 		res = append(res, err)
 	}
@@ -83,6 +95,10 @@ func (m *IterationStats) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateNumRelatedDocuments(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNumStoriesBacklog(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -111,6 +127,15 @@ func (m *IterationStats) Validate(formats strfmt.Registry) error {
 func (m *IterationStats) validateNumPoints(formats strfmt.Registry) error {
 
 	if err := validate.Required("num_points", "body", m.NumPoints); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *IterationStats) validateNumPointsBacklog(formats strfmt.Registry) error {
+
+	if err := validate.Required("num_points_backlog", "body", m.NumPointsBacklog); err != nil {
 		return err
 	}
 
@@ -147,6 +172,15 @@ func (m *IterationStats) validateNumPointsUnstarted(formats strfmt.Registry) err
 func (m *IterationStats) validateNumRelatedDocuments(formats strfmt.Registry) error {
 
 	if err := validate.Required("num_related_documents", "body", m.NumRelatedDocuments); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *IterationStats) validateNumStoriesBacklog(formats strfmt.Registry) error {
+
+	if err := validate.Required("num_stories_backlog", "body", m.NumStoriesBacklog); err != nil {
 		return err
 	}
 

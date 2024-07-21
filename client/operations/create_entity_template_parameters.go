@@ -65,7 +65,7 @@ type CreateEntityTemplateParams struct {
 
 	/* CreateEntityTemplate.
 
-	   Request paramaters for creating an entirely new entity template.
+	   Request parameters for creating an entirely new entity template.
 	*/
 	CreateEntityTemplate *models.CreateEntityTemplate
 

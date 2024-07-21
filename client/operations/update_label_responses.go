@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *UpdateLabelReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/labels/{label-public-id}] updateLabel", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *UpdateLabelOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update label o k response
+func (o *UpdateLabelOK) Code() int {
+	return 200
+}
+
 func (o *UpdateLabelOK) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelOK %s", 200, payload)
 }
 
 func (o *UpdateLabelOK) String() string {
-	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelOK %s", 200, payload)
 }
 
 func (o *UpdateLabelOK) GetPayload() *models.Label {
@@ -153,12 +161,17 @@ func (o *UpdateLabelBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the update label bad request response
+func (o *UpdateLabelBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateLabelBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelBadRequest", 400)
 }
 
 func (o *UpdateLabelBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelBadRequest", 400)
 }
 
 func (o *UpdateLabelBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *UpdateLabelNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the update label not found response
+func (o *UpdateLabelNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateLabelNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelNotFound", 404)
 }
 
 func (o *UpdateLabelNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelNotFound", 404)
 }
 
 func (o *UpdateLabelNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *UpdateLabelUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the update label unprocessable entity response
+func (o *UpdateLabelUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *UpdateLabelUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelUnprocessableEntity", 422)
 }
 
 func (o *UpdateLabelUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/labels/{label-public-id}][%d] updateLabelUnprocessableEntity", 422)
 }
 
 func (o *UpdateLabelUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

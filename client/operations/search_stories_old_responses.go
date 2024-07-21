@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *SearchStoriesOldReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/stories/search] searchStoriesOld", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *SearchStoriesOldCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the search stories old created response
+func (o *SearchStoriesOldCreated) Code() int {
+	return 201
+}
+
 func (o *SearchStoriesOldCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldCreated %s", 201, payload)
 }
 
 func (o *SearchStoriesOldCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldCreated %s", 201, payload)
 }
 
 func (o *SearchStoriesOldCreated) GetPayload() []*models.StorySlim {
@@ -151,12 +159,17 @@ func (o *SearchStoriesOldBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the search stories old bad request response
+func (o *SearchStoriesOldBadRequest) Code() int {
+	return 400
+}
+
 func (o *SearchStoriesOldBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldBadRequest", 400)
 }
 
 func (o *SearchStoriesOldBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldBadRequest", 400)
 }
 
 func (o *SearchStoriesOldBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *SearchStoriesOldNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the search stories old not found response
+func (o *SearchStoriesOldNotFound) Code() int {
+	return 404
+}
+
 func (o *SearchStoriesOldNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldNotFound", 404)
 }
 
 func (o *SearchStoriesOldNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldNotFound", 404)
 }
 
 func (o *SearchStoriesOldNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *SearchStoriesOldUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the search stories old unprocessable entity response
+func (o *SearchStoriesOldUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *SearchStoriesOldUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldUnprocessableEntity", 422)
 }
 
 func (o *SearchStoriesOldUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/stories/search][%d] searchStoriesOldUnprocessableEntity", 422)
 }
 
 func (o *SearchStoriesOldUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

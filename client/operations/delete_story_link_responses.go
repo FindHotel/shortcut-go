@@ -45,7 +45,7 @@ func (o *DeleteStoryLinkReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/story-links/{story-link-public-id}] deleteStoryLink", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteStoryLinkNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete story link no content response
+func (o *DeleteStoryLinkNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteStoryLinkNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkNoContent", 204)
 }
 
 func (o *DeleteStoryLinkNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkNoContent", 204)
 }
 
 func (o *DeleteStoryLinkNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteStoryLinkBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete story link bad request response
+func (o *DeleteStoryLinkBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteStoryLinkBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkBadRequest", 400)
 }
 
 func (o *DeleteStoryLinkBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkBadRequest", 400)
 }
 
 func (o *DeleteStoryLinkBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteStoryLinkNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete story link not found response
+func (o *DeleteStoryLinkNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteStoryLinkNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkNotFound", 404)
 }
 
 func (o *DeleteStoryLinkNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkNotFound", 404)
 }
 
 func (o *DeleteStoryLinkNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteStoryLinkUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete story link unprocessable entity response
+func (o *DeleteStoryLinkUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteStoryLinkUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkUnprocessableEntity", 422)
 }
 
 func (o *DeleteStoryLinkUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/story-links/{story-link-public-id}][%d] deleteStoryLinkUnprocessableEntity", 422)
 }
 
 func (o *DeleteStoryLinkUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

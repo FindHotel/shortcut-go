@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetEpicCommentReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}] getEpicComment", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetEpicCommentOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get epic comment o k response
+func (o *GetEpicCommentOK) Code() int {
+	return 200
+}
+
 func (o *GetEpicCommentOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentOK %s", 200, payload)
 }
 
 func (o *GetEpicCommentOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentOK %s", 200, payload)
 }
 
 func (o *GetEpicCommentOK) GetPayload() *models.ThreadedComment {
@@ -153,12 +161,17 @@ func (o *GetEpicCommentBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get epic comment bad request response
+func (o *GetEpicCommentBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetEpicCommentBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentBadRequest", 400)
 }
 
 func (o *GetEpicCommentBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentBadRequest", 400)
 }
 
 func (o *GetEpicCommentBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetEpicCommentNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get epic comment not found response
+func (o *GetEpicCommentNotFound) Code() int {
+	return 404
+}
+
 func (o *GetEpicCommentNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentNotFound", 404)
 }
 
 func (o *GetEpicCommentNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentNotFound", 404)
 }
 
 func (o *GetEpicCommentNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetEpicCommentUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get epic comment unprocessable entity response
+func (o *GetEpicCommentUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetEpicCommentUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentUnprocessableEntity", 422)
 }
 
 func (o *GetEpicCommentUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] getEpicCommentUnprocessableEntity", 422)
 }
 
 func (o *GetEpicCommentUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

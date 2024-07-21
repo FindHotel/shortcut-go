@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *UpdateStoryCommentReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}] updateStoryComment", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *UpdateStoryCommentOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update story comment o k response
+func (o *UpdateStoryCommentOK) Code() int {
+	return 200
+}
+
 func (o *UpdateStoryCommentOK) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentOK %s", 200, payload)
 }
 
 func (o *UpdateStoryCommentOK) String() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentOK %s", 200, payload)
 }
 
 func (o *UpdateStoryCommentOK) GetPayload() *models.StoryComment {
@@ -153,12 +161,17 @@ func (o *UpdateStoryCommentBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the update story comment bad request response
+func (o *UpdateStoryCommentBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateStoryCommentBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentBadRequest", 400)
 }
 
 func (o *UpdateStoryCommentBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentBadRequest", 400)
 }
 
 func (o *UpdateStoryCommentBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *UpdateStoryCommentNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the update story comment not found response
+func (o *UpdateStoryCommentNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateStoryCommentNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentNotFound", 404)
 }
 
 func (o *UpdateStoryCommentNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentNotFound", 404)
 }
 
 func (o *UpdateStoryCommentNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *UpdateStoryCommentUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the update story comment unprocessable entity response
+func (o *UpdateStoryCommentUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *UpdateStoryCommentUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentUnprocessableEntity", 422)
 }
 
 func (o *UpdateStoryCommentUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] updateStoryCommentUnprocessableEntity", 422)
 }
 
 func (o *UpdateStoryCommentUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -45,7 +45,7 @@ func (o *DisableIterationsReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/iterations/disable] disableIterations", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DisableIterationsNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the disable iterations no content response
+func (o *DisableIterationsNoContent) Code() int {
+	return 204
+}
+
 func (o *DisableIterationsNoContent) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsNoContent ", 204)
+	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsNoContent", 204)
 }
 
 func (o *DisableIterationsNoContent) String() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsNoContent ", 204)
+	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsNoContent", 204)
 }
 
 func (o *DisableIterationsNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DisableIterationsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the disable iterations bad request response
+func (o *DisableIterationsBadRequest) Code() int {
+	return 400
+}
+
 func (o *DisableIterationsBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsBadRequest", 400)
 }
 
 func (o *DisableIterationsBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsBadRequest", 400)
 }
 
 func (o *DisableIterationsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DisableIterationsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the disable iterations not found response
+func (o *DisableIterationsNotFound) Code() int {
+	return 404
+}
+
 func (o *DisableIterationsNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsNotFound", 404)
 }
 
 func (o *DisableIterationsNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsNotFound", 404)
 }
 
 func (o *DisableIterationsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DisableIterationsUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the disable iterations unprocessable entity response
+func (o *DisableIterationsUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DisableIterationsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsUnprocessableEntity", 422)
 }
 
 func (o *DisableIterationsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/iterations/disable][%d] disableIterationsUnprocessableEntity", 422)
 }
 
 func (o *DisableIterationsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

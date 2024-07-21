@@ -39,6 +39,10 @@ type LabelStats struct {
 	// Required: true
 	NumEpicsUnstarted *int64 `json:"num_epics_unstarted"`
 
+	// The total number of backlog points with this Label.
+	// Required: true
+	NumPointsBacklog *int64 `json:"num_points_backlog"`
+
 	// The total number of completed points with this Label.
 	// Required: true
 	NumPointsCompleted *int64 `json:"num_points_completed"`
@@ -58,6 +62,10 @@ type LabelStats struct {
 	// The total number of Documents associated this Label.
 	// Required: true
 	NumRelatedDocuments *int64 `json:"num_related_documents"`
+
+	// The total number of stories backlog Stories with this Label.
+	// Required: true
+	NumStoriesBacklog *int64 `json:"num_stories_backlog"`
 
 	// The total number of completed Stories with this Label.
 	// Required: true
@@ -104,6 +112,10 @@ func (m *LabelStats) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateNumPointsBacklog(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateNumPointsCompleted(formats); err != nil {
 		res = append(res, err)
 	}
@@ -121,6 +133,10 @@ func (m *LabelStats) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateNumRelatedDocuments(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNumStoriesBacklog(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -195,6 +211,15 @@ func (m *LabelStats) validateNumEpicsUnstarted(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *LabelStats) validateNumPointsBacklog(formats strfmt.Registry) error {
+
+	if err := validate.Required("num_points_backlog", "body", m.NumPointsBacklog); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *LabelStats) validateNumPointsCompleted(formats strfmt.Registry) error {
 
 	if err := validate.Required("num_points_completed", "body", m.NumPointsCompleted); err != nil {
@@ -234,6 +259,15 @@ func (m *LabelStats) validateNumPointsUnstarted(formats strfmt.Registry) error {
 func (m *LabelStats) validateNumRelatedDocuments(formats strfmt.Registry) error {
 
 	if err := validate.Required("num_related_documents", "body", m.NumRelatedDocuments); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *LabelStats) validateNumStoriesBacklog(formats strfmt.Registry) error {
+
+	if err := validate.Required("num_stories_backlog", "body", m.NumStoriesBacklog); err != nil {
 		return err
 	}
 

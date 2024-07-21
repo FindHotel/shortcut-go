@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *SearchReader) ReadResponse(response runtime.ClientResponse, consumer ru
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/search] search", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *SearchOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the search o k response
+func (o *SearchOK) Code() int {
+	return 200
+}
+
 func (o *SearchOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/search][%d] searchOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/search][%d] searchOK %s", 200, payload)
 }
 
 func (o *SearchOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/search][%d] searchOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/search][%d] searchOK %s", 200, payload)
 }
 
 func (o *SearchOK) GetPayload() *models.SearchResults {
@@ -154,12 +162,19 @@ func (o *SearchBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the search bad request response
+func (o *SearchBadRequest) Code() int {
+	return 400
+}
+
 func (o *SearchBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/search][%d] searchBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/search][%d] searchBadRequest %s", 400, payload)
 }
 
 func (o *SearchBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/search][%d] searchBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/search][%d] searchBadRequest %s", 400, payload)
 }
 
 func (o *SearchBadRequest) GetPayload() *models.MaxSearchResultsExceededError {
@@ -216,12 +231,17 @@ func (o *SearchNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the search not found response
+func (o *SearchNotFound) Code() int {
+	return 404
+}
+
 func (o *SearchNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/search][%d] searchNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/search][%d] searchNotFound", 404)
 }
 
 func (o *SearchNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/search][%d] searchNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/search][%d] searchNotFound", 404)
 }
 
 func (o *SearchNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,12 +287,17 @@ func (o *SearchUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the search unprocessable entity response
+func (o *SearchUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *SearchUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/search][%d] searchUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/search][%d] searchUnprocessableEntity", 422)
 }
 
 func (o *SearchUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/search][%d] searchUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/search][%d] searchUnprocessableEntity", 422)
 }
 
 func (o *SearchUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -265,6 +265,11 @@ func (m *Workflow) contextValidateStates(ctx context.Context, formats strfmt.Reg
 	for i := 0; i < len(m.States); i++ {
 
 		if m.States[i] != nil {
+
+			if swag.IsZero(m.States[i]) { // not required
+				return nil
+			}
+
 			if err := m.States[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("states" + "." + strconv.Itoa(i))

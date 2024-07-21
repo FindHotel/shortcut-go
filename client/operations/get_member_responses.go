@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetMemberReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/members/{member-public-id}] getMember", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetMemberOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get member o k response
+func (o *GetMemberOK) Code() int {
+	return 200
+}
+
 func (o *GetMemberOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberOK %s", 200, payload)
 }
 
 func (o *GetMemberOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberOK %s", 200, payload)
 }
 
 func (o *GetMemberOK) GetPayload() *models.Member {
@@ -153,12 +161,17 @@ func (o *GetMemberBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get member bad request response
+func (o *GetMemberBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetMemberBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberBadRequest", 400)
 }
 
 func (o *GetMemberBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberBadRequest", 400)
 }
 
 func (o *GetMemberBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetMemberNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get member not found response
+func (o *GetMemberNotFound) Code() int {
+	return 404
+}
+
 func (o *GetMemberNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberNotFound", 404)
 }
 
 func (o *GetMemberNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberNotFound", 404)
 }
 
 func (o *GetMemberNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetMemberUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get member unprocessable entity response
+func (o *GetMemberUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetMemberUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberUnprocessableEntity", 422)
 }
 
 func (o *GetMemberUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/members/{member-public-id}][%d] getMemberUnprocessableEntity", 422)
 }
 
 func (o *GetMemberUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

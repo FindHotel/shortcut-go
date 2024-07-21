@@ -45,7 +45,7 @@ func (o *DeleteIterationReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/iterations/{iteration-public-id}] deleteIteration", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteIterationNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete iteration no content response
+func (o *DeleteIterationNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteIterationNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationNoContent", 204)
 }
 
 func (o *DeleteIterationNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationNoContent", 204)
 }
 
 func (o *DeleteIterationNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteIterationBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete iteration bad request response
+func (o *DeleteIterationBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteIterationBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationBadRequest", 400)
 }
 
 func (o *DeleteIterationBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationBadRequest", 400)
 }
 
 func (o *DeleteIterationBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteIterationNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete iteration not found response
+func (o *DeleteIterationNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteIterationNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationNotFound", 404)
 }
 
 func (o *DeleteIterationNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationNotFound", 404)
 }
 
 func (o *DeleteIterationNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteIterationUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete iteration unprocessable entity response
+func (o *DeleteIterationUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteIterationUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationUnprocessableEntity", 422)
 }
 
 func (o *DeleteIterationUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/iterations/{iteration-public-id}][%d] deleteIterationUnprocessableEntity", 422)
 }
 
 func (o *DeleteIterationUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

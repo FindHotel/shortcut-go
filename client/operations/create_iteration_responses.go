@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *CreateIterationReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/iterations] createIteration", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *CreateIterationCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create iteration created response
+func (o *CreateIterationCreated) Code() int {
+	return 201
+}
+
 func (o *CreateIterationCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationCreated %s", 201, payload)
 }
 
 func (o *CreateIterationCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationCreated %s", 201, payload)
 }
 
 func (o *CreateIterationCreated) GetPayload() *models.Iteration {
@@ -153,12 +161,17 @@ func (o *CreateIterationBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create iteration bad request response
+func (o *CreateIterationBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateIterationBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationBadRequest", 400)
 }
 
 func (o *CreateIterationBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationBadRequest", 400)
 }
 
 func (o *CreateIterationBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *CreateIterationNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the create iteration not found response
+func (o *CreateIterationNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateIterationNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationNotFound", 404)
 }
 
 func (o *CreateIterationNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationNotFound", 404)
 }
 
 func (o *CreateIterationNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *CreateIterationUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the create iteration unprocessable entity response
+func (o *CreateIterationUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *CreateIterationUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationUnprocessableEntity", 422)
 }
 
 func (o *CreateIterationUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/iterations][%d] createIterationUnprocessableEntity", 422)
 }
 
 func (o *CreateIterationUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

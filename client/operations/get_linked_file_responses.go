@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetLinkedFileReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/linked-files/{linked-file-public-id}] getLinkedFile", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetLinkedFileOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get linked file o k response
+func (o *GetLinkedFileOK) Code() int {
+	return 200
+}
+
 func (o *GetLinkedFileOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileOK %s", 200, payload)
 }
 
 func (o *GetLinkedFileOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileOK %s", 200, payload)
 }
 
 func (o *GetLinkedFileOK) GetPayload() *models.LinkedFile {
@@ -153,12 +161,17 @@ func (o *GetLinkedFileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get linked file bad request response
+func (o *GetLinkedFileBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetLinkedFileBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileBadRequest", 400)
 }
 
 func (o *GetLinkedFileBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileBadRequest", 400)
 }
 
 func (o *GetLinkedFileBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetLinkedFileNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get linked file not found response
+func (o *GetLinkedFileNotFound) Code() int {
+	return 404
+}
+
 func (o *GetLinkedFileNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileNotFound", 404)
 }
 
 func (o *GetLinkedFileNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileNotFound", 404)
 }
 
 func (o *GetLinkedFileNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetLinkedFileUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get linked file unprocessable entity response
+func (o *GetLinkedFileUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetLinkedFileUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileUnprocessableEntity", 422)
 }
 
 func (o *GetLinkedFileUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/linked-files/{linked-file-public-id}][%d] getLinkedFileUnprocessableEntity", 422)
 }
 
 func (o *GetLinkedFileUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

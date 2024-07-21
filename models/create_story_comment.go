@@ -23,9 +23,6 @@ type CreateStoryComment struct {
 	// Format: uuid
 	AuthorID strfmt.UUID `json:"author_id,omitempty"`
 
-	// Marks the comment as a blocker that can be surfaced to permissions or teams mentioned in the comment. Can only be used on a top-level comment.
-	Blocker bool `json:"blocker,omitempty"`
-
 	// Defaults to the time/date the comment is created, but can be set to reflect another date.
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
@@ -40,9 +37,6 @@ type CreateStoryComment struct {
 	// Required: true
 	// Max Length: 100000
 	Text *string `json:"text"`
-
-	// Marks the comment as an unblocker to its  blocker parent. Can only be set on a threaded comment who has a parent with `blocker` set.
-	UnblocksParent bool `json:"unblocks_parent,omitempty"`
 
 	// Defaults to the time/date the comment is last updated, but can be set to reflect another date.
 	// Format: date-time

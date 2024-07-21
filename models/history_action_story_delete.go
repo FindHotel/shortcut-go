@@ -22,7 +22,7 @@ type HistoryActionStoryDelete struct {
 
 	// The action of the entity referenced.
 	// Required: true
-	// Enum: [delete]
+	// Enum: ["delete"]
 	Action *string `json:"action"`
 
 	// The type of entity referenced.
@@ -39,7 +39,7 @@ type HistoryActionStoryDelete struct {
 
 	// The type of Story; either feature, bug, or chore.
 	// Required: true
-	// Enum: [feature chore bug]
+	// Enum: ["feature","chore","bug"]
 	StoryType *string `json:"story_type"`
 }
 

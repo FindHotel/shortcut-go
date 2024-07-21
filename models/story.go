@@ -150,7 +150,7 @@ type Story struct {
 	// Required: true
 	MemberMentionIds []strfmt.UUID `json:"member_mention_ids"`
 
-	// Deprecated: use member_mention_ids.
+	// `Deprecated:` use `member_mention_ids`.
 	// Required: true
 	MentionIds []strfmt.UUID `json:"mention_ids"`
 
@@ -218,6 +218,9 @@ type Story struct {
 	// The type of story (feature, bug, chore).
 	// Required: true
 	StoryType *string `json:"story_type"`
+
+	// synced item
+	SyncedItem *SyncedItem `json:"synced_item,omitempty"`
 
 	// An array of tasks connected to the story.
 	// Required: true
@@ -425,6 +428,10 @@ func (m *Story) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateStoryType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSyncedItem(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1116,6 +1123,25 @@ func (m *Story) validateStoryType(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Story) validateSyncedItem(formats strfmt.Registry) error {
+	if swag.IsZero(m.SyncedItem) { // not required
+		return nil
+	}
+
+	if m.SyncedItem != nil {
+		if err := m.SyncedItem.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("synced_item")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("synced_item")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Story) validateTasks(formats strfmt.Registry) error {
 
 	if err := validate.Required("tasks", "body", m.Tasks); err != nil {
@@ -1218,6 +1244,10 @@ func (m *Story) ContextValidate(ctx context.Context, formats strfmt.Registry) er
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateSyncedItem(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateTasks(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -1233,6 +1263,11 @@ func (m *Story) contextValidateBranches(ctx context.Context, formats strfmt.Regi
 	for i := 0; i < len(m.Branches); i++ {
 
 		if m.Branches[i] != nil {
+
+			if swag.IsZero(m.Branches[i]) { // not required
+				return nil
+			}
+
 			if err := m.Branches[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("branches" + "." + strconv.Itoa(i))
@@ -1253,6 +1288,11 @@ func (m *Story) contextValidateComments(ctx context.Context, formats strfmt.Regi
 	for i := 0; i < len(m.Comments); i++ {
 
 		if m.Comments[i] != nil {
+
+			if swag.IsZero(m.Comments[i]) { // not required
+				return nil
+			}
+
 			if err := m.Comments[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("comments" + "." + strconv.Itoa(i))
@@ -1273,6 +1313,11 @@ func (m *Story) contextValidateCommits(ctx context.Context, formats strfmt.Regis
 	for i := 0; i < len(m.Commits); i++ {
 
 		if m.Commits[i] != nil {
+
+			if swag.IsZero(m.Commits[i]) { // not required
+				return nil
+			}
+
 			if err := m.Commits[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("commits" + "." + strconv.Itoa(i))
@@ -1293,6 +1338,11 @@ func (m *Story) contextValidateCustomFields(ctx context.Context, formats strfmt.
 	for i := 0; i < len(m.CustomFields); i++ {
 
 		if m.CustomFields[i] != nil {
+
+			if swag.IsZero(m.CustomFields[i]) { // not required
+				return nil
+			}
+
 			if err := m.CustomFields[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("custom_fields" + "." + strconv.Itoa(i))
@@ -1313,6 +1363,11 @@ func (m *Story) contextValidateFiles(ctx context.Context, formats strfmt.Registr
 	for i := 0; i < len(m.Files); i++ {
 
 		if m.Files[i] != nil {
+
+			if swag.IsZero(m.Files[i]) { // not required
+				return nil
+			}
+
 			if err := m.Files[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("files" + "." + strconv.Itoa(i))
@@ -1333,6 +1388,11 @@ func (m *Story) contextValidateLabels(ctx context.Context, formats strfmt.Regist
 	for i := 0; i < len(m.Labels); i++ {
 
 		if m.Labels[i] != nil {
+
+			if swag.IsZero(m.Labels[i]) { // not required
+				return nil
+			}
+
 			if err := m.Labels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("labels" + "." + strconv.Itoa(i))
@@ -1353,6 +1413,11 @@ func (m *Story) contextValidateLinkedFiles(ctx context.Context, formats strfmt.R
 	for i := 0; i < len(m.LinkedFiles); i++ {
 
 		if m.LinkedFiles[i] != nil {
+
+			if swag.IsZero(m.LinkedFiles[i]) { // not required
+				return nil
+			}
+
 			if err := m.LinkedFiles[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("linked_files" + "." + strconv.Itoa(i))
@@ -1373,6 +1438,11 @@ func (m *Story) contextValidatePullRequests(ctx context.Context, formats strfmt.
 	for i := 0; i < len(m.PullRequests); i++ {
 
 		if m.PullRequests[i] != nil {
+
+			if swag.IsZero(m.PullRequests[i]) { // not required
+				return nil
+			}
+
 			if err := m.PullRequests[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("pull_requests" + "." + strconv.Itoa(i))
@@ -1391,6 +1461,7 @@ func (m *Story) contextValidatePullRequests(ctx context.Context, formats strfmt.
 func (m *Story) contextValidateStats(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Stats != nil {
+
 		if err := m.Stats.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("stats")
@@ -1409,6 +1480,11 @@ func (m *Story) contextValidateStoryLinks(ctx context.Context, formats strfmt.Re
 	for i := 0; i < len(m.StoryLinks); i++ {
 
 		if m.StoryLinks[i] != nil {
+
+			if swag.IsZero(m.StoryLinks[i]) { // not required
+				return nil
+			}
+
 			if err := m.StoryLinks[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("story_links" + "." + strconv.Itoa(i))
@@ -1424,11 +1500,37 @@ func (m *Story) contextValidateStoryLinks(ctx context.Context, formats strfmt.Re
 	return nil
 }
 
+func (m *Story) contextValidateSyncedItem(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SyncedItem != nil {
+
+		if swag.IsZero(m.SyncedItem) { // not required
+			return nil
+		}
+
+		if err := m.SyncedItem.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("synced_item")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("synced_item")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Story) contextValidateTasks(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Tasks); i++ {
 
 		if m.Tasks[i] != nil {
+
+			if swag.IsZero(m.Tasks[i]) { // not required
+				return nil
+			}
+
 			if err := m.Tasks[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("tasks" + "." + strconv.Itoa(i))

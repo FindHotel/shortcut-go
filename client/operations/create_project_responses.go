@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *CreateProjectReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/projects] createProject", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *CreateProjectCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create project created response
+func (o *CreateProjectCreated) Code() int {
+	return 201
+}
+
 func (o *CreateProjectCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectCreated %s", 201, payload)
 }
 
 func (o *CreateProjectCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectCreated %s", 201, payload)
 }
 
 func (o *CreateProjectCreated) GetPayload() *models.Project {
@@ -153,12 +161,17 @@ func (o *CreateProjectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create project bad request response
+func (o *CreateProjectBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateProjectBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectBadRequest", 400)
 }
 
 func (o *CreateProjectBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectBadRequest", 400)
 }
 
 func (o *CreateProjectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *CreateProjectNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the create project not found response
+func (o *CreateProjectNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateProjectNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectNotFound", 404)
 }
 
 func (o *CreateProjectNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectNotFound", 404)
 }
 
 func (o *CreateProjectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *CreateProjectUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the create project unprocessable entity response
+func (o *CreateProjectUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *CreateProjectUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectUnprocessableEntity", 422)
 }
 
 func (o *CreateProjectUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/projects][%d] createProjectUnprocessableEntity", 422)
 }
 
 func (o *CreateProjectUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

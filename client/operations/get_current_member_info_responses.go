@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetCurrentMemberInfoReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/member] getCurrentMemberInfo", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetCurrentMemberInfoOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get current member info o k response
+func (o *GetCurrentMemberInfoOK) Code() int {
+	return 200
+}
+
 func (o *GetCurrentMemberInfoOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoOK %s", 200, payload)
 }
 
 func (o *GetCurrentMemberInfoOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoOK %s", 200, payload)
 }
 
 func (o *GetCurrentMemberInfoOK) GetPayload() *models.MemberInfo {
@@ -153,12 +161,17 @@ func (o *GetCurrentMemberInfoBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get current member info bad request response
+func (o *GetCurrentMemberInfoBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetCurrentMemberInfoBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoBadRequest", 400)
 }
 
 func (o *GetCurrentMemberInfoBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoBadRequest", 400)
 }
 
 func (o *GetCurrentMemberInfoBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetCurrentMemberInfoNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get current member info not found response
+func (o *GetCurrentMemberInfoNotFound) Code() int {
+	return 404
+}
+
 func (o *GetCurrentMemberInfoNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoNotFound", 404)
 }
 
 func (o *GetCurrentMemberInfoNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoNotFound", 404)
 }
 
 func (o *GetCurrentMemberInfoNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetCurrentMemberInfoUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get current member info unprocessable entity response
+func (o *GetCurrentMemberInfoUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetCurrentMemberInfoUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoUnprocessableEntity", 422)
 }
 
 func (o *GetCurrentMemberInfoUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/member][%d] getCurrentMemberInfoUnprocessableEntity", 422)
 }
 
 func (o *GetCurrentMemberInfoUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

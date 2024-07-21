@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *CreateMultipleStoriesReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/stories/bulk] createMultipleStories", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *CreateMultipleStoriesCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create multiple stories created response
+func (o *CreateMultipleStoriesCreated) Code() int {
+	return 201
+}
+
 func (o *CreateMultipleStoriesCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesCreated %s", 201, payload)
 }
 
 func (o *CreateMultipleStoriesCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesCreated %s", 201, payload)
 }
 
 func (o *CreateMultipleStoriesCreated) GetPayload() []*models.StorySlim {
@@ -151,12 +159,17 @@ func (o *CreateMultipleStoriesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create multiple stories bad request response
+func (o *CreateMultipleStoriesBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateMultipleStoriesBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesBadRequest", 400)
 }
 
 func (o *CreateMultipleStoriesBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesBadRequest", 400)
 }
 
 func (o *CreateMultipleStoriesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *CreateMultipleStoriesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the create multiple stories not found response
+func (o *CreateMultipleStoriesNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateMultipleStoriesNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesNotFound", 404)
 }
 
 func (o *CreateMultipleStoriesNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesNotFound", 404)
 }
 
 func (o *CreateMultipleStoriesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *CreateMultipleStoriesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the create multiple stories unprocessable entity response
+func (o *CreateMultipleStoriesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *CreateMultipleStoriesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesUnprocessableEntity", 422)
 }
 
 func (o *CreateMultipleStoriesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/stories/bulk][%d] createMultipleStoriesUnprocessableEntity", 422)
 }
 
 func (o *CreateMultipleStoriesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

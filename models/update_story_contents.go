@@ -30,9 +30,6 @@ type UpdateStoryContents struct {
 	// The description of the story.
 	Description string `json:"description,omitempty"`
 
-	// A string description of this resource.
-	EntityType string `json:"entity_type,omitempty"`
-
 	// The ID of the epic the to be populated.
 	EpicID *int64 `json:"epic_id,omitempty"`
 
@@ -46,9 +43,6 @@ type UpdateStoryContents struct {
 	// Unique: true
 	FileIds []int64 `json:"file_ids"`
 
-	// An array of files attached to the story.
-	Files []*UploadedFile `json:"files"`
-
 	// An array of UUIDs for any Members listed as Followers.
 	FollowerIds []strfmt.UUID `json:"follower_ids"`
 
@@ -59,18 +53,12 @@ type UpdateStoryContents struct {
 	// The ID of the iteration the to be populated.
 	IterationID *int64 `json:"iteration_id,omitempty"`
 
-	// An array of label ids attached to the story.
-	LabelIds []int64 `json:"label_ids"`
-
 	// An array of labels to be populated by the template.
 	Labels []*CreateLabelParams `json:"labels"`
 
 	// An array of the linked file IDs to be populated.
 	// Unique: true
 	LinkedFileIds []int64 `json:"linked_file_ids"`
-
-	// An array of linked files attached to the story.
-	LinkedFiles []*LinkedFile `json:"linked_files"`
 
 	// The name of the story.
 	Name string `json:"name,omitempty"`
@@ -85,10 +73,10 @@ type UpdateStoryContents struct {
 	StoryType string `json:"story_type,omitempty"`
 
 	// An array of tasks to be populated by the template.
-	Tasks []*EntityTemplateTask `json:"tasks"`
+	Tasks []*BaseTaskParams `json:"tasks"`
 
-	// The ID of the workflow state the story is currently in.
-	WorkflowStateID int64 `json:"workflow_state_id,omitempty"`
+	// The ID of the workflow state to be populated.
+	WorkflowStateID *int64 `json:"workflow_state_id,omitempty"`
 }
 
 // Validate validates this update story contents
@@ -107,10 +95,6 @@ func (m *UpdateStoryContents) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateFiles(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateFollowerIds(formats); err != nil {
 		res = append(res, err)
 	}
@@ -124,10 +108,6 @@ func (m *UpdateStoryContents) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLinkedFileIds(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateLinkedFiles(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -190,32 +170,6 @@ func (m *UpdateStoryContents) validateFileIds(formats strfmt.Registry) error {
 
 	if err := validate.UniqueItems("file_ids", "body", m.FileIds); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (m *UpdateStoryContents) validateFiles(formats strfmt.Registry) error {
-	if swag.IsZero(m.Files) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Files); i++ {
-		if swag.IsZero(m.Files[i]) { // not required
-			continue
-		}
-
-		if m.Files[i] != nil {
-			if err := m.Files[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("files" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("files" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil
@@ -287,32 +241,6 @@ func (m *UpdateStoryContents) validateLinkedFileIds(formats strfmt.Registry) err
 	return nil
 }
 
-func (m *UpdateStoryContents) validateLinkedFiles(formats strfmt.Registry) error {
-	if swag.IsZero(m.LinkedFiles) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.LinkedFiles); i++ {
-		if swag.IsZero(m.LinkedFiles[i]) { // not required
-			continue
-		}
-
-		if m.LinkedFiles[i] != nil {
-			if err := m.LinkedFiles[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("linked_files" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("linked_files" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
 func (m *UpdateStoryContents) validateOwnerIds(formats strfmt.Registry) error {
 	if swag.IsZero(m.OwnerIds) { // not required
 		return nil
@@ -363,15 +291,7 @@ func (m *UpdateStoryContents) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateFiles(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateLabels(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateLinkedFiles(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -390,6 +310,11 @@ func (m *UpdateStoryContents) contextValidateCustomFields(ctx context.Context, f
 	for i := 0; i < len(m.CustomFields); i++ {
 
 		if m.CustomFields[i] != nil {
+
+			if swag.IsZero(m.CustomFields[i]) { // not required
+				return nil
+			}
+
 			if err := m.CustomFields[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("custom_fields" + "." + strconv.Itoa(i))
@@ -405,31 +330,16 @@ func (m *UpdateStoryContents) contextValidateCustomFields(ctx context.Context, f
 	return nil
 }
 
-func (m *UpdateStoryContents) contextValidateFiles(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Files); i++ {
-
-		if m.Files[i] != nil {
-			if err := m.Files[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("files" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("files" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
 func (m *UpdateStoryContents) contextValidateLabels(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Labels); i++ {
 
 		if m.Labels[i] != nil {
+
+			if swag.IsZero(m.Labels[i]) { // not required
+				return nil
+			}
+
 			if err := m.Labels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("labels" + "." + strconv.Itoa(i))
@@ -445,31 +355,16 @@ func (m *UpdateStoryContents) contextValidateLabels(ctx context.Context, formats
 	return nil
 }
 
-func (m *UpdateStoryContents) contextValidateLinkedFiles(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.LinkedFiles); i++ {
-
-		if m.LinkedFiles[i] != nil {
-			if err := m.LinkedFiles[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("linked_files" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("linked_files" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
 func (m *UpdateStoryContents) contextValidateTasks(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Tasks); i++ {
 
 		if m.Tasks[i] != nil {
+
+			if swag.IsZero(m.Tasks[i]) { // not required
+				return nil
+			}
+
 			if err := m.Tasks[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("tasks" + "." + strconv.Itoa(i))

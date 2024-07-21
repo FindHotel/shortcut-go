@@ -45,7 +45,7 @@ func (o *DeleteLinkedFileReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/linked-files/{linked-file-public-id}] deleteLinkedFile", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteLinkedFileNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete linked file no content response
+func (o *DeleteLinkedFileNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteLinkedFileNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileNoContent", 204)
 }
 
 func (o *DeleteLinkedFileNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileNoContent", 204)
 }
 
 func (o *DeleteLinkedFileNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteLinkedFileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete linked file bad request response
+func (o *DeleteLinkedFileBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteLinkedFileBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileBadRequest", 400)
 }
 
 func (o *DeleteLinkedFileBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileBadRequest", 400)
 }
 
 func (o *DeleteLinkedFileBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteLinkedFileNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete linked file not found response
+func (o *DeleteLinkedFileNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteLinkedFileNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileNotFound", 404)
 }
 
 func (o *DeleteLinkedFileNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileNotFound", 404)
 }
 
 func (o *DeleteLinkedFileNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteLinkedFileUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete linked file unprocessable entity response
+func (o *DeleteLinkedFileUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteLinkedFileUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileUnprocessableEntity", 422)
 }
 
 func (o *DeleteLinkedFileUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/linked-files/{linked-file-public-id}][%d] deleteLinkedFileUnprocessableEntity", 422)
 }
 
 func (o *DeleteLinkedFileUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

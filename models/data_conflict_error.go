@@ -22,7 +22,7 @@ type DataConflictError struct {
 
 	// error
 	// Required: true
-	// Enum: [data-conflict-error]
+	// Enum: ["data-conflict-error"]
 	Error *string `json:"error"`
 
 	// An explanatory message: "The update failed due to a data conflict. Please refresh and try again."

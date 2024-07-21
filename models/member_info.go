@@ -131,6 +131,7 @@ func (m *MemberInfo) ContextValidate(ctx context.Context, formats strfmt.Registr
 func (m *MemberInfo) contextValidateWorkspace2(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Workspace2 != nil {
+
 		if err := m.Workspace2.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("workspace2")

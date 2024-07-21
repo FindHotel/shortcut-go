@@ -45,7 +45,7 @@ func (o *DeleteCustomFieldReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/custom-fields/{custom-field-public-id}] deleteCustomField", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteCustomFieldNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete custom field no content response
+func (o *DeleteCustomFieldNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteCustomFieldNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldNoContent", 204)
 }
 
 func (o *DeleteCustomFieldNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldNoContent", 204)
 }
 
 func (o *DeleteCustomFieldNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteCustomFieldBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete custom field bad request response
+func (o *DeleteCustomFieldBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteCustomFieldBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldBadRequest", 400)
 }
 
 func (o *DeleteCustomFieldBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldBadRequest", 400)
 }
 
 func (o *DeleteCustomFieldBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteCustomFieldNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete custom field not found response
+func (o *DeleteCustomFieldNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteCustomFieldNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldNotFound", 404)
 }
 
 func (o *DeleteCustomFieldNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldNotFound", 404)
 }
 
 func (o *DeleteCustomFieldNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteCustomFieldUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete custom field unprocessable entity response
+func (o *DeleteCustomFieldUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteCustomFieldUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldUnprocessableEntity", 422)
 }
 
 func (o *DeleteCustomFieldUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/custom-fields/{custom-field-public-id}][%d] deleteCustomFieldUnprocessableEntity", 422)
 }
 
 func (o *DeleteCustomFieldUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

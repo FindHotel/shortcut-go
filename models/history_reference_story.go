@@ -40,7 +40,7 @@ type HistoryReferenceStory struct {
 
 	// If the referenced entity is a Story, either "bug", "chore", or "feature".
 	// Required: true
-	// Enum: [feature chore bug]
+	// Enum: ["feature","chore","bug"]
 	StoryType *string `json:"story_type"`
 }
 

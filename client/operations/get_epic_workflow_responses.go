@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetEpicWorkflowReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/epic-workflow] getEpicWorkflow", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetEpicWorkflowOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get epic workflow o k response
+func (o *GetEpicWorkflowOK) Code() int {
+	return 200
+}
+
 func (o *GetEpicWorkflowOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowOK %s", 200, payload)
 }
 
 func (o *GetEpicWorkflowOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowOK %s", 200, payload)
 }
 
 func (o *GetEpicWorkflowOK) GetPayload() *models.EpicWorkflow {
@@ -153,12 +161,17 @@ func (o *GetEpicWorkflowBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get epic workflow bad request response
+func (o *GetEpicWorkflowBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetEpicWorkflowBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowBadRequest", 400)
 }
 
 func (o *GetEpicWorkflowBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowBadRequest", 400)
 }
 
 func (o *GetEpicWorkflowBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetEpicWorkflowNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get epic workflow not found response
+func (o *GetEpicWorkflowNotFound) Code() int {
+	return 404
+}
+
 func (o *GetEpicWorkflowNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowNotFound", 404)
 }
 
 func (o *GetEpicWorkflowNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowNotFound", 404)
 }
 
 func (o *GetEpicWorkflowNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetEpicWorkflowUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get epic workflow unprocessable entity response
+func (o *GetEpicWorkflowUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetEpicWorkflowUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowUnprocessableEntity", 422)
 }
 
 func (o *GetEpicWorkflowUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/epic-workflow][%d] getEpicWorkflowUnprocessableEntity", 422)
 }
 
 func (o *GetEpicWorkflowUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

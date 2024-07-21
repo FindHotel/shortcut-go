@@ -45,7 +45,7 @@ func (o *DeleteTaskReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}] deleteTask", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteTaskNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete task no content response
+func (o *DeleteTaskNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteTaskNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskNoContent", 204)
 }
 
 func (o *DeleteTaskNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskNoContent", 204)
 }
 
 func (o *DeleteTaskNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteTaskBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete task bad request response
+func (o *DeleteTaskBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteTaskBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskBadRequest", 400)
 }
 
 func (o *DeleteTaskBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskBadRequest", 400)
 }
 
 func (o *DeleteTaskBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteTaskNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete task not found response
+func (o *DeleteTaskNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteTaskNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskNotFound", 404)
 }
 
 func (o *DeleteTaskNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskNotFound", 404)
 }
 
 func (o *DeleteTaskNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteTaskUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete task unprocessable entity response
+func (o *DeleteTaskUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteTaskUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskUnprocessableEntity", 422)
 }
 
 func (o *DeleteTaskUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] deleteTaskUnprocessableEntity", 422)
 }
 
 func (o *DeleteTaskUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -15,8 +15,6 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	"github.com/FindHotel/shortcut-go/models"
 )
 
 // NewListIterationStoriesParams creates a new ListIterationStoriesParams object,
@@ -64,8 +62,11 @@ ListIterationStoriesParams contains all the parameters to send to the API endpoi
 */
 type ListIterationStoriesParams struct {
 
-	// GetIterationStories.
-	GetIterationStories *models.GetIterationStories
+	/* IncludesDescription.
+
+	   A true/false boolean indicating whether to return Stories with their descriptions.
+	*/
+	IncludesDescription *bool
 
 	/* IterationPublicID.
 
@@ -128,15 +129,15 @@ func (o *ListIterationStoriesParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithGetIterationStories adds the getIterationStories to the list iteration stories params
-func (o *ListIterationStoriesParams) WithGetIterationStories(getIterationStories *models.GetIterationStories) *ListIterationStoriesParams {
-	o.SetGetIterationStories(getIterationStories)
+// WithIncludesDescription adds the includesDescription to the list iteration stories params
+func (o *ListIterationStoriesParams) WithIncludesDescription(includesDescription *bool) *ListIterationStoriesParams {
+	o.SetIncludesDescription(includesDescription)
 	return o
 }
 
-// SetGetIterationStories adds the getIterationStories to the list iteration stories params
-func (o *ListIterationStoriesParams) SetGetIterationStories(getIterationStories *models.GetIterationStories) {
-	o.GetIterationStories = getIterationStories
+// SetIncludesDescription adds the includesDescription to the list iteration stories params
+func (o *ListIterationStoriesParams) SetIncludesDescription(includesDescription *bool) {
+	o.IncludesDescription = includesDescription
 }
 
 // WithIterationPublicID adds the iterationPublicID to the list iteration stories params
@@ -157,9 +158,21 @@ func (o *ListIterationStoriesParams) WriteToRequest(r runtime.ClientRequest, reg
 		return err
 	}
 	var res []error
-	if o.GetIterationStories != nil {
-		if err := r.SetBodyParam(o.GetIterationStories); err != nil {
-			return err
+
+	if o.IncludesDescription != nil {
+
+		// query param includes_description
+		var qrIncludesDescription bool
+
+		if o.IncludesDescription != nil {
+			qrIncludesDescription = *o.IncludesDescription
+		}
+		qIncludesDescription := swag.FormatBool(qrIncludesDescription)
+		if qIncludesDescription != "" {
+
+			if err := r.SetQueryParam("includes_description", qIncludesDescription); err != nil {
+				return err
+			}
 		}
 	}
 

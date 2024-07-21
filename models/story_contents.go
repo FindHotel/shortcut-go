@@ -350,6 +350,11 @@ func (m *StoryContents) contextValidateCustomFields(ctx context.Context, formats
 	for i := 0; i < len(m.CustomFields); i++ {
 
 		if m.CustomFields[i] != nil {
+
+			if swag.IsZero(m.CustomFields[i]) { // not required
+				return nil
+			}
+
 			if err := m.CustomFields[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("custom_fields" + "." + strconv.Itoa(i))
@@ -370,6 +375,11 @@ func (m *StoryContents) contextValidateFiles(ctx context.Context, formats strfmt
 	for i := 0; i < len(m.Files); i++ {
 
 		if m.Files[i] != nil {
+
+			if swag.IsZero(m.Files[i]) { // not required
+				return nil
+			}
+
 			if err := m.Files[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("files" + "." + strconv.Itoa(i))
@@ -390,6 +400,11 @@ func (m *StoryContents) contextValidateLabels(ctx context.Context, formats strfm
 	for i := 0; i < len(m.Labels); i++ {
 
 		if m.Labels[i] != nil {
+
+			if swag.IsZero(m.Labels[i]) { // not required
+				return nil
+			}
+
 			if err := m.Labels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("labels" + "." + strconv.Itoa(i))
@@ -410,6 +425,11 @@ func (m *StoryContents) contextValidateLinkedFiles(ctx context.Context, formats 
 	for i := 0; i < len(m.LinkedFiles); i++ {
 
 		if m.LinkedFiles[i] != nil {
+
+			if swag.IsZero(m.LinkedFiles[i]) { // not required
+				return nil
+			}
+
 			if err := m.LinkedFiles[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("linked_files" + "." + strconv.Itoa(i))
@@ -430,6 +450,11 @@ func (m *StoryContents) contextValidateTasks(ctx context.Context, formats strfmt
 	for i := 0; i < len(m.Tasks); i++ {
 
 		if m.Tasks[i] != nil {
+
+			if swag.IsZero(m.Tasks[i]) { // not required
+				return nil
+			}
+
 			if err := m.Tasks[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("tasks" + "." + strconv.Itoa(i))

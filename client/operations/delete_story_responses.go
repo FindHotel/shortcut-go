@@ -45,7 +45,7 @@ func (o *DeleteStoryReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/stories/{story-public-id}] deleteStory", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteStoryNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete story no content response
+func (o *DeleteStoryNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteStoryNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryNoContent", 204)
 }
 
 func (o *DeleteStoryNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryNoContent", 204)
 }
 
 func (o *DeleteStoryNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteStoryBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete story bad request response
+func (o *DeleteStoryBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteStoryBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryBadRequest", 400)
 }
 
 func (o *DeleteStoryBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryBadRequest", 400)
 }
 
 func (o *DeleteStoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteStoryNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete story not found response
+func (o *DeleteStoryNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteStoryNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryNotFound", 404)
 }
 
 func (o *DeleteStoryNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryNotFound", 404)
 }
 
 func (o *DeleteStoryNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteStoryUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete story unprocessable entity response
+func (o *DeleteStoryUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteStoryUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryUnprocessableEntity", 422)
 }
 
 func (o *DeleteStoryUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}][%d] deleteStoryUnprocessableEntity", 422)
 }
 
 func (o *DeleteStoryUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -57,11 +57,15 @@ type StoryComment struct {
 	// Required: true
 	ID *int64 `json:"id"`
 
+	// Whether the Comment is currently the root of a thread that is linked to Slack.
+	// Required: true
+	LinkedToSlack *bool `json:"linked_to_slack"`
+
 	// The unique IDs of the Member who are mentioned in the Comment.
 	// Required: true
 	MemberMentionIds []strfmt.UUID `json:"member_mention_ids"`
 
-	// Deprecated: use member_mention_ids.
+	// `Deprecated:` use `member_mention_ids`.
 	// Required: true
 	MentionIds []strfmt.UUID `json:"mention_ids"`
 
@@ -126,6 +130,10 @@ func (m *StoryComment) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLinkedToSlack(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -245,6 +253,15 @@ func (m *StoryComment) validateGroupMentionIds(formats strfmt.Registry) error {
 func (m *StoryComment) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *StoryComment) validateLinkedToSlack(formats strfmt.Registry) error {
+
+	if err := validate.Required("linked_to_slack", "body", m.LinkedToSlack); err != nil {
 		return err
 	}
 
@@ -371,6 +388,11 @@ func (m *StoryComment) contextValidateReactions(ctx context.Context, formats str
 	for i := 0; i < len(m.Reactions); i++ {
 
 		if m.Reactions[i] != nil {
+
+			if swag.IsZero(m.Reactions[i]) { // not required
+				return nil
+			}
+
 			if err := m.Reactions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("reactions" + "." + strconv.Itoa(i))

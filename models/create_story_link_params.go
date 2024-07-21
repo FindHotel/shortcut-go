@@ -28,7 +28,7 @@ type CreateStoryLinkParams struct {
 
 	// How the subject Story acts on the object Story. This can be "blocks", "duplicates", or "relates to".
 	// Required: true
-	// Enum: [blocks duplicates relates to]
+	// Enum: ["blocks","duplicates","relates to"]
 	Verb *string `json:"verb"`
 }
 

@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *UploadFilesReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/files] uploadFiles", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *UploadFilesCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the upload files created response
+func (o *UploadFilesCreated) Code() int {
+	return 201
+}
+
 func (o *UploadFilesCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesCreated %s", 201, payload)
 }
 
 func (o *UploadFilesCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesCreated %s", 201, payload)
 }
 
 func (o *UploadFilesCreated) GetPayload() []*models.UploadedFile {
@@ -151,12 +159,17 @@ func (o *UploadFilesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the upload files bad request response
+func (o *UploadFilesBadRequest) Code() int {
+	return 400
+}
+
 func (o *UploadFilesBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesBadRequest", 400)
 }
 
 func (o *UploadFilesBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesBadRequest", 400)
 }
 
 func (o *UploadFilesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *UploadFilesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the upload files not found response
+func (o *UploadFilesNotFound) Code() int {
+	return 404
+}
+
 func (o *UploadFilesNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesNotFound", 404)
 }
 
 func (o *UploadFilesNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesNotFound", 404)
 }
 
 func (o *UploadFilesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *UploadFilesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the upload files unprocessable entity response
+func (o *UploadFilesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *UploadFilesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesUnprocessableEntity", 422)
 }
 
 func (o *UploadFilesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/files][%d] uploadFilesUnprocessableEntity", 422)
 }
 
 func (o *UploadFilesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

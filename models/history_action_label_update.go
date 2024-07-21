@@ -22,7 +22,7 @@ type HistoryActionLabelUpdate struct {
 
 	// The action of the entity referenced.
 	// Required: true
-	// Enum: [update]
+	// Enum: ["update"]
 	Action *string `json:"action"`
 
 	// The type of entity referenced.

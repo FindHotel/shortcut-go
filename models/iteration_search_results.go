@@ -20,9 +20,6 @@ import (
 // swagger:model IterationSearchResults
 type IterationSearchResults struct {
 
-	// cursors
-	Cursors []string `json:"cursors"`
-
 	// A list of search results.
 	// Required: true
 	Data []*IterationSlim `json:"data"`
@@ -122,6 +119,11 @@ func (m *IterationSearchResults) contextValidateData(ctx context.Context, format
 	for i := 0; i < len(m.Data); i++ {
 
 		if m.Data[i] != nil {
+
+			if swag.IsZero(m.Data[i]) { // not required
+				return nil
+			}
+
 			if err := m.Data[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("data" + "." + strconv.Itoa(i))

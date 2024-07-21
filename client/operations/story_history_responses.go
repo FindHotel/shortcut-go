@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *StoryHistoryReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/stories/{story-public-id}/history] storyHistory", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *StoryHistoryOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the story history o k response
+func (o *StoryHistoryOK) Code() int {
+	return 200
+}
+
 func (o *StoryHistoryOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryOK %s", 200, payload)
 }
 
 func (o *StoryHistoryOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryOK %s", 200, payload)
 }
 
 func (o *StoryHistoryOK) GetPayload() []*models.History {
@@ -151,12 +159,17 @@ func (o *StoryHistoryBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the story history bad request response
+func (o *StoryHistoryBadRequest) Code() int {
+	return 400
+}
+
 func (o *StoryHistoryBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryBadRequest", 400)
 }
 
 func (o *StoryHistoryBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryBadRequest", 400)
 }
 
 func (o *StoryHistoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *StoryHistoryNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the story history not found response
+func (o *StoryHistoryNotFound) Code() int {
+	return 404
+}
+
 func (o *StoryHistoryNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryNotFound", 404)
 }
 
 func (o *StoryHistoryNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryNotFound", 404)
 }
 
 func (o *StoryHistoryNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *StoryHistoryUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the story history unprocessable entity response
+func (o *StoryHistoryUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *StoryHistoryUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryUnprocessableEntity", 422)
 }
 
 func (o *StoryHistoryUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/history][%d] storyHistoryUnprocessableEntity", 422)
 }
 
 func (o *StoryHistoryUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

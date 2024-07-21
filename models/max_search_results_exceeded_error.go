@@ -22,7 +22,7 @@ type MaxSearchResultsExceededError struct {
 
 	// The name for this type of error, `maximum-results-exceeded`
 	// Required: true
-	// Enum: [maximum-results-exceeded]
+	// Enum: ["maximum-results-exceeded"]
 	Error *string `json:"error"`
 
 	// The maximum number of search results supported, `1000`

@@ -71,7 +71,7 @@ type UpdateStories struct {
 	LabelsRemove []*CreateLabelParams `json:"labels_remove"`
 
 	// One of "first" or "last". This can be used to move the given story to the first or last position in the workflow state.
-	// Enum: [last first]
+	// Enum: ["last","first"]
 	MoveTo string `json:"move_to,omitempty"`
 
 	// The UUIDs of the new owners to be added.
@@ -95,7 +95,7 @@ type UpdateStories struct {
 	StoryIds []int64 `json:"story_ids"`
 
 	// The type of story (feature, bug, chore).
-	// Enum: [feature chore bug]
+	// Enum: ["feature","chore","bug"]
 	StoryType string `json:"story_type,omitempty"`
 
 	// The ID of the workflow state to put the stories in.
@@ -519,6 +519,11 @@ func (m *UpdateStories) contextValidateCustomFieldsAdd(ctx context.Context, form
 	for i := 0; i < len(m.CustomFieldsAdd); i++ {
 
 		if m.CustomFieldsAdd[i] != nil {
+
+			if swag.IsZero(m.CustomFieldsAdd[i]) { // not required
+				return nil
+			}
+
 			if err := m.CustomFieldsAdd[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("custom_fields_add" + "." + strconv.Itoa(i))
@@ -539,6 +544,11 @@ func (m *UpdateStories) contextValidateCustomFieldsRemove(ctx context.Context, f
 	for i := 0; i < len(m.CustomFieldsRemove); i++ {
 
 		if m.CustomFieldsRemove[i] != nil {
+
+			if swag.IsZero(m.CustomFieldsRemove[i]) { // not required
+				return nil
+			}
+
 			if err := m.CustomFieldsRemove[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("custom_fields_remove" + "." + strconv.Itoa(i))
@@ -559,6 +569,11 @@ func (m *UpdateStories) contextValidateLabelsAdd(ctx context.Context, formats st
 	for i := 0; i < len(m.LabelsAdd); i++ {
 
 		if m.LabelsAdd[i] != nil {
+
+			if swag.IsZero(m.LabelsAdd[i]) { // not required
+				return nil
+			}
+
 			if err := m.LabelsAdd[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("labels_add" + "." + strconv.Itoa(i))
@@ -579,6 +594,11 @@ func (m *UpdateStories) contextValidateLabelsRemove(ctx context.Context, formats
 	for i := 0; i < len(m.LabelsRemove); i++ {
 
 		if m.LabelsRemove[i] != nil {
+
+			if swag.IsZero(m.LabelsRemove[i]) { // not required
+				return nil
+			}
+
 			if err := m.LabelsRemove[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("labels_remove" + "." + strconv.Itoa(i))

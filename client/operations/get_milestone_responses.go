@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetMilestoneReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/milestones/{milestone-public-id}] getMilestone", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetMilestoneOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get milestone o k response
+func (o *GetMilestoneOK) Code() int {
+	return 200
+}
+
 func (o *GetMilestoneOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneOK %s", 200, payload)
 }
 
 func (o *GetMilestoneOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneOK %s", 200, payload)
 }
 
 func (o *GetMilestoneOK) GetPayload() *models.Milestone {
@@ -153,12 +161,17 @@ func (o *GetMilestoneBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get milestone bad request response
+func (o *GetMilestoneBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetMilestoneBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneBadRequest", 400)
 }
 
 func (o *GetMilestoneBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneBadRequest", 400)
 }
 
 func (o *GetMilestoneBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetMilestoneNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get milestone not found response
+func (o *GetMilestoneNotFound) Code() int {
+	return 404
+}
+
 func (o *GetMilestoneNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneNotFound", 404)
 }
 
 func (o *GetMilestoneNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneNotFound", 404)
 }
 
 func (o *GetMilestoneNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetMilestoneUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get milestone unprocessable entity response
+func (o *GetMilestoneUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetMilestoneUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneUnprocessableEntity", 422)
 }
 
 func (o *GetMilestoneUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}][%d] getMilestoneUnprocessableEntity", 422)
 }
 
 func (o *GetMilestoneUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

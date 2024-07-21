@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetCustomFieldReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/custom-fields/{custom-field-public-id}] getCustomField", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetCustomFieldOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get custom field o k response
+func (o *GetCustomFieldOK) Code() int {
+	return 200
+}
+
 func (o *GetCustomFieldOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldOK %s", 200, payload)
 }
 
 func (o *GetCustomFieldOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldOK %s", 200, payload)
 }
 
 func (o *GetCustomFieldOK) GetPayload() *models.CustomField {
@@ -153,12 +161,17 @@ func (o *GetCustomFieldBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get custom field bad request response
+func (o *GetCustomFieldBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetCustomFieldBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldBadRequest", 400)
 }
 
 func (o *GetCustomFieldBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldBadRequest", 400)
 }
 
 func (o *GetCustomFieldBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetCustomFieldNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get custom field not found response
+func (o *GetCustomFieldNotFound) Code() int {
+	return 404
+}
+
 func (o *GetCustomFieldNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldNotFound", 404)
 }
 
 func (o *GetCustomFieldNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldNotFound", 404)
 }
 
 func (o *GetCustomFieldNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetCustomFieldUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get custom field unprocessable entity response
+func (o *GetCustomFieldUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetCustomFieldUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldUnprocessableEntity", 422)
 }
 
 func (o *GetCustomFieldUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/custom-fields/{custom-field-public-id}][%d] getCustomFieldUnprocessableEntity", 422)
 }
 
 func (o *GetCustomFieldUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -15,8 +15,6 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	"github.com/FindHotel/shortcut-go/models"
 )
 
 // NewListStoriesParams creates a new ListStoriesParams object,
@@ -64,8 +62,11 @@ ListStoriesParams contains all the parameters to send to the API endpoint
 */
 type ListStoriesParams struct {
 
-	// GetProjectStories.
-	GetProjectStories *models.GetProjectStories
+	/* IncludesDescription.
+
+	   A true/false boolean indicating whether to return Stories with their descriptions.
+	*/
+	IncludesDescription *bool
 
 	/* ProjectPublicID.
 
@@ -128,15 +129,15 @@ func (o *ListStoriesParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithGetProjectStories adds the getProjectStories to the list stories params
-func (o *ListStoriesParams) WithGetProjectStories(getProjectStories *models.GetProjectStories) *ListStoriesParams {
-	o.SetGetProjectStories(getProjectStories)
+// WithIncludesDescription adds the includesDescription to the list stories params
+func (o *ListStoriesParams) WithIncludesDescription(includesDescription *bool) *ListStoriesParams {
+	o.SetIncludesDescription(includesDescription)
 	return o
 }
 
-// SetGetProjectStories adds the getProjectStories to the list stories params
-func (o *ListStoriesParams) SetGetProjectStories(getProjectStories *models.GetProjectStories) {
-	o.GetProjectStories = getProjectStories
+// SetIncludesDescription adds the includesDescription to the list stories params
+func (o *ListStoriesParams) SetIncludesDescription(includesDescription *bool) {
+	o.IncludesDescription = includesDescription
 }
 
 // WithProjectPublicID adds the projectPublicID to the list stories params
@@ -157,9 +158,21 @@ func (o *ListStoriesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		return err
 	}
 	var res []error
-	if o.GetProjectStories != nil {
-		if err := r.SetBodyParam(o.GetProjectStories); err != nil {
-			return err
+
+	if o.IncludesDescription != nil {
+
+		// query param includes_description
+		var qrIncludesDescription bool
+
+		if o.IncludesDescription != nil {
+			qrIncludesDescription = *o.IncludesDescription
+		}
+		qIncludesDescription := swag.FormatBool(qrIncludesDescription)
+		if qIncludesDescription != "" {
+
+			if err := r.SetQueryParam("includes_description", qIncludesDescription); err != nil {
+				return err
+			}
 		}
 	}
 

@@ -22,7 +22,7 @@ type HistoryActionStoryLinkUpdate struct {
 
 	// The action of the entity referenced.
 	// Required: true
-	// Enum: [update]
+	// Enum: ["update"]
 	Action *string `json:"action"`
 
 	// changes
@@ -47,7 +47,7 @@ type HistoryActionStoryLinkUpdate struct {
 
 	// The verb describing the link's relationship.
 	// Required: true
-	// Enum: [blocks duplicates relates to]
+	// Enum: ["blocks","duplicates","relates to"]
 	Verb *string `json:"verb"`
 }
 
@@ -248,6 +248,7 @@ func (m *HistoryActionStoryLinkUpdate) ContextValidate(ctx context.Context, form
 func (m *HistoryActionStoryLinkUpdate) contextValidateChanges(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Changes != nil {
+
 		if err := m.Changes.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("changes")

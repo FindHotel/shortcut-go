@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetStoryReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/stories/{story-public-id}] getStory", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetStoryOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get story o k response
+func (o *GetStoryOK) Code() int {
+	return 200
+}
+
 func (o *GetStoryOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryOK %s", 200, payload)
 }
 
 func (o *GetStoryOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryOK %s", 200, payload)
 }
 
 func (o *GetStoryOK) GetPayload() *models.Story {
@@ -153,12 +161,17 @@ func (o *GetStoryBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get story bad request response
+func (o *GetStoryBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetStoryBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryBadRequest", 400)
 }
 
 func (o *GetStoryBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryBadRequest", 400)
 }
 
 func (o *GetStoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetStoryNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get story not found response
+func (o *GetStoryNotFound) Code() int {
+	return 404
+}
+
 func (o *GetStoryNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryNotFound", 404)
 }
 
 func (o *GetStoryNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryNotFound", 404)
 }
 
 func (o *GetStoryNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetStoryUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get story unprocessable entity response
+func (o *GetStoryUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetStoryUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryUnprocessableEntity", 422)
 }
 
 func (o *GetStoryUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}][%d] getStoryUnprocessableEntity", 422)
 }
 
 func (o *GetStoryUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

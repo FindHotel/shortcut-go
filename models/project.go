@@ -63,6 +63,10 @@ type Project struct {
 	// Required: true
 	FollowerIds []strfmt.UUID `json:"follower_ids"`
 
+	// The Global ID of the Project.
+	// Required: true
+	GlobalID *string `json:"global_id"`
+
 	// The unique ID of the Project.
 	// Required: true
 	ID *int64 `json:"id"`
@@ -143,6 +147,10 @@ func (m *Project) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateFollowerIds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGlobalID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -298,6 +306,15 @@ func (m *Project) validateFollowerIds(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Project) validateGlobalID(formats strfmt.Registry) error {
+
+	if err := validate.Required("global_id", "body", m.GlobalID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *Project) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("id", "body", m.ID); err != nil {
@@ -415,6 +432,7 @@ func (m *Project) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 func (m *Project) contextValidateStats(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Stats != nil {
+
 		if err := m.Stats.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("stats")

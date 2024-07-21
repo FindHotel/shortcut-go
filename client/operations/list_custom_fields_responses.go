@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListCustomFieldsReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/custom-fields] listCustomFields", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListCustomFieldsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list custom fields o k response
+func (o *ListCustomFieldsOK) Code() int {
+	return 200
+}
+
 func (o *ListCustomFieldsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsOK %s", 200, payload)
 }
 
 func (o *ListCustomFieldsOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsOK %s", 200, payload)
 }
 
 func (o *ListCustomFieldsOK) GetPayload() []*models.CustomField {
@@ -151,12 +159,17 @@ func (o *ListCustomFieldsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list custom fields bad request response
+func (o *ListCustomFieldsBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListCustomFieldsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsBadRequest", 400)
 }
 
 func (o *ListCustomFieldsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsBadRequest", 400)
 }
 
 func (o *ListCustomFieldsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListCustomFieldsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list custom fields not found response
+func (o *ListCustomFieldsNotFound) Code() int {
+	return 404
+}
+
 func (o *ListCustomFieldsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsNotFound", 404)
 }
 
 func (o *ListCustomFieldsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsNotFound", 404)
 }
 
 func (o *ListCustomFieldsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListCustomFieldsUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list custom fields unprocessable entity response
+func (o *ListCustomFieldsUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListCustomFieldsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsUnprocessableEntity", 422)
 }
 
 func (o *ListCustomFieldsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/custom-fields][%d] listCustomFieldsUnprocessableEntity", 422)
 }
 
 func (o *ListCustomFieldsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

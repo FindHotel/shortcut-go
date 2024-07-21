@@ -45,7 +45,7 @@ func (o *DeleteEpicCommentReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}] deleteEpicComment", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteEpicCommentNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete epic comment no content response
+func (o *DeleteEpicCommentNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteEpicCommentNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentNoContent", 204)
 }
 
 func (o *DeleteEpicCommentNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentNoContent", 204)
 }
 
 func (o *DeleteEpicCommentNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteEpicCommentBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete epic comment bad request response
+func (o *DeleteEpicCommentBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteEpicCommentBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentBadRequest", 400)
 }
 
 func (o *DeleteEpicCommentBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentBadRequest", 400)
 }
 
 func (o *DeleteEpicCommentBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteEpicCommentNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete epic comment not found response
+func (o *DeleteEpicCommentNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteEpicCommentNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentNotFound", 404)
 }
 
 func (o *DeleteEpicCommentNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentNotFound", 404)
 }
 
 func (o *DeleteEpicCommentNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteEpicCommentUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete epic comment unprocessable entity response
+func (o *DeleteEpicCommentUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteEpicCommentUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentUnprocessableEntity", 422)
 }
 
 func (o *DeleteEpicCommentUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] deleteEpicCommentUnprocessableEntity", 422)
 }
 
 func (o *DeleteEpicCommentUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

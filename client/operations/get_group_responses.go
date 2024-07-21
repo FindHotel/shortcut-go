@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetGroupReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/groups/{group-public-id}] getGroup", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetGroupOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get group o k response
+func (o *GetGroupOK) Code() int {
+	return 200
+}
+
 func (o *GetGroupOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupOK %s", 200, payload)
 }
 
 func (o *GetGroupOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupOK %s", 200, payload)
 }
 
 func (o *GetGroupOK) GetPayload() *models.Group {
@@ -153,12 +161,17 @@ func (o *GetGroupBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get group bad request response
+func (o *GetGroupBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetGroupBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupBadRequest", 400)
 }
 
 func (o *GetGroupBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupBadRequest", 400)
 }
 
 func (o *GetGroupBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetGroupNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get group not found response
+func (o *GetGroupNotFound) Code() int {
+	return 404
+}
+
 func (o *GetGroupNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupNotFound", 404)
 }
 
 func (o *GetGroupNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupNotFound", 404)
 }
 
 func (o *GetGroupNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetGroupUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get group unprocessable entity response
+func (o *GetGroupUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetGroupUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupUnprocessableEntity", 422)
 }
 
 func (o *GetGroupUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}][%d] getGroupUnprocessableEntity", 422)
 }
 
 func (o *GetGroupUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

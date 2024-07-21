@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetFileReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/files/{file-public-id}] getFile", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetFileOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get file o k response
+func (o *GetFileOK) Code() int {
+	return 200
+}
+
 func (o *GetFileOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileOK %s", 200, payload)
 }
 
 func (o *GetFileOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileOK %s", 200, payload)
 }
 
 func (o *GetFileOK) GetPayload() *models.UploadedFile {
@@ -153,12 +161,17 @@ func (o *GetFileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get file bad request response
+func (o *GetFileBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetFileBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileBadRequest", 400)
 }
 
 func (o *GetFileBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileBadRequest", 400)
 }
 
 func (o *GetFileBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetFileNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get file not found response
+func (o *GetFileNotFound) Code() int {
+	return 404
+}
+
 func (o *GetFileNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileNotFound", 404)
 }
 
 func (o *GetFileNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileNotFound", 404)
 }
 
 func (o *GetFileNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetFileUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get file unprocessable entity response
+func (o *GetFileUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetFileUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileUnprocessableEntity", 422)
 }
 
 func (o *GetFileUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/files/{file-public-id}][%d] getFileUnprocessableEntity", 422)
 }
 
 func (o *GetFileUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

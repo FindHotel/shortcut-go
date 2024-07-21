@@ -30,7 +30,7 @@ type CustomFieldEnumValue struct {
 
 	// A string description of this resource.
 	// Required: true
-	// Enum: [custom-field-enum-value]
+	// Enum: ["custom-field-enum-value"]
 	EntityType *string `json:"entity_type"`
 
 	// The unique public ID for the Custom Field.

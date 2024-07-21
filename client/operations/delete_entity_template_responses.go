@@ -45,7 +45,7 @@ func (o *DeleteEntityTemplateReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/entity-templates/{entity-template-public-id}] deleteEntityTemplate", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteEntityTemplateNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete entity template no content response
+func (o *DeleteEntityTemplateNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteEntityTemplateNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateNoContent", 204)
 }
 
 func (o *DeleteEntityTemplateNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateNoContent", 204)
 }
 
 func (o *DeleteEntityTemplateNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteEntityTemplateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete entity template bad request response
+func (o *DeleteEntityTemplateBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteEntityTemplateBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateBadRequest", 400)
 }
 
 func (o *DeleteEntityTemplateBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateBadRequest", 400)
 }
 
 func (o *DeleteEntityTemplateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteEntityTemplateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete entity template not found response
+func (o *DeleteEntityTemplateNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteEntityTemplateNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateNotFound", 404)
 }
 
 func (o *DeleteEntityTemplateNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateNotFound", 404)
 }
 
 func (o *DeleteEntityTemplateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteEntityTemplateUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete entity template unprocessable entity response
+func (o *DeleteEntityTemplateUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteEntityTemplateUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateUnprocessableEntity", 422)
 }
 
 func (o *DeleteEntityTemplateUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/entity-templates/{entity-template-public-id}][%d] deleteEntityTemplateUnprocessableEntity", 422)
 }
 
 func (o *DeleteEntityTemplateUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

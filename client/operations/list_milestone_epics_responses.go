@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListMilestoneEpicsReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/milestones/{milestone-public-id}/epics] listMilestoneEpics", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListMilestoneEpicsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list milestone epics o k response
+func (o *ListMilestoneEpicsOK) Code() int {
+	return 200
+}
+
 func (o *ListMilestoneEpicsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsOK %s", 200, payload)
 }
 
 func (o *ListMilestoneEpicsOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsOK %s", 200, payload)
 }
 
 func (o *ListMilestoneEpicsOK) GetPayload() []*models.EpicSlim {
@@ -151,12 +159,17 @@ func (o *ListMilestoneEpicsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list milestone epics bad request response
+func (o *ListMilestoneEpicsBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListMilestoneEpicsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsBadRequest", 400)
 }
 
 func (o *ListMilestoneEpicsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsBadRequest", 400)
 }
 
 func (o *ListMilestoneEpicsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListMilestoneEpicsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list milestone epics not found response
+func (o *ListMilestoneEpicsNotFound) Code() int {
+	return 404
+}
+
 func (o *ListMilestoneEpicsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsNotFound", 404)
 }
 
 func (o *ListMilestoneEpicsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsNotFound", 404)
 }
 
 func (o *ListMilestoneEpicsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListMilestoneEpicsUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list milestone epics unprocessable entity response
+func (o *ListMilestoneEpicsUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListMilestoneEpicsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsUnprocessableEntity", 422)
 }
 
 func (o *ListMilestoneEpicsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/milestones/{milestone-public-id}/epics][%d] listMilestoneEpicsUnprocessableEntity", 422)
 }
 
 func (o *ListMilestoneEpicsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

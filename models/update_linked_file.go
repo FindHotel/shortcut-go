@@ -39,7 +39,7 @@ type UpdateLinkedFile struct {
 	ThumbnailURL string `json:"thumbnail_url,omitempty"`
 
 	// The integration type of the file (e.g. google, dropbox, box).
-	// Enum: [google url dropbox box onedrive]
+	// Enum: ["google","url","dropbox","box","onedrive"]
 	Type string `json:"type,omitempty"`
 
 	// The UUID of the member that uploaded the file.

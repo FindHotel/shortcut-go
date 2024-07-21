@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *UpdateMilestoneReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/milestones/{milestone-public-id}] updateMilestone", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *UpdateMilestoneOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update milestone o k response
+func (o *UpdateMilestoneOK) Code() int {
+	return 200
+}
+
 func (o *UpdateMilestoneOK) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneOK %s", 200, payload)
 }
 
 func (o *UpdateMilestoneOK) String() string {
-	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneOK %s", 200, payload)
 }
 
 func (o *UpdateMilestoneOK) GetPayload() *models.Milestone {
@@ -153,12 +161,17 @@ func (o *UpdateMilestoneBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the update milestone bad request response
+func (o *UpdateMilestoneBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateMilestoneBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneBadRequest", 400)
 }
 
 func (o *UpdateMilestoneBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneBadRequest", 400)
 }
 
 func (o *UpdateMilestoneBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *UpdateMilestoneNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the update milestone not found response
+func (o *UpdateMilestoneNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateMilestoneNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneNotFound", 404)
 }
 
 func (o *UpdateMilestoneNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneNotFound", 404)
 }
 
 func (o *UpdateMilestoneNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *UpdateMilestoneUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the update milestone unprocessable entity response
+func (o *UpdateMilestoneUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *UpdateMilestoneUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneUnprocessableEntity", 422)
 }
 
 func (o *UpdateMilestoneUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/milestones/{milestone-public-id}][%d] updateMilestoneUnprocessableEntity", 422)
 }
 
 func (o *UpdateMilestoneUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

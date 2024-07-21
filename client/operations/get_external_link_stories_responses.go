@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetExternalLinkStoriesReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/external-link/stories] getExternalLinkStories", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetExternalLinkStoriesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get external link stories o k response
+func (o *GetExternalLinkStoriesOK) Code() int {
+	return 200
+}
+
 func (o *GetExternalLinkStoriesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesOK %s", 200, payload)
 }
 
 func (o *GetExternalLinkStoriesOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesOK %s", 200, payload)
 }
 
 func (o *GetExternalLinkStoriesOK) GetPayload() []*models.StorySlim {
@@ -151,12 +159,17 @@ func (o *GetExternalLinkStoriesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get external link stories bad request response
+func (o *GetExternalLinkStoriesBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetExternalLinkStoriesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesBadRequest", 400)
 }
 
 func (o *GetExternalLinkStoriesBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesBadRequest", 400)
 }
 
 func (o *GetExternalLinkStoriesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *GetExternalLinkStoriesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get external link stories not found response
+func (o *GetExternalLinkStoriesNotFound) Code() int {
+	return 404
+}
+
 func (o *GetExternalLinkStoriesNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesNotFound", 404)
 }
 
 func (o *GetExternalLinkStoriesNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesNotFound", 404)
 }
 
 func (o *GetExternalLinkStoriesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *GetExternalLinkStoriesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get external link stories unprocessable entity response
+func (o *GetExternalLinkStoriesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetExternalLinkStoriesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesUnprocessableEntity", 422)
 }
 
 func (o *GetExternalLinkStoriesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/external-link/stories][%d] getExternalLinkStoriesUnprocessableEntity", 422)
 }
 
 func (o *GetExternalLinkStoriesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

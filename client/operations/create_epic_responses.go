@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *CreateEpicReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/epics] createEpic", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *CreateEpicCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create epic created response
+func (o *CreateEpicCreated) Code() int {
+	return 201
+}
+
 func (o *CreateEpicCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicCreated %s", 201, payload)
 }
 
 func (o *CreateEpicCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicCreated %s", 201, payload)
 }
 
 func (o *CreateEpicCreated) GetPayload() *models.Epic {
@@ -153,12 +161,17 @@ func (o *CreateEpicBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create epic bad request response
+func (o *CreateEpicBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateEpicBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicBadRequest", 400)
 }
 
 func (o *CreateEpicBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicBadRequest", 400)
 }
 
 func (o *CreateEpicBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *CreateEpicNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the create epic not found response
+func (o *CreateEpicNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateEpicNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicNotFound", 404)
 }
 
 func (o *CreateEpicNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicNotFound", 404)
 }
 
 func (o *CreateEpicNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *CreateEpicUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the create epic unprocessable entity response
+func (o *CreateEpicUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *CreateEpicUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicUnprocessableEntity", 422)
 }
 
 func (o *CreateEpicUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/epics][%d] createEpicUnprocessableEntity", 422)
 }
 
 func (o *CreateEpicUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

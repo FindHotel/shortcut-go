@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListCategoriesReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/categories] listCategories", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListCategoriesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list categories o k response
+func (o *ListCategoriesOK) Code() int {
+	return 200
+}
+
 func (o *ListCategoriesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesOK %s", 200, payload)
 }
 
 func (o *ListCategoriesOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesOK %s", 200, payload)
 }
 
 func (o *ListCategoriesOK) GetPayload() []*models.Category {
@@ -151,12 +159,17 @@ func (o *ListCategoriesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list categories bad request response
+func (o *ListCategoriesBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListCategoriesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesBadRequest", 400)
 }
 
 func (o *ListCategoriesBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesBadRequest", 400)
 }
 
 func (o *ListCategoriesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListCategoriesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list categories not found response
+func (o *ListCategoriesNotFound) Code() int {
+	return 404
+}
+
 func (o *ListCategoriesNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesNotFound", 404)
 }
 
 func (o *ListCategoriesNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesNotFound", 404)
 }
 
 func (o *ListCategoriesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListCategoriesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list categories unprocessable entity response
+func (o *ListCategoriesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListCategoriesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesUnprocessableEntity", 422)
 }
 
 func (o *ListCategoriesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/categories][%d] listCategoriesUnprocessableEntity", 422)
 }
 
 func (o *ListCategoriesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

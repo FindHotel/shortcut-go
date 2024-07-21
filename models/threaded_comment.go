@@ -62,7 +62,7 @@ type ThreadedComment struct {
 	// Required: true
 	MemberMentionIds []strfmt.UUID `json:"member_mention_ids"`
 
-	// Deprecated: use member_mention_ids.
+	// `Deprecated:` use `member_mention_ids`.
 	// Required: true
 	MentionIds []strfmt.UUID `json:"mention_ids"`
 
@@ -328,6 +328,11 @@ func (m *ThreadedComment) contextValidateComments(ctx context.Context, formats s
 	for i := 0; i < len(m.Comments); i++ {
 
 		if m.Comments[i] != nil {
+
+			if swag.IsZero(m.Comments[i]) { // not required
+				return nil
+			}
+
 			if err := m.Comments[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("comments" + "." + strconv.Itoa(i))

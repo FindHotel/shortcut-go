@@ -32,9 +32,9 @@ type HistoryReferenceWorkflowState struct {
 	// Required: true
 	Name *string `json:"name"`
 
-	// Either "unstarted", "started", or "done".
+	// Either "backlog", "unstarted", "started", or "done".
 	// Required: true
-	// Enum: [started unstarted done]
+	// Enum: ["started","backlog","unstarted","done"]
 	Type *string `json:"type"`
 }
 
@@ -95,7 +95,7 @@ var historyReferenceWorkflowStateTypeTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["started","unstarted","done"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["started","backlog","unstarted","done"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -107,6 +107,9 @@ const (
 
 	// HistoryReferenceWorkflowStateTypeStarted captures enum value "started"
 	HistoryReferenceWorkflowStateTypeStarted string = "started"
+
+	// HistoryReferenceWorkflowStateTypeBacklog captures enum value "backlog"
+	HistoryReferenceWorkflowStateTypeBacklog string = "backlog"
 
 	// HistoryReferenceWorkflowStateTypeUnstarted captures enum value "unstarted"
 	HistoryReferenceWorkflowStateTypeUnstarted string = "unstarted"

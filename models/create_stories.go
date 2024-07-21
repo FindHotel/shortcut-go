@@ -85,6 +85,11 @@ func (m *CreateStories) contextValidateStories(ctx context.Context, formats strf
 	for i := 0; i < len(m.Stories); i++ {
 
 		if m.Stories[i] != nil {
+
+			if swag.IsZero(m.Stories[i]) { // not required
+				return nil
+			}
+
 			if err := m.Stories[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("stories" + "." + strconv.Itoa(i))

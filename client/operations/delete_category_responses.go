@@ -45,7 +45,7 @@ func (o *DeleteCategoryReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/categories/{category-public-id}] deleteCategory", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteCategoryNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete category no content response
+func (o *DeleteCategoryNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteCategoryNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryNoContent", 204)
 }
 
 func (o *DeleteCategoryNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryNoContent", 204)
 }
 
 func (o *DeleteCategoryNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteCategoryBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete category bad request response
+func (o *DeleteCategoryBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteCategoryBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryBadRequest", 400)
 }
 
 func (o *DeleteCategoryBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryBadRequest", 400)
 }
 
 func (o *DeleteCategoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteCategoryNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete category not found response
+func (o *DeleteCategoryNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteCategoryNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryNotFound", 404)
 }
 
 func (o *DeleteCategoryNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryNotFound", 404)
 }
 
 func (o *DeleteCategoryNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteCategoryUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete category unprocessable entity response
+func (o *DeleteCategoryUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteCategoryUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryUnprocessableEntity", 422)
 }
 
 func (o *DeleteCategoryUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/categories/{category-public-id}][%d] deleteCategoryUnprocessableEntity", 422)
 }
 
 func (o *DeleteCategoryUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

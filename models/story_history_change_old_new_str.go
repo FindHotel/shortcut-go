@@ -21,7 +21,7 @@ type StoryHistoryChangeOldNewStr struct {
 	New string `json:"new,omitempty"`
 
 	// The old value.
-	Old string `json:"old,omitempty"`
+	Old *string `json:"old,omitempty"`
 }
 
 // Validate validates this story history change old new str

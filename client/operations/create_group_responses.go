@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -54,7 +55,7 @@ func (o *CreateGroupReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/groups] createGroup", response, response.Code())
 	}
 }
 
@@ -97,12 +98,19 @@ func (o *CreateGroupCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create group created response
+func (o *CreateGroupCreated) Code() int {
+	return 201
+}
+
 func (o *CreateGroupCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupCreated %s", 201, payload)
 }
 
 func (o *CreateGroupCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupCreated %s", 201, payload)
 }
 
 func (o *CreateGroupCreated) GetPayload() *models.Group {
@@ -159,12 +167,17 @@ func (o *CreateGroupBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create group bad request response
+func (o *CreateGroupBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateGroupBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupBadRequest", 400)
 }
 
 func (o *CreateGroupBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupBadRequest", 400)
 }
 
 func (o *CreateGroupBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,12 +224,19 @@ func (o *CreateGroupForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the create group forbidden response
+func (o *CreateGroupForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateGroupForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupForbidden %s", 403, payload)
 }
 
 func (o *CreateGroupForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupForbidden %s", 403, payload)
 }
 
 func (o *CreateGroupForbidden) GetPayload() *models.UnusableEntitlementError {
@@ -273,12 +293,17 @@ func (o *CreateGroupNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the create group not found response
+func (o *CreateGroupNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateGroupNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupNotFound", 404)
 }
 
 func (o *CreateGroupNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupNotFound", 404)
 }
 
 func (o *CreateGroupNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -324,12 +349,17 @@ func (o *CreateGroupUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the create group unprocessable entity response
+func (o *CreateGroupUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *CreateGroupUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupUnprocessableEntity", 422)
 }
 
 func (o *CreateGroupUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/groups][%d] createGroupUnprocessableEntity", 422)
 }
 
 func (o *CreateGroupUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

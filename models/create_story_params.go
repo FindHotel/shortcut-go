@@ -81,7 +81,7 @@ type CreateStoryParams struct {
 	LinkedFileIds []int64 `json:"linked_file_ids"`
 
 	// One of "first" or "last". This can be used to move the given story to the first or last position in the workflow state.
-	// Enum: [last first]
+	// Enum: ["last","first"]
 	MoveTo string `json:"move_to,omitempty"`
 
 	// The name of the story.
@@ -101,6 +101,9 @@ type CreateStoryParams struct {
 	// Format: uuid
 	RequestedByID strfmt.UUID `json:"requested_by_id,omitempty"`
 
+	// Given this story was converted from a task in another story, this is the original task ID that was converted to this story.
+	SourceTaskID *int64 `json:"source_task_id,omitempty"`
+
 	// A manual override for the time/date the Story was started.
 	// Format: date-time
 	StartedAtOverride strfmt.DateTime `json:"started_at_override,omitempty"`
@@ -113,7 +116,7 @@ type CreateStoryParams struct {
 	StoryTemplateID *strfmt.UUID `json:"story_template_id,omitempty"`
 
 	// The type of story (feature, bug, chore).
-	// Enum: [feature chore bug]
+	// Enum: ["feature","chore","bug"]
 	StoryType string `json:"story_type,omitempty"`
 
 	// An array of tasks connected to the story.
@@ -662,6 +665,11 @@ func (m *CreateStoryParams) contextValidateComments(ctx context.Context, formats
 	for i := 0; i < len(m.Comments); i++ {
 
 		if m.Comments[i] != nil {
+
+			if swag.IsZero(m.Comments[i]) { // not required
+				return nil
+			}
+
 			if err := m.Comments[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("comments" + "." + strconv.Itoa(i))
@@ -682,6 +690,11 @@ func (m *CreateStoryParams) contextValidateCustomFields(ctx context.Context, for
 	for i := 0; i < len(m.CustomFields); i++ {
 
 		if m.CustomFields[i] != nil {
+
+			if swag.IsZero(m.CustomFields[i]) { // not required
+				return nil
+			}
+
 			if err := m.CustomFields[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("custom_fields" + "." + strconv.Itoa(i))
@@ -702,6 +715,11 @@ func (m *CreateStoryParams) contextValidateLabels(ctx context.Context, formats s
 	for i := 0; i < len(m.Labels); i++ {
 
 		if m.Labels[i] != nil {
+
+			if swag.IsZero(m.Labels[i]) { // not required
+				return nil
+			}
+
 			if err := m.Labels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("labels" + "." + strconv.Itoa(i))
@@ -722,6 +740,11 @@ func (m *CreateStoryParams) contextValidateStoryLinks(ctx context.Context, forma
 	for i := 0; i < len(m.StoryLinks); i++ {
 
 		if m.StoryLinks[i] != nil {
+
+			if swag.IsZero(m.StoryLinks[i]) { // not required
+				return nil
+			}
+
 			if err := m.StoryLinks[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("story_links" + "." + strconv.Itoa(i))
@@ -742,6 +765,11 @@ func (m *CreateStoryParams) contextValidateTasks(ctx context.Context, formats st
 	for i := 0; i < len(m.Tasks); i++ {
 
 		if m.Tasks[i] != nil {
+
+			if swag.IsZero(m.Tasks[i]) { // not required
+				return nil
+			}
+
 			if err := m.Tasks[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("tasks" + "." + strconv.Itoa(i))

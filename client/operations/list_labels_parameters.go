@@ -14,8 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/FindHotel/shortcut-go/models"
+	"github.com/go-openapi/swag"
 )
 
 // NewListLabelsParams creates a new ListLabelsParams object,
@@ -63,8 +62,11 @@ ListLabelsParams contains all the parameters to send to the API endpoint
 */
 type ListLabelsParams struct {
 
-	// ListLabels.
-	ListLabels *models.ListLabels
+	/* Slim.
+
+	   A true/false boolean indicating if the slim versions of the Label should be returned.
+	*/
+	Slim *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -119,15 +121,15 @@ func (o *ListLabelsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithListLabels adds the listLabels to the list labels params
-func (o *ListLabelsParams) WithListLabels(listLabels *models.ListLabels) *ListLabelsParams {
-	o.SetListLabels(listLabels)
+// WithSlim adds the slim to the list labels params
+func (o *ListLabelsParams) WithSlim(slim *bool) *ListLabelsParams {
+	o.SetSlim(slim)
 	return o
 }
 
-// SetListLabels adds the listLabels to the list labels params
-func (o *ListLabelsParams) SetListLabels(listLabels *models.ListLabels) {
-	o.ListLabels = listLabels
+// SetSlim adds the slim to the list labels params
+func (o *ListLabelsParams) SetSlim(slim *bool) {
+	o.Slim = slim
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -137,9 +139,21 @@ func (o *ListLabelsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 		return err
 	}
 	var res []error
-	if o.ListLabels != nil {
-		if err := r.SetBodyParam(o.ListLabels); err != nil {
-			return err
+
+	if o.Slim != nil {
+
+		// query param slim
+		var qrSlim bool
+
+		if o.Slim != nil {
+			qrSlim = *o.Slim
+		}
+		qSlim := swag.FormatBool(qrSlim)
+		if qSlim != "" {
+
+			if err := r.SetQueryParam("slim", qSlim); err != nil {
+				return err
+			}
 		}
 	}
 

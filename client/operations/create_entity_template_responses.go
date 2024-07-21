@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *CreateEntityTemplateReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/entity-templates] createEntityTemplate", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *CreateEntityTemplateCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create entity template created response
+func (o *CreateEntityTemplateCreated) Code() int {
+	return 201
+}
+
 func (o *CreateEntityTemplateCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateCreated %s", 201, payload)
 }
 
 func (o *CreateEntityTemplateCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateCreated %s", 201, payload)
 }
 
 func (o *CreateEntityTemplateCreated) GetPayload() *models.EntityTemplate {
@@ -153,12 +161,17 @@ func (o *CreateEntityTemplateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create entity template bad request response
+func (o *CreateEntityTemplateBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateEntityTemplateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateBadRequest", 400)
 }
 
 func (o *CreateEntityTemplateBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateBadRequest", 400)
 }
 
 func (o *CreateEntityTemplateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *CreateEntityTemplateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the create entity template not found response
+func (o *CreateEntityTemplateNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateEntityTemplateNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateNotFound", 404)
 }
 
 func (o *CreateEntityTemplateNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateNotFound", 404)
 }
 
 func (o *CreateEntityTemplateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *CreateEntityTemplateUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the create entity template unprocessable entity response
+func (o *CreateEntityTemplateUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *CreateEntityTemplateUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateUnprocessableEntity", 422)
 }
 
 func (o *CreateEntityTemplateUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/entity-templates][%d] createEntityTemplateUnprocessableEntity", 422)
 }
 
 func (o *CreateEntityTemplateUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

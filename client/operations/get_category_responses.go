@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetCategoryReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/categories/{category-public-id}] getCategory", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetCategoryOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get category o k response
+func (o *GetCategoryOK) Code() int {
+	return 200
+}
+
 func (o *GetCategoryOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryOK %s", 200, payload)
 }
 
 func (o *GetCategoryOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryOK %s", 200, payload)
 }
 
 func (o *GetCategoryOK) GetPayload() *models.Category {
@@ -153,12 +161,17 @@ func (o *GetCategoryBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get category bad request response
+func (o *GetCategoryBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetCategoryBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryBadRequest", 400)
 }
 
 func (o *GetCategoryBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryBadRequest", 400)
 }
 
 func (o *GetCategoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetCategoryNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get category not found response
+func (o *GetCategoryNotFound) Code() int {
+	return 404
+}
+
 func (o *GetCategoryNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryNotFound", 404)
 }
 
 func (o *GetCategoryNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryNotFound", 404)
 }
 
 func (o *GetCategoryNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetCategoryUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get category unprocessable entity response
+func (o *GetCategoryUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetCategoryUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryUnprocessableEntity", 422)
 }
 
 func (o *GetCategoryUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}][%d] getCategoryUnprocessableEntity", 422)
 }
 
 func (o *GetCategoryUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

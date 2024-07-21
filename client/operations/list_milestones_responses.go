@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListMilestonesReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/milestones] listMilestones", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListMilestonesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list milestones o k response
+func (o *ListMilestonesOK) Code() int {
+	return 200
+}
+
 func (o *ListMilestonesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesOK %s", 200, payload)
 }
 
 func (o *ListMilestonesOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesOK %s", 200, payload)
 }
 
 func (o *ListMilestonesOK) GetPayload() []*models.Milestone {
@@ -151,12 +159,17 @@ func (o *ListMilestonesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list milestones bad request response
+func (o *ListMilestonesBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListMilestonesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesBadRequest", 400)
 }
 
 func (o *ListMilestonesBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesBadRequest", 400)
 }
 
 func (o *ListMilestonesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListMilestonesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list milestones not found response
+func (o *ListMilestonesNotFound) Code() int {
+	return 404
+}
+
 func (o *ListMilestonesNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesNotFound", 404)
 }
 
 func (o *ListMilestonesNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesNotFound", 404)
 }
 
 func (o *ListMilestonesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListMilestonesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list milestones unprocessable entity response
+func (o *ListMilestonesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListMilestonesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesUnprocessableEntity", 422)
 }
 
 func (o *ListMilestonesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/milestones][%d] listMilestonesUnprocessableEntity", 422)
 }
 
 func (o *ListMilestonesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

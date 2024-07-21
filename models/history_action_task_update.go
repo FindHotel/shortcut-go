@@ -22,7 +22,7 @@ type HistoryActionTaskUpdate struct {
 
 	// The action of the entity referenced.
 	// Required: true
-	// Enum: [update]
+	// Enum: ["update"]
 	Action *string `json:"action"`
 
 	// changes
@@ -196,6 +196,7 @@ func (m *HistoryActionTaskUpdate) ContextValidate(ctx context.Context, formats s
 func (m *HistoryActionTaskUpdate) contextValidateChanges(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Changes != nil {
+
 		if err := m.Changes.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("changes")

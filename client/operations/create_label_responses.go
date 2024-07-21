@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *CreateLabelReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/labels] createLabel", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *CreateLabelCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create label created response
+func (o *CreateLabelCreated) Code() int {
+	return 201
+}
+
 func (o *CreateLabelCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelCreated %s", 201, payload)
 }
 
 func (o *CreateLabelCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelCreated %s", 201, payload)
 }
 
 func (o *CreateLabelCreated) GetPayload() *models.Label {
@@ -153,12 +161,17 @@ func (o *CreateLabelBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create label bad request response
+func (o *CreateLabelBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateLabelBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelBadRequest", 400)
 }
 
 func (o *CreateLabelBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelBadRequest", 400)
 }
 
 func (o *CreateLabelBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *CreateLabelNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the create label not found response
+func (o *CreateLabelNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateLabelNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelNotFound", 404)
 }
 
 func (o *CreateLabelNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelNotFound", 404)
 }
 
 func (o *CreateLabelNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *CreateLabelUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the create label unprocessable entity response
+func (o *CreateLabelUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *CreateLabelUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelUnprocessableEntity", 422)
 }
 
 func (o *CreateLabelUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/labels][%d] createLabelUnprocessableEntity", 422)
 }
 
 func (o *CreateLabelUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

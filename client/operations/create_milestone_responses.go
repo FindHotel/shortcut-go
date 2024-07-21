@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -54,7 +55,7 @@ func (o *CreateMilestoneReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/milestones] createMilestone", response, response.Code())
 	}
 }
 
@@ -97,12 +98,19 @@ func (o *CreateMilestoneCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create milestone created response
+func (o *CreateMilestoneCreated) Code() int {
+	return 201
+}
+
 func (o *CreateMilestoneCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneCreated %s", 201, payload)
 }
 
 func (o *CreateMilestoneCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneCreated %s", 201, payload)
 }
 
 func (o *CreateMilestoneCreated) GetPayload() *models.Milestone {
@@ -159,12 +167,17 @@ func (o *CreateMilestoneBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create milestone bad request response
+func (o *CreateMilestoneBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateMilestoneBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneBadRequest", 400)
 }
 
 func (o *CreateMilestoneBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneBadRequest", 400)
 }
 
 func (o *CreateMilestoneBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,12 +224,19 @@ func (o *CreateMilestoneForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the create milestone forbidden response
+func (o *CreateMilestoneForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateMilestoneForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneForbidden %s", 403, payload)
 }
 
 func (o *CreateMilestoneForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneForbidden %s", 403, payload)
 }
 
 func (o *CreateMilestoneForbidden) GetPayload() *models.UnusableEntitlementError {
@@ -273,12 +293,17 @@ func (o *CreateMilestoneNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the create milestone not found response
+func (o *CreateMilestoneNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateMilestoneNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneNotFound", 404)
 }
 
 func (o *CreateMilestoneNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneNotFound", 404)
 }
 
 func (o *CreateMilestoneNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -324,12 +349,17 @@ func (o *CreateMilestoneUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the create milestone unprocessable entity response
+func (o *CreateMilestoneUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *CreateMilestoneUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneUnprocessableEntity", 422)
 }
 
 func (o *CreateMilestoneUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/milestones][%d] createMilestoneUnprocessableEntity", 422)
 }
 
 func (o *CreateMilestoneUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

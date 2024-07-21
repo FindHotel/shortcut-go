@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListLabelsReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/labels] listLabels", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListLabelsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list labels o k response
+func (o *ListLabelsOK) Code() int {
+	return 200
+}
+
 func (o *ListLabelsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsOK %s", 200, payload)
 }
 
 func (o *ListLabelsOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsOK %s", 200, payload)
 }
 
 func (o *ListLabelsOK) GetPayload() []*models.Label {
@@ -151,12 +159,17 @@ func (o *ListLabelsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list labels bad request response
+func (o *ListLabelsBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListLabelsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsBadRequest", 400)
 }
 
 func (o *ListLabelsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsBadRequest", 400)
 }
 
 func (o *ListLabelsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListLabelsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list labels not found response
+func (o *ListLabelsNotFound) Code() int {
+	return 404
+}
+
 func (o *ListLabelsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsNotFound", 404)
 }
 
 func (o *ListLabelsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsNotFound", 404)
 }
 
 func (o *ListLabelsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListLabelsUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list labels unprocessable entity response
+func (o *ListLabelsUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListLabelsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsUnprocessableEntity", 422)
 }
 
 func (o *ListLabelsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/labels][%d] listLabelsUnprocessableEntity", 422)
 }
 
 func (o *ListLabelsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

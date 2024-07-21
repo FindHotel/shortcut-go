@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *UpdateIterationReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/iterations/{iteration-public-id}] updateIteration", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *UpdateIterationOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update iteration o k response
+func (o *UpdateIterationOK) Code() int {
+	return 200
+}
+
 func (o *UpdateIterationOK) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationOK %s", 200, payload)
 }
 
 func (o *UpdateIterationOK) String() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationOK %s", 200, payload)
 }
 
 func (o *UpdateIterationOK) GetPayload() *models.Iteration {
@@ -153,12 +161,17 @@ func (o *UpdateIterationBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the update iteration bad request response
+func (o *UpdateIterationBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateIterationBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationBadRequest", 400)
 }
 
 func (o *UpdateIterationBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationBadRequest", 400)
 }
 
 func (o *UpdateIterationBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *UpdateIterationNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the update iteration not found response
+func (o *UpdateIterationNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateIterationNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationNotFound", 404)
 }
 
 func (o *UpdateIterationNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationNotFound", 404)
 }
 
 func (o *UpdateIterationNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *UpdateIterationUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the update iteration unprocessable entity response
+func (o *UpdateIterationUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *UpdateIterationUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationUnprocessableEntity", 422)
 }
 
 func (o *UpdateIterationUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/iterations/{iteration-public-id}][%d] updateIterationUnprocessableEntity", 422)
 }
 
 func (o *UpdateIterationUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

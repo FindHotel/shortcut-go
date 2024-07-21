@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *CreateCategoryReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/categories] createCategory", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *CreateCategoryCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create category created response
+func (o *CreateCategoryCreated) Code() int {
+	return 201
+}
+
 func (o *CreateCategoryCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryCreated %s", 201, payload)
 }
 
 func (o *CreateCategoryCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryCreated %s", 201, payload)
 }
 
 func (o *CreateCategoryCreated) GetPayload() *models.Category {
@@ -153,12 +161,17 @@ func (o *CreateCategoryBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create category bad request response
+func (o *CreateCategoryBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateCategoryBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryBadRequest", 400)
 }
 
 func (o *CreateCategoryBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryBadRequest", 400)
 }
 
 func (o *CreateCategoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *CreateCategoryNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the create category not found response
+func (o *CreateCategoryNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateCategoryNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryNotFound", 404)
 }
 
 func (o *CreateCategoryNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryNotFound", 404)
 }
 
 func (o *CreateCategoryNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *CreateCategoryUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the create category unprocessable entity response
+func (o *CreateCategoryUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *CreateCategoryUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryUnprocessableEntity", 422)
 }
 
 func (o *CreateCategoryUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/categories][%d] createCategoryUnprocessableEntity", 422)
 }
 
 func (o *CreateCategoryUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -51,7 +51,7 @@ type UpdateMilestone struct {
 	StartedAtOverride *strfmt.DateTime `json:"started_at_override,omitempty"`
 
 	// The workflow state that the Milestone is in.
-	// Enum: [in progress to do done]
+	// Enum: ["in progress","to do","done"]
 	State string `json:"state,omitempty"`
 }
 
@@ -231,6 +231,11 @@ func (m *UpdateMilestone) contextValidateCategories(ctx context.Context, formats
 	for i := 0; i < len(m.Categories); i++ {
 
 		if m.Categories[i] != nil {
+
+			if swag.IsZero(m.Categories[i]) { // not required
+				return nil
+			}
+
 			if err := m.Categories[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("categories" + "." + strconv.Itoa(i))

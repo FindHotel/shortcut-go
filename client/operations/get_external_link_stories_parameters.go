@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/FindHotel/shortcut-go/models"
 )
 
 // NewGetExternalLinkStoriesParams creates a new GetExternalLinkStoriesParams object,
@@ -63,8 +61,11 @@ GetExternalLinkStoriesParams contains all the parameters to send to the API endp
 */
 type GetExternalLinkStoriesParams struct {
 
-	// GetExternalLinkStoriesParams.
-	GetExternalLinkStoriesParams *models.GetExternalLinkStoriesParams
+	/* ExternalLink.
+
+	   The external link associated with one or more stories.
+	*/
+	ExternalLink string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -119,15 +120,15 @@ func (o *GetExternalLinkStoriesParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithGetExternalLinkStoriesParams adds the getExternalLinkStoriesParams to the get external link stories params
-func (o *GetExternalLinkStoriesParams) WithGetExternalLinkStoriesParams(getExternalLinkStoriesParams *models.GetExternalLinkStoriesParams) *GetExternalLinkStoriesParams {
-	o.SetGetExternalLinkStoriesParams(getExternalLinkStoriesParams)
+// WithExternalLink adds the externalLink to the get external link stories params
+func (o *GetExternalLinkStoriesParams) WithExternalLink(externalLink string) *GetExternalLinkStoriesParams {
+	o.SetExternalLink(externalLink)
 	return o
 }
 
-// SetGetExternalLinkStoriesParams adds the getExternalLinkStoriesParams to the get external link stories params
-func (o *GetExternalLinkStoriesParams) SetGetExternalLinkStoriesParams(getExternalLinkStoriesParams *models.GetExternalLinkStoriesParams) {
-	o.GetExternalLinkStoriesParams = getExternalLinkStoriesParams
+// SetExternalLink adds the externalLink to the get external link stories params
+func (o *GetExternalLinkStoriesParams) SetExternalLink(externalLink string) {
+	o.ExternalLink = externalLink
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -137,8 +138,13 @@ func (o *GetExternalLinkStoriesParams) WriteToRequest(r runtime.ClientRequest, r
 		return err
 	}
 	var res []error
-	if o.GetExternalLinkStoriesParams != nil {
-		if err := r.SetBodyParam(o.GetExternalLinkStoriesParams); err != nil {
+
+	// query param external_link
+	qrExternalLink := o.ExternalLink
+	qExternalLink := qrExternalLink
+	if qExternalLink != "" {
+
+		if err := r.SetQueryParam("external_link", qExternalLink); err != nil {
 			return err
 		}
 	}

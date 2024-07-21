@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *UpdateProjectReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/projects/{project-public-id}] updateProject", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *UpdateProjectOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update project o k response
+func (o *UpdateProjectOK) Code() int {
+	return 200
+}
+
 func (o *UpdateProjectOK) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectOK %s", 200, payload)
 }
 
 func (o *UpdateProjectOK) String() string {
-	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectOK %s", 200, payload)
 }
 
 func (o *UpdateProjectOK) GetPayload() *models.Project {
@@ -153,12 +161,17 @@ func (o *UpdateProjectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the update project bad request response
+func (o *UpdateProjectBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateProjectBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectBadRequest", 400)
 }
 
 func (o *UpdateProjectBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectBadRequest", 400)
 }
 
 func (o *UpdateProjectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *UpdateProjectNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the update project not found response
+func (o *UpdateProjectNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateProjectNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectNotFound", 404)
 }
 
 func (o *UpdateProjectNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectNotFound", 404)
 }
 
 func (o *UpdateProjectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *UpdateProjectUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the update project unprocessable entity response
+func (o *UpdateProjectUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *UpdateProjectUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectUnprocessableEntity", 422)
 }
 
 func (o *UpdateProjectUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/projects/{project-public-id}][%d] updateProjectUnprocessableEntity", 422)
 }
 
 func (o *UpdateProjectUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

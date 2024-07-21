@@ -45,7 +45,7 @@ func (o *DeleteLabelReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/labels/{label-public-id}] deleteLabel", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteLabelNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete label no content response
+func (o *DeleteLabelNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteLabelNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelNoContent", 204)
 }
 
 func (o *DeleteLabelNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelNoContent", 204)
 }
 
 func (o *DeleteLabelNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteLabelBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete label bad request response
+func (o *DeleteLabelBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteLabelBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelBadRequest", 400)
 }
 
 func (o *DeleteLabelBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelBadRequest", 400)
 }
 
 func (o *DeleteLabelBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteLabelNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete label not found response
+func (o *DeleteLabelNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteLabelNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelNotFound", 404)
 }
 
 func (o *DeleteLabelNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelNotFound", 404)
 }
 
 func (o *DeleteLabelNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteLabelUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete label unprocessable entity response
+func (o *DeleteLabelUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteLabelUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelUnprocessableEntity", 422)
 }
 
 func (o *DeleteLabelUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/labels/{label-public-id}][%d] deleteLabelUnprocessableEntity", 422)
 }
 
 func (o *DeleteLabelUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

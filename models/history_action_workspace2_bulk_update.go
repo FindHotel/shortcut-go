@@ -22,7 +22,7 @@ type HistoryActionWorkspace2BulkUpdate struct {
 
 	// The action of the entity referenced.
 	// Required: true
-	// Enum: [bulk-update]
+	// Enum: ["bulk-update"]
 	Action *string `json:"action"`
 
 	// The type of entity referenced.

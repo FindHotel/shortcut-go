@@ -24,27 +24,27 @@ type SearchStories struct {
 	// A true/false boolean indicating whether the Story is in archived state.
 	Archived bool `json:"archived,omitempty"`
 
-	// Stories should have been completed before this date.
+	// Stories should have been completed on or before this date.
 	// Format: date-time
 	CompletedAtEnd strfmt.DateTime `json:"completed_at_end,omitempty"`
 
-	// Stories should have been completed after this date.
+	// Stories should have been completed on or after this date.
 	// Format: date-time
 	CompletedAtStart strfmt.DateTime `json:"completed_at_start,omitempty"`
 
-	// Stories should have been created before this date.
+	// Stories should have been created on or before this date.
 	// Format: date-time
 	CreatedAtEnd strfmt.DateTime `json:"created_at_end,omitempty"`
 
-	// Stories should have been created after this date.
+	// Stories should have been created on or after this date.
 	// Format: date-time
 	CreatedAtStart strfmt.DateTime `json:"created_at_start,omitempty"`
 
-	// Stories should have a deadline before this date.
+	// Stories should have a deadline on or before this date.
 	// Format: date-time
 	DeadlineEnd strfmt.DateTime `json:"deadline_end,omitempty"`
 
-	// Stories should have a deadline after this date.
+	// Stories should have a deadline on or after this date.
 	// Format: date-time
 	DeadlineStart strfmt.DateTime `json:"deadline_start,omitempty"`
 
@@ -107,14 +107,14 @@ type SearchStories struct {
 	RequestedByID strfmt.UUID `json:"requested_by_id,omitempty"`
 
 	// The type of Stories that you want returned.
-	// Enum: [feature chore bug]
+	// Enum: ["feature","chore","bug"]
 	StoryType string `json:"story_type,omitempty"`
 
-	// Stories should have been updated before this date.
+	// Stories should have been updated on or before this date.
 	// Format: date-time
 	UpdatedAtEnd strfmt.DateTime `json:"updated_at_end,omitempty"`
 
-	// Stories should have been updated after this date.
+	// Stories should have been updated on or after this date.
 	// Format: date-time
 	UpdatedAtStart strfmt.DateTime `json:"updated_at_start,omitempty"`
 

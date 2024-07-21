@@ -45,7 +45,7 @@ func (o *DeleteFileReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/files/{file-public-id}] deleteFile", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteFileNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete file no content response
+func (o *DeleteFileNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteFileNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileNoContent", 204)
 }
 
 func (o *DeleteFileNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileNoContent", 204)
 }
 
 func (o *DeleteFileNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteFileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete file bad request response
+func (o *DeleteFileBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteFileBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileBadRequest", 400)
 }
 
 func (o *DeleteFileBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileBadRequest", 400)
 }
 
 func (o *DeleteFileBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteFileNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete file not found response
+func (o *DeleteFileNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteFileNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileNotFound", 404)
 }
 
 func (o *DeleteFileNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileNotFound", 404)
 }
 
 func (o *DeleteFileNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteFileUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete file unprocessable entity response
+func (o *DeleteFileUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteFileUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileUnprocessableEntity", 422)
 }
 
 func (o *DeleteFileUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/files/{file-public-id}][%d] deleteFileUnprocessableEntity", 422)
 }
 
 func (o *DeleteFileUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -65,7 +65,7 @@ type Member struct {
 
 	// The user state, one of partial, full, disabled, or imported.  A partial user is disabled, has no means to log in, and is not an import user.  A full user is enabled and has a means to log in.  A disabled user is disabled and has a means to log in.  An import user is disabled, has no means to log in, and is marked as an import user.
 	// Required: true
-	// Enum: [partial full disabled imported]
+	// Enum: ["partial","full","disabled","imported"]
 	State *string `json:"state"`
 
 	// The time/date the Member was last updated.
@@ -331,6 +331,7 @@ func (m *Member) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 func (m *Member) contextValidateProfile(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Profile != nil {
+
 		if err := m.Profile.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("profile")

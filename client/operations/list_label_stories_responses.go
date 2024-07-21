@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListLabelStoriesReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/labels/{label-public-id}/stories] listLabelStories", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListLabelStoriesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list label stories o k response
+func (o *ListLabelStoriesOK) Code() int {
+	return 200
+}
+
 func (o *ListLabelStoriesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesOK %s", 200, payload)
 }
 
 func (o *ListLabelStoriesOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesOK %s", 200, payload)
 }
 
 func (o *ListLabelStoriesOK) GetPayload() []*models.StorySlim {
@@ -151,12 +159,17 @@ func (o *ListLabelStoriesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list label stories bad request response
+func (o *ListLabelStoriesBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListLabelStoriesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesBadRequest", 400)
 }
 
 func (o *ListLabelStoriesBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesBadRequest", 400)
 }
 
 func (o *ListLabelStoriesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListLabelStoriesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list label stories not found response
+func (o *ListLabelStoriesNotFound) Code() int {
+	return 404
+}
+
 func (o *ListLabelStoriesNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesNotFound", 404)
 }
 
 func (o *ListLabelStoriesNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesNotFound", 404)
 }
 
 func (o *ListLabelStoriesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListLabelStoriesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list label stories unprocessable entity response
+func (o *ListLabelStoriesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListLabelStoriesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesUnprocessableEntity", 422)
 }
 
 func (o *ListLabelStoriesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/stories][%d] listLabelStoriesUnprocessableEntity", 422)
 }
 
 func (o *ListLabelStoriesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

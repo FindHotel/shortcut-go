@@ -25,7 +25,7 @@ type MilestoneStats struct {
 	// The average lead time (in seconds) of completed stories in this Milestone.
 	AverageLeadTime int64 `json:"average_lead_time,omitempty"`
 
-	// The number of related documents tp this Milestone.
+	// The number of related documents to this Milestone.
 	// Required: true
 	NumRelatedDocuments *int64 `json:"num_related_documents"`
 }

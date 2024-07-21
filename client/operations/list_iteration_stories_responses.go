@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListIterationStoriesReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/iterations/{iteration-public-id}/stories] listIterationStories", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListIterationStoriesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list iteration stories o k response
+func (o *ListIterationStoriesOK) Code() int {
+	return 200
+}
+
 func (o *ListIterationStoriesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesOK %s", 200, payload)
 }
 
 func (o *ListIterationStoriesOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesOK %s", 200, payload)
 }
 
 func (o *ListIterationStoriesOK) GetPayload() []*models.StorySlim {
@@ -151,12 +159,17 @@ func (o *ListIterationStoriesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list iteration stories bad request response
+func (o *ListIterationStoriesBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListIterationStoriesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesBadRequest", 400)
 }
 
 func (o *ListIterationStoriesBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesBadRequest", 400)
 }
 
 func (o *ListIterationStoriesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListIterationStoriesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list iteration stories not found response
+func (o *ListIterationStoriesNotFound) Code() int {
+	return 404
+}
+
 func (o *ListIterationStoriesNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesNotFound", 404)
 }
 
 func (o *ListIterationStoriesNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesNotFound", 404)
 }
 
 func (o *ListIterationStoriesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListIterationStoriesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list iteration stories unprocessable entity response
+func (o *ListIterationStoriesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListIterationStoriesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesUnprocessableEntity", 422)
 }
 
 func (o *ListIterationStoriesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/iterations/{iteration-public-id}/stories][%d] listIterationStoriesUnprocessableEntity", 422)
 }
 
 func (o *ListIterationStoriesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetLabelReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/labels/{label-public-id}] getLabel", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetLabelOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get label o k response
+func (o *GetLabelOK) Code() int {
+	return 200
+}
+
 func (o *GetLabelOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelOK %s", 200, payload)
 }
 
 func (o *GetLabelOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelOK %s", 200, payload)
 }
 
 func (o *GetLabelOK) GetPayload() *models.Label {
@@ -153,12 +161,17 @@ func (o *GetLabelBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get label bad request response
+func (o *GetLabelBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetLabelBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelBadRequest", 400)
 }
 
 func (o *GetLabelBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelBadRequest", 400)
 }
 
 func (o *GetLabelBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetLabelNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get label not found response
+func (o *GetLabelNotFound) Code() int {
+	return 404
+}
+
 func (o *GetLabelNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelNotFound", 404)
 }
 
 func (o *GetLabelNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelNotFound", 404)
 }
 
 func (o *GetLabelNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetLabelUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get label unprocessable entity response
+func (o *GetLabelUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetLabelUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelUnprocessableEntity", 422)
 }
 
 func (o *GetLabelUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}][%d] getLabelUnprocessableEntity", 422)
 }
 
 func (o *GetLabelUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

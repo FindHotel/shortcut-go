@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListEpicStoriesReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/epics/{epic-public-id}/stories] listEpicStories", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListEpicStoriesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list epic stories o k response
+func (o *ListEpicStoriesOK) Code() int {
+	return 200
+}
+
 func (o *ListEpicStoriesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesOK %s", 200, payload)
 }
 
 func (o *ListEpicStoriesOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesOK %s", 200, payload)
 }
 
 func (o *ListEpicStoriesOK) GetPayload() []*models.StorySlim {
@@ -151,12 +159,17 @@ func (o *ListEpicStoriesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list epic stories bad request response
+func (o *ListEpicStoriesBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListEpicStoriesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesBadRequest", 400)
 }
 
 func (o *ListEpicStoriesBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesBadRequest", 400)
 }
 
 func (o *ListEpicStoriesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListEpicStoriesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list epic stories not found response
+func (o *ListEpicStoriesNotFound) Code() int {
+	return 404
+}
+
 func (o *ListEpicStoriesNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesNotFound", 404)
 }
 
 func (o *ListEpicStoriesNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesNotFound", 404)
 }
 
 func (o *ListEpicStoriesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListEpicStoriesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list epic stories unprocessable entity response
+func (o *ListEpicStoriesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListEpicStoriesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesUnprocessableEntity", 422)
 }
 
 func (o *ListEpicStoriesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/epics/{epic-public-id}/stories][%d] listEpicStoriesUnprocessableEntity", 422)
 }
 
 func (o *ListEpicStoriesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

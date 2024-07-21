@@ -44,6 +44,10 @@ type Profile struct {
 	// Format: uuid
 	ID *strfmt.UUID `json:"id"`
 
+	// A boolean indicating whether this profile is an owner at their associated organization.
+	// Required: true
+	IsOwner *bool `json:"is_owner"`
+
 	// The Member's username within the Organization.
 	// Required: true
 	MentionName *string `json:"mention_name"`
@@ -81,6 +85,10 @@ func (m *Profile) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIsOwner(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -167,6 +175,15 @@ func (m *Profile) validateID(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Profile) validateIsOwner(formats strfmt.Registry) error {
+
+	if err := validate.Required("is_owner", "body", m.IsOwner); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *Profile) validateMentionName(formats strfmt.Registry) error {
 
 	if err := validate.Required("mention_name", "body", m.MentionName); err != nil {
@@ -202,6 +219,7 @@ func (m *Profile) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 func (m *Profile) contextValidateDisplayIcon(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DisplayIcon != nil {
+
 		if err := m.DisplayIcon.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("display_icon")

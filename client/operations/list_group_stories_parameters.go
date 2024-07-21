@@ -14,8 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/FindHotel/shortcut-go/models"
+	"github.com/go-openapi/swag"
 )
 
 // NewListGroupStoriesParams creates a new ListGroupStoriesParams object,
@@ -63,9 +62,6 @@ ListGroupStoriesParams contains all the parameters to send to the API endpoint
 */
 type ListGroupStoriesParams struct {
 
-	// ListGroupStories.
-	ListGroupStories *models.ListGroupStories
-
 	/* GroupPublicID.
 
 	   The unique ID of the Group.
@@ -73,6 +69,22 @@ type ListGroupStoriesParams struct {
 	   Format: uuid
 	*/
 	GroupPublicID strfmt.UUID
+
+	/* Limit.
+
+	   The maximum number of results to return. (Defaults to 1000, max 1000)
+
+	   Format: int64
+	*/
+	Limit *int64
+
+	/* Offset.
+
+	   The offset at which to begin returning results. (Defaults to 0)
+
+	   Format: int64
+	*/
+	Offset *int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -127,17 +139,6 @@ func (o *ListGroupStoriesParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithListGroupStories adds the listGroupStories to the list group stories params
-func (o *ListGroupStoriesParams) WithListGroupStories(listGroupStories *models.ListGroupStories) *ListGroupStoriesParams {
-	o.SetListGroupStories(listGroupStories)
-	return o
-}
-
-// SetListGroupStories adds the listGroupStories to the list group stories params
-func (o *ListGroupStoriesParams) SetListGroupStories(listGroupStories *models.ListGroupStories) {
-	o.ListGroupStories = listGroupStories
-}
-
 // WithGroupPublicID adds the groupPublicID to the list group stories params
 func (o *ListGroupStoriesParams) WithGroupPublicID(groupPublicID strfmt.UUID) *ListGroupStoriesParams {
 	o.SetGroupPublicID(groupPublicID)
@@ -149,6 +150,28 @@ func (o *ListGroupStoriesParams) SetGroupPublicID(groupPublicID strfmt.UUID) {
 	o.GroupPublicID = groupPublicID
 }
 
+// WithLimit adds the limit to the list group stories params
+func (o *ListGroupStoriesParams) WithLimit(limit *int64) *ListGroupStoriesParams {
+	o.SetLimit(limit)
+	return o
+}
+
+// SetLimit adds the limit to the list group stories params
+func (o *ListGroupStoriesParams) SetLimit(limit *int64) {
+	o.Limit = limit
+}
+
+// WithOffset adds the offset to the list group stories params
+func (o *ListGroupStoriesParams) WithOffset(offset *int64) *ListGroupStoriesParams {
+	o.SetOffset(offset)
+	return o
+}
+
+// SetOffset adds the offset to the list group stories params
+func (o *ListGroupStoriesParams) SetOffset(offset *int64) {
+	o.Offset = offset
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ListGroupStoriesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -156,15 +179,44 @@ func (o *ListGroupStoriesParams) WriteToRequest(r runtime.ClientRequest, reg str
 		return err
 	}
 	var res []error
-	if o.ListGroupStories != nil {
-		if err := r.SetBodyParam(o.ListGroupStories); err != nil {
-			return err
-		}
-	}
 
 	// path param group-public-id
 	if err := r.SetPathParam("group-public-id", o.GroupPublicID.String()); err != nil {
 		return err
+	}
+
+	if o.Limit != nil {
+
+		// query param limit
+		var qrLimit int64
+
+		if o.Limit != nil {
+			qrLimit = *o.Limit
+		}
+		qLimit := swag.FormatInt64(qrLimit)
+		if qLimit != "" {
+
+			if err := r.SetQueryParam("limit", qLimit); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Offset != nil {
+
+		// query param offset
+		var qrOffset int64
+
+		if o.Offset != nil {
+			qrOffset = *o.Offset
+		}
+		qOffset := swag.FormatInt64(qrOffset)
+		if qOffset != "" {
+
+			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

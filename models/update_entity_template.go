@@ -95,6 +95,11 @@ func (m *UpdateEntityTemplate) ContextValidate(ctx context.Context, formats strf
 func (m *UpdateEntityTemplate) contextValidateStoryContents(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.StoryContents != nil {
+
+		if swag.IsZero(m.StoryContents) { // not required
+			return nil
+		}
+
 		if err := m.StoryContents.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("story_contents")

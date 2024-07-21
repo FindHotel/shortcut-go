@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListCategoryMilestonesReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/categories/{category-public-id}/milestones] listCategoryMilestones", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListCategoryMilestonesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list category milestones o k response
+func (o *ListCategoryMilestonesOK) Code() int {
+	return 200
+}
+
 func (o *ListCategoryMilestonesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesOK %s", 200, payload)
 }
 
 func (o *ListCategoryMilestonesOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesOK %s", 200, payload)
 }
 
 func (o *ListCategoryMilestonesOK) GetPayload() []*models.Milestone {
@@ -151,12 +159,17 @@ func (o *ListCategoryMilestonesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list category milestones bad request response
+func (o *ListCategoryMilestonesBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListCategoryMilestonesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesBadRequest", 400)
 }
 
 func (o *ListCategoryMilestonesBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesBadRequest", 400)
 }
 
 func (o *ListCategoryMilestonesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListCategoryMilestonesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list category milestones not found response
+func (o *ListCategoryMilestonesNotFound) Code() int {
+	return 404
+}
+
 func (o *ListCategoryMilestonesNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesNotFound", 404)
 }
 
 func (o *ListCategoryMilestonesNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesNotFound", 404)
 }
 
 func (o *ListCategoryMilestonesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListCategoryMilestonesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list category milestones unprocessable entity response
+func (o *ListCategoryMilestonesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListCategoryMilestonesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesUnprocessableEntity", 422)
 }
 
 func (o *ListCategoryMilestonesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/categories/{category-public-id}/milestones][%d] listCategoryMilestonesUnprocessableEntity", 422)
 }
 
 func (o *ListCategoryMilestonesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// CreateEntityTemplate Request paramaters for creating an entirely new entity template.
+// CreateEntityTemplate Request parameters for creating an entirely new entity template.
 //
 // swagger:model CreateEntityTemplate
 type CreateEntityTemplate struct {
@@ -117,6 +117,7 @@ func (m *CreateEntityTemplate) ContextValidate(ctx context.Context, formats strf
 func (m *CreateEntityTemplate) contextValidateStoryContents(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.StoryContents != nil {
+
 		if err := m.StoryContents.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("story_contents")

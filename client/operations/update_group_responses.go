@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -54,7 +55,7 @@ func (o *UpdateGroupReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/groups/{group-public-id}] updateGroup", response, response.Code())
 	}
 }
 
@@ -97,12 +98,19 @@ func (o *UpdateGroupOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update group o k response
+func (o *UpdateGroupOK) Code() int {
+	return 200
+}
+
 func (o *UpdateGroupOK) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupOK %s", 200, payload)
 }
 
 func (o *UpdateGroupOK) String() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupOK %s", 200, payload)
 }
 
 func (o *UpdateGroupOK) GetPayload() *models.Group {
@@ -159,12 +167,17 @@ func (o *UpdateGroupBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the update group bad request response
+func (o *UpdateGroupBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateGroupBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupBadRequest", 400)
 }
 
 func (o *UpdateGroupBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupBadRequest", 400)
 }
 
 func (o *UpdateGroupBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,12 +224,19 @@ func (o *UpdateGroupForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the update group forbidden response
+func (o *UpdateGroupForbidden) Code() int {
+	return 403
+}
+
 func (o *UpdateGroupForbidden) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupForbidden %s", 403, payload)
 }
 
 func (o *UpdateGroupForbidden) String() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupForbidden %s", 403, payload)
 }
 
 func (o *UpdateGroupForbidden) GetPayload() *models.UnusableEntitlementError {
@@ -273,12 +293,17 @@ func (o *UpdateGroupNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the update group not found response
+func (o *UpdateGroupNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateGroupNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupNotFound", 404)
 }
 
 func (o *UpdateGroupNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupNotFound", 404)
 }
 
 func (o *UpdateGroupNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -324,12 +349,17 @@ func (o *UpdateGroupUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the update group unprocessable entity response
+func (o *UpdateGroupUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *UpdateGroupUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupUnprocessableEntity", 422)
 }
 
 func (o *UpdateGroupUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/groups/{group-public-id}][%d] updateGroupUnprocessableEntity", 422)
 }
 
 func (o *UpdateGroupUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -24,6 +24,10 @@ type History struct {
 	// Required: true
 	Actions []interface{} `json:"actions"`
 
+	// The ID of the automation that performed the change.
+	// Format: uuid
+	AutomationID strfmt.UUID `json:"automation_id,omitempty"`
+
 	// The date when the change occurred.
 	// Required: true
 	ChangedAt *string `json:"changed_at"`
@@ -48,7 +52,7 @@ type History struct {
 
 	// The version of the change format.
 	// Required: true
-	// Enum: [v1]
+	// Enum: ["v1"]
 	Version *string `json:"version"`
 
 	// The ID of the webhook that handled the change.
@@ -60,6 +64,10 @@ func (m *History) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateActions(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAutomationID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -88,6 +96,18 @@ func (m *History) Validate(formats strfmt.Registry) error {
 func (m *History) validateActions(formats strfmt.Registry) error {
 
 	if err := validate.Required("actions", "body", m.Actions); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *History) validateAutomationID(formats strfmt.Registry) error {
+	if swag.IsZero(m.AutomationID) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("automation_id", "body", "uuid", m.AutomationID.String(), formats); err != nil {
 		return err
 	}
 

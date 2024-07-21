@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/FindHotel/shortcut-go/models"
 )
 
 // NewListMembersParams creates a new ListMembersParams object,
@@ -63,8 +61,13 @@ ListMembersParams contains all the parameters to send to the API endpoint
 */
 type ListMembersParams struct {
 
-	// ListMembers.
-	ListMembers *models.ListMembers
+	/* OrgPublicID.
+
+	   The unique ID of the Organization to limit the list to.
+
+	   Format: uuid
+	*/
+	OrgPublicID *strfmt.UUID
 
 	timeout    time.Duration
 	Context    context.Context
@@ -119,15 +122,15 @@ func (o *ListMembersParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithListMembers adds the listMembers to the list members params
-func (o *ListMembersParams) WithListMembers(listMembers *models.ListMembers) *ListMembersParams {
-	o.SetListMembers(listMembers)
+// WithOrgPublicID adds the orgPublicID to the list members params
+func (o *ListMembersParams) WithOrgPublicID(orgPublicID *strfmt.UUID) *ListMembersParams {
+	o.SetOrgPublicID(orgPublicID)
 	return o
 }
 
-// SetListMembers adds the listMembers to the list members params
-func (o *ListMembersParams) SetListMembers(listMembers *models.ListMembers) {
-	o.ListMembers = listMembers
+// SetOrgPublicID adds the orgPublicId to the list members params
+func (o *ListMembersParams) SetOrgPublicID(orgPublicID *strfmt.UUID) {
+	o.OrgPublicID = orgPublicID
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -137,9 +140,21 @@ func (o *ListMembersParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		return err
 	}
 	var res []error
-	if o.ListMembers != nil {
-		if err := r.SetBodyParam(o.ListMembers); err != nil {
-			return err
+
+	if o.OrgPublicID != nil {
+
+		// query param org-public-id
+		var qrOrgPublicID strfmt.UUID
+
+		if o.OrgPublicID != nil {
+			qrOrgPublicID = *o.OrgPublicID
+		}
+		qOrgPublicID := qrOrgPublicID.String()
+		if qOrgPublicID != "" {
+
+			if err := r.SetQueryParam("org-public-id", qOrgPublicID); err != nil {
+				return err
+			}
 		}
 	}
 

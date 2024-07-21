@@ -162,6 +162,11 @@ func (m *HistoryChangesTask) ContextValidate(ctx context.Context, formats strfmt
 func (m *HistoryChangesTask) contextValidateComplete(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Complete != nil {
+
+		if swag.IsZero(m.Complete) { // not required
+			return nil
+		}
+
 		if err := m.Complete.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("complete")
@@ -178,6 +183,11 @@ func (m *HistoryChangesTask) contextValidateComplete(ctx context.Context, format
 func (m *HistoryChangesTask) contextValidateDescription(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Description != nil {
+
+		if swag.IsZero(m.Description) { // not required
+			return nil
+		}
+
 		if err := m.Description.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("description")
@@ -194,6 +204,11 @@ func (m *HistoryChangesTask) contextValidateDescription(ctx context.Context, for
 func (m *HistoryChangesTask) contextValidateMentionIds(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MentionIds != nil {
+
+		if swag.IsZero(m.MentionIds) { // not required
+			return nil
+		}
+
 		if err := m.MentionIds.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("mention_ids")
@@ -210,6 +225,11 @@ func (m *HistoryChangesTask) contextValidateMentionIds(ctx context.Context, form
 func (m *HistoryChangesTask) contextValidateOwnerIds(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OwnerIds != nil {
+
+		if swag.IsZero(m.OwnerIds) { // not required
+			return nil
+		}
+
 		if err := m.OwnerIds.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("owner_ids")

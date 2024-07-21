@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *UpdateEpicReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/epics/{epic-public-id}] updateEpic", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *UpdateEpicOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update epic o k response
+func (o *UpdateEpicOK) Code() int {
+	return 200
+}
+
 func (o *UpdateEpicOK) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicOK %s", 200, payload)
 }
 
 func (o *UpdateEpicOK) String() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicOK %s", 200, payload)
 }
 
 func (o *UpdateEpicOK) GetPayload() *models.Epic {
@@ -153,12 +161,17 @@ func (o *UpdateEpicBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the update epic bad request response
+func (o *UpdateEpicBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateEpicBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicBadRequest", 400)
 }
 
 func (o *UpdateEpicBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicBadRequest", 400)
 }
 
 func (o *UpdateEpicBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *UpdateEpicNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the update epic not found response
+func (o *UpdateEpicNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateEpicNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicNotFound", 404)
 }
 
 func (o *UpdateEpicNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicNotFound", 404)
 }
 
 func (o *UpdateEpicNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *UpdateEpicUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the update epic unprocessable entity response
+func (o *UpdateEpicUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *UpdateEpicUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicUnprocessableEntity", 422)
 }
 
 func (o *UpdateEpicUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}][%d] updateEpicUnprocessableEntity", 422)
 }
 
 func (o *UpdateEpicUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

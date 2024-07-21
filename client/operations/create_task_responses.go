@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *CreateTaskReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/stories/{story-public-id}/tasks] createTask", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *CreateTaskCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create task created response
+func (o *CreateTaskCreated) Code() int {
+	return 201
+}
+
 func (o *CreateTaskCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskCreated %s", 201, payload)
 }
 
 func (o *CreateTaskCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskCreated %s", 201, payload)
 }
 
 func (o *CreateTaskCreated) GetPayload() *models.Task {
@@ -153,12 +161,17 @@ func (o *CreateTaskBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create task bad request response
+func (o *CreateTaskBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateTaskBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskBadRequest", 400)
 }
 
 func (o *CreateTaskBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskBadRequest", 400)
 }
 
 func (o *CreateTaskBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *CreateTaskNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the create task not found response
+func (o *CreateTaskNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateTaskNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskNotFound", 404)
 }
 
 func (o *CreateTaskNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskNotFound", 404)
 }
 
 func (o *CreateTaskNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *CreateTaskUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the create task unprocessable entity response
+func (o *CreateTaskUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *CreateTaskUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskUnprocessableEntity", 422)
 }
 
 func (o *CreateTaskUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/tasks][%d] createTaskUnprocessableEntity", 422)
 }
 
 func (o *CreateTaskUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

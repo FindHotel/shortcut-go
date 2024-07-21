@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -44,8 +45,9 @@ type Repository struct {
 	// Required: true
 	Name *string `json:"name"`
 
-	// The type of Repository. Currently this can only be "github".
+	// The VCS provider for the Repository.
 	// Required: true
+	// Enum: ["github","gitlab","bitbucket"]
 	Type *string `json:"type"`
 
 	// The time/date the Repository was updated.
@@ -162,9 +164,46 @@ func (m *Repository) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
+var repositoryTypeTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["github","gitlab","bitbucket"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		repositoryTypeTypePropEnum = append(repositoryTypeTypePropEnum, v)
+	}
+}
+
+const (
+
+	// RepositoryTypeGithub captures enum value "github"
+	RepositoryTypeGithub string = "github"
+
+	// RepositoryTypeGitlab captures enum value "gitlab"
+	RepositoryTypeGitlab string = "gitlab"
+
+	// RepositoryTypeBitbucket captures enum value "bitbucket"
+	RepositoryTypeBitbucket string = "bitbucket"
+)
+
+// prop value enum
+func (m *Repository) validateTypeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, repositoryTypeTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (m *Repository) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

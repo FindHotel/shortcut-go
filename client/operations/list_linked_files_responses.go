@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListLinkedFilesReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/linked-files] listLinkedFiles", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListLinkedFilesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list linked files o k response
+func (o *ListLinkedFilesOK) Code() int {
+	return 200
+}
+
 func (o *ListLinkedFilesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesOK %s", 200, payload)
 }
 
 func (o *ListLinkedFilesOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesOK %s", 200, payload)
 }
 
 func (o *ListLinkedFilesOK) GetPayload() []*models.LinkedFile {
@@ -151,12 +159,17 @@ func (o *ListLinkedFilesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list linked files bad request response
+func (o *ListLinkedFilesBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListLinkedFilesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesBadRequest", 400)
 }
 
 func (o *ListLinkedFilesBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesBadRequest", 400)
 }
 
 func (o *ListLinkedFilesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListLinkedFilesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list linked files not found response
+func (o *ListLinkedFilesNotFound) Code() int {
+	return 404
+}
+
 func (o *ListLinkedFilesNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesNotFound", 404)
 }
 
 func (o *ListLinkedFilesNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesNotFound", 404)
 }
 
 func (o *ListLinkedFilesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListLinkedFilesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list linked files unprocessable entity response
+func (o *ListLinkedFilesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListLinkedFilesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesUnprocessableEntity", 422)
 }
 
 func (o *ListLinkedFilesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/linked-files][%d] listLinkedFilesUnprocessableEntity", 422)
 }
 
 func (o *ListLinkedFilesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

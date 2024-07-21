@@ -50,10 +50,6 @@ type HistoryReferenceCustomFieldEnumValue struct {
 
 	// The custom-field enum value as a string.
 	// Required: true
-	IntegerValue *int64 `json:"integer_value"`
-
-	// The custom-field enum value as a string.
-	// Required: true
 	StringValue *string `json:"string_value"`
 }
 
@@ -86,10 +82,6 @@ func (m *HistoryReferenceCustomFieldEnumValue) Validate(formats strfmt.Registry)
 	}
 
 	if err := m.validateID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateIntegerValue(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -165,15 +157,6 @@ func (m *HistoryReferenceCustomFieldEnumValue) validateID(formats strfmt.Registr
 
 	if m.ID == nil {
 		return errors.Required("id", "body", nil)
-	}
-
-	return nil
-}
-
-func (m *HistoryReferenceCustomFieldEnumValue) validateIntegerValue(formats strfmt.Registry) error {
-
-	if err := validate.Required("integer_value", "body", m.IntegerValue); err != nil {
-		return err
 	}
 
 	return nil

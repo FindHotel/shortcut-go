@@ -49,10 +49,6 @@ type Commit struct {
 	// Required: true
 	ID *int64 `json:"id"`
 
-	// The IDs of the Branches the Commit has been merged into.
-	// Required: true
-	MergedBranchIds []int64 `json:"merged_branch_ids"`
-
 	// The Commit message.
 	// Required: true
 	Message *string `json:"message"`
@@ -105,10 +101,6 @@ func (m *Commit) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateMergedBranchIds(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -220,15 +212,6 @@ func (m *Commit) validateID(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Commit) validateMergedBranchIds(formats strfmt.Registry) error {
-
-	if err := validate.Required("merged_branch_ids", "body", m.MergedBranchIds); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *Commit) validateMessage(formats strfmt.Registry) error {
 
 	if err := validate.Required("message", "body", m.Message); err != nil {
@@ -299,6 +282,7 @@ func (m *Commit) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 func (m *Commit) contextValidateAuthorIdentity(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AuthorIdentity != nil {
+
 		if err := m.AuthorIdentity.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("author_identity")

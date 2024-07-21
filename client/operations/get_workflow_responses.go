@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetWorkflowReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/workflows/{workflow-public-id}] getWorkflow", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetWorkflowOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get workflow o k response
+func (o *GetWorkflowOK) Code() int {
+	return 200
+}
+
 func (o *GetWorkflowOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowOK %s", 200, payload)
 }
 
 func (o *GetWorkflowOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowOK %s", 200, payload)
 }
 
 func (o *GetWorkflowOK) GetPayload() *models.Workflow {
@@ -153,12 +161,17 @@ func (o *GetWorkflowBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get workflow bad request response
+func (o *GetWorkflowBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetWorkflowBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowBadRequest", 400)
 }
 
 func (o *GetWorkflowBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowBadRequest", 400)
 }
 
 func (o *GetWorkflowBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetWorkflowNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get workflow not found response
+func (o *GetWorkflowNotFound) Code() int {
+	return 404
+}
+
 func (o *GetWorkflowNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowNotFound", 404)
 }
 
 func (o *GetWorkflowNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowNotFound", 404)
 }
 
 func (o *GetWorkflowNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetWorkflowUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get workflow unprocessable entity response
+func (o *GetWorkflowUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetWorkflowUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowUnprocessableEntity", 422)
 }
 
 func (o *GetWorkflowUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/workflows/{workflow-public-id}][%d] getWorkflowUnprocessableEntity", 422)
 }
 
 func (o *GetWorkflowUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

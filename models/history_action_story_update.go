@@ -22,7 +22,7 @@ type HistoryActionStoryUpdate struct {
 
 	// The action of the entity referenced.
 	// Required: true
-	// Enum: [update]
+	// Enum: ["update"]
 	Action *string `json:"action"`
 
 	// The application URL of the Story.
@@ -48,7 +48,7 @@ type HistoryActionStoryUpdate struct {
 
 	// The type of Story; either feature, bug, or chore.
 	// Required: true
-	// Enum: [feature chore bug]
+	// Enum: ["feature","chore","bug"]
 	StoryType *string `json:"story_type"`
 }
 
@@ -256,6 +256,11 @@ func (m *HistoryActionStoryUpdate) ContextValidate(ctx context.Context, formats 
 func (m *HistoryActionStoryUpdate) contextValidateChanges(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Changes != nil {
+
+		if swag.IsZero(m.Changes) { // not required
+			return nil
+		}
+
 		if err := m.Changes.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("changes")

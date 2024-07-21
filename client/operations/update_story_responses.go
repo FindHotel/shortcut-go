@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *UpdateStoryReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/stories/{story-public-id}] updateStory", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *UpdateStoryOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update story o k response
+func (o *UpdateStoryOK) Code() int {
+	return 200
+}
+
 func (o *UpdateStoryOK) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryOK %s", 200, payload)
 }
 
 func (o *UpdateStoryOK) String() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryOK %s", 200, payload)
 }
 
 func (o *UpdateStoryOK) GetPayload() *models.Story {
@@ -153,12 +161,17 @@ func (o *UpdateStoryBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the update story bad request response
+func (o *UpdateStoryBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateStoryBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryBadRequest", 400)
 }
 
 func (o *UpdateStoryBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryBadRequest", 400)
 }
 
 func (o *UpdateStoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *UpdateStoryNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the update story not found response
+func (o *UpdateStoryNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateStoryNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryNotFound", 404)
 }
 
 func (o *UpdateStoryNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryNotFound", 404)
 }
 
 func (o *UpdateStoryNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *UpdateStoryUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the update story unprocessable entity response
+func (o *UpdateStoryUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *UpdateStoryUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryUnprocessableEntity", 422)
 }
 
 func (o *UpdateStoryUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/stories/{story-public-id}][%d] updateStoryUnprocessableEntity", 422)
 }
 
 func (o *UpdateStoryUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

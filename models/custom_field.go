@@ -40,12 +40,12 @@ type CustomField struct {
 
 	// A string description of this resource.
 	// Required: true
-	// Enum: [custom-field]
+	// Enum: ["custom-field"]
 	EntityType *string `json:"entity_type"`
 
 	// The type of Custom Field, eg. 'enum'.
 	// Required: true
-	// Enum: [enum]
+	// Enum: ["enum"]
 	FieldType *string `json:"field_type"`
 
 	// When true, the CustomFieldEnumValues may not be reordered.
@@ -368,6 +368,11 @@ func (m *CustomField) contextValidateValues(ctx context.Context, formats strfmt.
 	for i := 0; i < len(m.Values); i++ {
 
 		if m.Values[i] != nil {
+
+			if swag.IsZero(m.Values[i]) { // not required
+				return nil
+			}
+
 			if err := m.Values[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("values" + "." + strconv.Itoa(i))

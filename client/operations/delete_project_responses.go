@@ -45,7 +45,7 @@ func (o *DeleteProjectReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/projects/{project-public-id}] deleteProject", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteProjectNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete project no content response
+func (o *DeleteProjectNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteProjectNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectNoContent", 204)
 }
 
 func (o *DeleteProjectNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectNoContent", 204)
 }
 
 func (o *DeleteProjectNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteProjectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete project bad request response
+func (o *DeleteProjectBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteProjectBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectBadRequest", 400)
 }
 
 func (o *DeleteProjectBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectBadRequest", 400)
 }
 
 func (o *DeleteProjectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteProjectNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete project not found response
+func (o *DeleteProjectNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteProjectNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectNotFound", 404)
 }
 
 func (o *DeleteProjectNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectNotFound", 404)
 }
 
 func (o *DeleteProjectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteProjectUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete project unprocessable entity response
+func (o *DeleteProjectUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteProjectUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectUnprocessableEntity", 422)
 }
 
 func (o *DeleteProjectUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/projects/{project-public-id}][%d] deleteProjectUnprocessableEntity", 422)
 }
 
 func (o *DeleteProjectUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

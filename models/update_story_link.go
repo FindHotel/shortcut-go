@@ -27,7 +27,7 @@ type UpdateStoryLink struct {
 	SubjectID int64 `json:"subject_id,omitempty"`
 
 	// The type of link.
-	// Enum: [blocks duplicates relates to]
+	// Enum: ["blocks","duplicates","relates to"]
 	Verb string `json:"verb,omitempty"`
 }
 

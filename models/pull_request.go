@@ -48,6 +48,10 @@ type PullRequest struct {
 	// Required: true
 	EntityType *string `json:"entity_type"`
 
+	// Boolean indicating that the Pull Request has Stories that have Pull Requests that change at least one of the same lines this Pull Request changes.
+	// Required: true
+	HasOverlappingStories *bool `json:"has_overlapping_stories"`
+
 	// The unique ID associated with the pull request in Shortcut.
 	// Required: true
 	ID *int64 `json:"id"`
@@ -136,6 +140,10 @@ func (m *PullRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateEntityType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHasOverlappingStories(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -253,6 +261,15 @@ func (m *PullRequest) validateDraft(formats strfmt.Registry) error {
 func (m *PullRequest) validateEntityType(formats strfmt.Registry) error {
 
 	if err := validate.Required("entity_type", "body", m.EntityType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *PullRequest) validateHasOverlappingStories(formats strfmt.Registry) error {
+
+	if err := validate.Required("has_overlapping_stories", "body", m.HasOverlappingStories); err != nil {
 		return err
 	}
 
@@ -425,6 +442,11 @@ func (m *PullRequest) contextValidateVcsLabels(ctx context.Context, formats strf
 	for i := 0; i < len(m.VcsLabels); i++ {
 
 		if m.VcsLabels[i] != nil {
+
+			if swag.IsZero(m.VcsLabels[i]) { // not required
+				return nil
+			}
+
 			if err := m.VcsLabels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("vcs_labels" + "." + strconv.Itoa(i))

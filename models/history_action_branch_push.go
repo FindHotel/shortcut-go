@@ -22,7 +22,7 @@ type HistoryActionBranchPush struct {
 
 	// The action of the entity referenced.
 	// Required: true
-	// Enum: [push]
+	// Enum: ["push"]
 	Action *string `json:"action"`
 
 	// The type of entity referenced.

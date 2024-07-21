@@ -85,7 +85,7 @@ type UpdateStory struct {
 	LinkedFileIds []int64 `json:"linked_file_ids"`
 
 	// One of "first" or "last". This can be used to move the given story to the first or last position in the workflow state.
-	// Enum: [last first]
+	// Enum: ["last","first"]
 	MoveTo string `json:"move_to,omitempty"`
 
 	// The title of the story.
@@ -113,7 +113,7 @@ type UpdateStory struct {
 	StartedAtOverride *strfmt.DateTime `json:"started_at_override,omitempty"`
 
 	// The type of story (feature, bug, chore).
-	// Enum: [feature chore bug]
+	// Enum: ["feature","chore","bug"]
 	StoryType string `json:"story_type,omitempty"`
 
 	// The ID of the workflow state to put the story in.
@@ -552,6 +552,11 @@ func (m *UpdateStory) contextValidateCustomFields(ctx context.Context, formats s
 	for i := 0; i < len(m.CustomFields); i++ {
 
 		if m.CustomFields[i] != nil {
+
+			if swag.IsZero(m.CustomFields[i]) { // not required
+				return nil
+			}
+
 			if err := m.CustomFields[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("custom_fields" + "." + strconv.Itoa(i))
@@ -572,6 +577,11 @@ func (m *UpdateStory) contextValidateLabels(ctx context.Context, formats strfmt.
 	for i := 0; i < len(m.Labels); i++ {
 
 		if m.Labels[i] != nil {
+
+			if swag.IsZero(m.Labels[i]) { // not required
+				return nil
+			}
+
 			if err := m.Labels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("labels" + "." + strconv.Itoa(i))

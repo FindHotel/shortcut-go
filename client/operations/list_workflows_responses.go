@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListWorkflowsReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/workflows] listWorkflows", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListWorkflowsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list workflows o k response
+func (o *ListWorkflowsOK) Code() int {
+	return 200
+}
+
 func (o *ListWorkflowsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsOK %s", 200, payload)
 }
 
 func (o *ListWorkflowsOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsOK %s", 200, payload)
 }
 
 func (o *ListWorkflowsOK) GetPayload() []*models.Workflow {
@@ -151,12 +159,17 @@ func (o *ListWorkflowsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list workflows bad request response
+func (o *ListWorkflowsBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListWorkflowsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsBadRequest", 400)
 }
 
 func (o *ListWorkflowsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsBadRequest", 400)
 }
 
 func (o *ListWorkflowsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListWorkflowsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list workflows not found response
+func (o *ListWorkflowsNotFound) Code() int {
+	return 404
+}
+
 func (o *ListWorkflowsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsNotFound", 404)
 }
 
 func (o *ListWorkflowsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsNotFound", 404)
 }
 
 func (o *ListWorkflowsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListWorkflowsUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list workflows unprocessable entity response
+func (o *ListWorkflowsUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListWorkflowsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsUnprocessableEntity", 422)
 }
 
 func (o *ListWorkflowsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/workflows][%d] listWorkflowsUnprocessableEntity", 422)
 }
 
 func (o *ListWorkflowsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

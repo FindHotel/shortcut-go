@@ -265,6 +265,11 @@ func (m *Branch) contextValidatePullRequests(ctx context.Context, formats strfmt
 	for i := 0; i < len(m.PullRequests); i++ {
 
 		if m.PullRequests[i] != nil {
+
+			if swag.IsZero(m.PullRequests[i]) { // not required
+				return nil
+			}
+
 			if err := m.PullRequests[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("pull_requests" + "." + strconv.Itoa(i))

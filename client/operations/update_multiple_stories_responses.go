@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *UpdateMultipleStoriesReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/stories/bulk] updateMultipleStories", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *UpdateMultipleStoriesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update multiple stories o k response
+func (o *UpdateMultipleStoriesOK) Code() int {
+	return 200
+}
+
 func (o *UpdateMultipleStoriesOK) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesOK %s", 200, payload)
 }
 
 func (o *UpdateMultipleStoriesOK) String() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesOK %s", 200, payload)
 }
 
 func (o *UpdateMultipleStoriesOK) GetPayload() []*models.StorySlim {
@@ -151,12 +159,17 @@ func (o *UpdateMultipleStoriesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the update multiple stories bad request response
+func (o *UpdateMultipleStoriesBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateMultipleStoriesBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesBadRequest", 400)
 }
 
 func (o *UpdateMultipleStoriesBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesBadRequest", 400)
 }
 
 func (o *UpdateMultipleStoriesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *UpdateMultipleStoriesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the update multiple stories not found response
+func (o *UpdateMultipleStoriesNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateMultipleStoriesNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesNotFound", 404)
 }
 
 func (o *UpdateMultipleStoriesNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesNotFound", 404)
 }
 
 func (o *UpdateMultipleStoriesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *UpdateMultipleStoriesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the update multiple stories unprocessable entity response
+func (o *UpdateMultipleStoriesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *UpdateMultipleStoriesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesUnprocessableEntity", 422)
 }
 
 func (o *UpdateMultipleStoriesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/stories/bulk][%d] updateMultipleStoriesUnprocessableEntity", 422)
 }
 
 func (o *UpdateMultipleStoriesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

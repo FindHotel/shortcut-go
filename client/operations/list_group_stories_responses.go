@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListGroupStoriesReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/groups/{group-public-id}/stories] listGroupStories", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListGroupStoriesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list group stories o k response
+func (o *ListGroupStoriesOK) Code() int {
+	return 200
+}
+
 func (o *ListGroupStoriesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesOK %s", 200, payload)
 }
 
 func (o *ListGroupStoriesOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesOK %s", 200, payload)
 }
 
 func (o *ListGroupStoriesOK) GetPayload() []*models.StorySlim {
@@ -151,12 +159,17 @@ func (o *ListGroupStoriesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list group stories bad request response
+func (o *ListGroupStoriesBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListGroupStoriesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesBadRequest", 400)
 }
 
 func (o *ListGroupStoriesBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesBadRequest", 400)
 }
 
 func (o *ListGroupStoriesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListGroupStoriesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list group stories not found response
+func (o *ListGroupStoriesNotFound) Code() int {
+	return 404
+}
+
 func (o *ListGroupStoriesNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesNotFound", 404)
 }
 
 func (o *ListGroupStoriesNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesNotFound", 404)
 }
 
 func (o *ListGroupStoriesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListGroupStoriesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list group stories unprocessable entity response
+func (o *ListGroupStoriesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListGroupStoriesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesUnprocessableEntity", 422)
 }
 
 func (o *ListGroupStoriesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/groups/{group-public-id}/stories][%d] listGroupStoriesUnprocessableEntity", 422)
 }
 
 func (o *ListGroupStoriesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

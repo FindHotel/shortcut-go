@@ -45,7 +45,7 @@ func (o *DisableStoryTemplatesReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/entity-templates/disable] disableStoryTemplates", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DisableStoryTemplatesNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the disable story templates no content response
+func (o *DisableStoryTemplatesNoContent) Code() int {
+	return 204
+}
+
 func (o *DisableStoryTemplatesNoContent) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesNoContent ", 204)
+	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesNoContent", 204)
 }
 
 func (o *DisableStoryTemplatesNoContent) String() string {
-	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesNoContent ", 204)
+	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesNoContent", 204)
 }
 
 func (o *DisableStoryTemplatesNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DisableStoryTemplatesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the disable story templates bad request response
+func (o *DisableStoryTemplatesBadRequest) Code() int {
+	return 400
+}
+
 func (o *DisableStoryTemplatesBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesBadRequest", 400)
 }
 
 func (o *DisableStoryTemplatesBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesBadRequest", 400)
 }
 
 func (o *DisableStoryTemplatesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DisableStoryTemplatesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the disable story templates not found response
+func (o *DisableStoryTemplatesNotFound) Code() int {
+	return 404
+}
+
 func (o *DisableStoryTemplatesNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesNotFound", 404)
 }
 
 func (o *DisableStoryTemplatesNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesNotFound", 404)
 }
 
 func (o *DisableStoryTemplatesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DisableStoryTemplatesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the disable story templates unprocessable entity response
+func (o *DisableStoryTemplatesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DisableStoryTemplatesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesUnprocessableEntity", 422)
 }
 
 func (o *DisableStoryTemplatesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/entity-templates/disable][%d] disableStoryTemplatesUnprocessableEntity", 422)
 }
 
 func (o *DisableStoryTemplatesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *CreateLinkedFileReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/linked-files] createLinkedFile", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *CreateLinkedFileCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create linked file created response
+func (o *CreateLinkedFileCreated) Code() int {
+	return 201
+}
+
 func (o *CreateLinkedFileCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileCreated %s", 201, payload)
 }
 
 func (o *CreateLinkedFileCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileCreated %s", 201, payload)
 }
 
 func (o *CreateLinkedFileCreated) GetPayload() *models.LinkedFile {
@@ -153,12 +161,17 @@ func (o *CreateLinkedFileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create linked file bad request response
+func (o *CreateLinkedFileBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateLinkedFileBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileBadRequest", 400)
 }
 
 func (o *CreateLinkedFileBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileBadRequest", 400)
 }
 
 func (o *CreateLinkedFileBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *CreateLinkedFileNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the create linked file not found response
+func (o *CreateLinkedFileNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateLinkedFileNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileNotFound", 404)
 }
 
 func (o *CreateLinkedFileNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileNotFound", 404)
 }
 
 func (o *CreateLinkedFileNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *CreateLinkedFileUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the create linked file unprocessable entity response
+func (o *CreateLinkedFileUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *CreateLinkedFileUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileUnprocessableEntity", 422)
 }
 
 func (o *CreateLinkedFileUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/linked-files][%d] createLinkedFileUnprocessableEntity", 422)
 }
 
 func (o *CreateLinkedFileUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

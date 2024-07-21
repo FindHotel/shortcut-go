@@ -14,8 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/FindHotel/shortcut-go/models"
+	"github.com/go-openapi/swag"
 )
 
 // NewListEpicsParams creates a new ListEpicsParams object,
@@ -63,8 +62,11 @@ ListEpicsParams contains all the parameters to send to the API endpoint
 */
 type ListEpicsParams struct {
 
-	// ListEpics.
-	ListEpics *models.ListEpics
+	/* IncludesDescription.
+
+	   A true/false boolean indicating whether to return Epics with their descriptions.
+	*/
+	IncludesDescription *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -119,15 +121,15 @@ func (o *ListEpicsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithListEpics adds the listEpics to the list epics params
-func (o *ListEpicsParams) WithListEpics(listEpics *models.ListEpics) *ListEpicsParams {
-	o.SetListEpics(listEpics)
+// WithIncludesDescription adds the includesDescription to the list epics params
+func (o *ListEpicsParams) WithIncludesDescription(includesDescription *bool) *ListEpicsParams {
+	o.SetIncludesDescription(includesDescription)
 	return o
 }
 
-// SetListEpics adds the listEpics to the list epics params
-func (o *ListEpicsParams) SetListEpics(listEpics *models.ListEpics) {
-	o.ListEpics = listEpics
+// SetIncludesDescription adds the includesDescription to the list epics params
+func (o *ListEpicsParams) SetIncludesDescription(includesDescription *bool) {
+	o.IncludesDescription = includesDescription
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -137,9 +139,21 @@ func (o *ListEpicsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		return err
 	}
 	var res []error
-	if o.ListEpics != nil {
-		if err := r.SetBodyParam(o.ListEpics); err != nil {
-			return err
+
+	if o.IncludesDescription != nil {
+
+		// query param includes_description
+		var qrIncludesDescription bool
+
+		if o.IncludesDescription != nil {
+			qrIncludesDescription = *o.IncludesDescription
+		}
+		qIncludesDescription := swag.FormatBool(qrIncludesDescription)
+		if qIncludesDescription != "" {
+
+			if err := r.SetQueryParam("includes_description", qIncludesDescription); err != nil {
+				return err
+			}
 		}
 	}
 

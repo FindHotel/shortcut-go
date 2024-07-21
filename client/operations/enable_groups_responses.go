@@ -45,7 +45,7 @@ func (o *EnableGroupsReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/groups/enable] enableGroups", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *EnableGroupsNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the enable groups no content response
+func (o *EnableGroupsNoContent) Code() int {
+	return 204
+}
+
 func (o *EnableGroupsNoContent) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsNoContent ", 204)
+	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsNoContent", 204)
 }
 
 func (o *EnableGroupsNoContent) String() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsNoContent ", 204)
+	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsNoContent", 204)
 }
 
 func (o *EnableGroupsNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *EnableGroupsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the enable groups bad request response
+func (o *EnableGroupsBadRequest) Code() int {
+	return 400
+}
+
 func (o *EnableGroupsBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsBadRequest", 400)
 }
 
 func (o *EnableGroupsBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsBadRequest", 400)
 }
 
 func (o *EnableGroupsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *EnableGroupsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the enable groups not found response
+func (o *EnableGroupsNotFound) Code() int {
+	return 404
+}
+
 func (o *EnableGroupsNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsNotFound", 404)
 }
 
 func (o *EnableGroupsNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsNotFound", 404)
 }
 
 func (o *EnableGroupsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *EnableGroupsUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the enable groups unprocessable entity response
+func (o *EnableGroupsUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *EnableGroupsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsUnprocessableEntity", 422)
 }
 
 func (o *EnableGroupsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/groups/enable][%d] enableGroupsUnprocessableEntity", 422)
 }
 
 func (o *EnableGroupsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

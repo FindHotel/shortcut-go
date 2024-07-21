@@ -34,6 +34,10 @@ type EpicStats struct {
 	// Required: true
 	NumPoints *int64 `json:"num_points"`
 
+	// The total number of backlog points in this Epic.
+	// Required: true
+	NumPointsBacklog *int64 `json:"num_points_backlog"`
+
 	// The total number of completed points in this Epic.
 	// Required: true
 	NumPointsDone *int64 `json:"num_points_done"`
@@ -49,6 +53,10 @@ type EpicStats struct {
 	// The total number of documents associated with this Epic.
 	// Required: true
 	NumRelatedDocuments *int64 `json:"num_related_documents"`
+
+	// The total number of backlog Stories in this Epic.
+	// Required: true
+	NumStoriesBacklog *int64 `json:"num_stories_backlog"`
 
 	// The total number of done Stories in this Epic.
 	// Required: true
@@ -83,6 +91,10 @@ func (m *EpicStats) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateNumPointsBacklog(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateNumPointsDone(formats); err != nil {
 		res = append(res, err)
 	}
@@ -96,6 +108,10 @@ func (m *EpicStats) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateNumRelatedDocuments(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNumStoriesBacklog(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -147,6 +163,15 @@ func (m *EpicStats) validateNumPoints(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *EpicStats) validateNumPointsBacklog(formats strfmt.Registry) error {
+
+	if err := validate.Required("num_points_backlog", "body", m.NumPointsBacklog); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *EpicStats) validateNumPointsDone(formats strfmt.Registry) error {
 
 	if err := validate.Required("num_points_done", "body", m.NumPointsDone); err != nil {
@@ -177,6 +202,15 @@ func (m *EpicStats) validateNumPointsUnstarted(formats strfmt.Registry) error {
 func (m *EpicStats) validateNumRelatedDocuments(formats strfmt.Registry) error {
 
 	if err := validate.Required("num_related_documents", "body", m.NumRelatedDocuments); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *EpicStats) validateNumStoriesBacklog(formats strfmt.Registry) error {
+
+	if err := validate.Required("num_stories_backlog", "body", m.NumStoriesBacklog); err != nil {
 		return err
 	}
 

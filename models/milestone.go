@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Milestone A Milestone is a collection of Epics that represent a release or some other large initiative that you are working on.
+// Milestone (Deprecated) A Milestone is a collection of Epics that represent a release or some other large initiative that you are working on. Milestones have become Objectives, so you should use Objective-related API resources instead of Milestone ones.
 //
 // swagger:model Milestone
 type Milestone struct {
@@ -67,6 +67,10 @@ type Milestone struct {
 	// Required: true
 	ID *int64 `json:"id"`
 
+	// The IDs of the Key Results associated with the Objective.
+	// Required: true
+	KeyResultIds []strfmt.UUID `json:"key_result_ids"`
+
 	// The name of the Milestone.
 	// Required: true
 	Name *string `json:"name"`
@@ -94,7 +98,8 @@ type Milestone struct {
 	State *string `json:"state"`
 
 	// stats
-	Stats *MilestoneStats `json:"stats,omitempty"`
+	// Required: true
+	Stats *MilestoneStats `json:"stats"`
 
 	// The time/date the Milestone was updated.
 	// Required: true
@@ -147,6 +152,10 @@ func (m *Milestone) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKeyResultIds(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -317,6 +326,23 @@ func (m *Milestone) validateID(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Milestone) validateKeyResultIds(formats strfmt.Registry) error {
+
+	if err := validate.Required("key_result_ids", "body", m.KeyResultIds); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.KeyResultIds); i++ {
+
+		if err := validate.FormatOf("key_result_ids"+"."+strconv.Itoa(i), "body", "uuid", m.KeyResultIds[i].String(), formats); err != nil {
+			return err
+		}
+
+	}
+
+	return nil
+}
+
 func (m *Milestone) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
@@ -380,8 +406,9 @@ func (m *Milestone) validateState(formats strfmt.Registry) error {
 }
 
 func (m *Milestone) validateStats(formats strfmt.Registry) error {
-	if swag.IsZero(m.Stats) { // not required
-		return nil
+
+	if err := validate.Required("stats", "body", m.Stats); err != nil {
+		return err
 	}
 
 	if m.Stats != nil {
@@ -434,6 +461,11 @@ func (m *Milestone) contextValidateCategories(ctx context.Context, formats strfm
 	for i := 0; i < len(m.Categories); i++ {
 
 		if m.Categories[i] != nil {
+
+			if swag.IsZero(m.Categories[i]) { // not required
+				return nil
+			}
+
 			if err := m.Categories[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("categories" + "." + strconv.Itoa(i))
@@ -452,6 +484,7 @@ func (m *Milestone) contextValidateCategories(ctx context.Context, formats strfm
 func (m *Milestone) contextValidateStats(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Stats != nil {
+
 		if err := m.Stats.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("stats")

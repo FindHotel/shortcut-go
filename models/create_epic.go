@@ -46,14 +46,17 @@ type CreateEpic struct {
 	// An array of UUIDs for any Members you want to add as Followers on this new Epic.
 	FollowerIds []strfmt.UUID `json:"follower_ids"`
 
-	// The ID of the group to associate with the epic.
+	// `Deprecated` The ID of the group to associate with the epic. Use `group_ids`.
 	// Format: uuid
 	GroupID *strfmt.UUID `json:"group_id,omitempty"`
+
+	// An array of UUIDS for Groups to which this Epic is related.
+	GroupIds []strfmt.UUID `json:"group_ids"`
 
 	// An array of Labels attached to the Epic.
 	Labels []*CreateLabelParams `json:"labels"`
 
-	// The ID of the Milestone this Epic is related to.
+	// `Deprecated` The ID of the Milestone this Epic is related to. Use `objective_ids`.
 	MilestoneID *int64 `json:"milestone_id,omitempty"`
 
 	// The Epic's name.
@@ -61,6 +64,9 @@ type CreateEpic struct {
 	// Max Length: 256
 	// Min Length: 1
 	Name *string `json:"name"`
+
+	// An array of IDs for Objectives to which this Epic is related.
+	ObjectiveIds []int64 `json:"objective_ids"`
 
 	// An array of UUIDs for any members you want to add as Owners on this new Epic.
 	OwnerIds []strfmt.UUID `json:"owner_ids"`
@@ -78,7 +84,7 @@ type CreateEpic struct {
 	StartedAtOverride strfmt.DateTime `json:"started_at_override,omitempty"`
 
 	// `Deprecated` The Epic's state (to do, in progress, or done); will be ignored when `epic_state_id` is set.
-	// Enum: [in progress to do done]
+	// Enum: ["in progress","to do","done"]
 	State string `json:"state,omitempty"`
 
 	// Defaults to the time/date it is created but can be set to reflect another date.
@@ -111,6 +117,10 @@ func (m *CreateEpic) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateGroupID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGroupIds(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -223,6 +233,22 @@ func (m *CreateEpic) validateGroupID(formats strfmt.Registry) error {
 
 	if err := validate.FormatOf("group_id", "body", "uuid", m.GroupID.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *CreateEpic) validateGroupIds(formats strfmt.Registry) error {
+	if swag.IsZero(m.GroupIds) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.GroupIds); i++ {
+
+		if err := validate.FormatOf("group_ids"+"."+strconv.Itoa(i), "body", "uuid", m.GroupIds[i].String(), formats); err != nil {
+			return err
+		}
+
 	}
 
 	return nil
@@ -399,6 +425,11 @@ func (m *CreateEpic) contextValidateLabels(ctx context.Context, formats strfmt.R
 	for i := 0; i < len(m.Labels); i++ {
 
 		if m.Labels[i] != nil {
+
+			if swag.IsZero(m.Labels[i]) { // not required
+				return nil
+			}
+
 			if err := m.Labels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("labels" + "." + strconv.Itoa(i))

@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListEpicsReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/epics] listEpics", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListEpicsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list epics o k response
+func (o *ListEpicsOK) Code() int {
+	return 200
+}
+
 func (o *ListEpicsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsOK %s", 200, payload)
 }
 
 func (o *ListEpicsOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsOK %s", 200, payload)
 }
 
 func (o *ListEpicsOK) GetPayload() []*models.EpicSlim {
@@ -151,12 +159,17 @@ func (o *ListEpicsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list epics bad request response
+func (o *ListEpicsBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListEpicsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsBadRequest", 400)
 }
 
 func (o *ListEpicsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsBadRequest", 400)
 }
 
 func (o *ListEpicsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListEpicsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list epics not found response
+func (o *ListEpicsNotFound) Code() int {
+	return 404
+}
+
 func (o *ListEpicsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsNotFound", 404)
 }
 
 func (o *ListEpicsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsNotFound", 404)
 }
 
 func (o *ListEpicsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListEpicsUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list epics unprocessable entity response
+func (o *ListEpicsUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListEpicsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsUnprocessableEntity", 422)
 }
 
 func (o *ListEpicsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/epics][%d] listEpicsUnprocessableEntity", 422)
 }
 
 func (o *ListEpicsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

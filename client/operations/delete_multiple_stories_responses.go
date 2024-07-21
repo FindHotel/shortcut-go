@@ -45,7 +45,7 @@ func (o *DeleteMultipleStoriesReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/stories/bulk] deleteMultipleStories", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteMultipleStoriesNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete multiple stories no content response
+func (o *DeleteMultipleStoriesNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteMultipleStoriesNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesNoContent", 204)
 }
 
 func (o *DeleteMultipleStoriesNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesNoContent", 204)
 }
 
 func (o *DeleteMultipleStoriesNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteMultipleStoriesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete multiple stories bad request response
+func (o *DeleteMultipleStoriesBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteMultipleStoriesBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesBadRequest", 400)
 }
 
 func (o *DeleteMultipleStoriesBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesBadRequest", 400)
 }
 
 func (o *DeleteMultipleStoriesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteMultipleStoriesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete multiple stories not found response
+func (o *DeleteMultipleStoriesNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteMultipleStoriesNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesNotFound", 404)
 }
 
 func (o *DeleteMultipleStoriesNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesNotFound", 404)
 }
 
 func (o *DeleteMultipleStoriesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteMultipleStoriesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete multiple stories unprocessable entity response
+func (o *DeleteMultipleStoriesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteMultipleStoriesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesUnprocessableEntity", 422)
 }
 
 func (o *DeleteMultipleStoriesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/stories/bulk][%d] deleteMultipleStoriesUnprocessableEntity", 422)
 }
 
 func (o *DeleteMultipleStoriesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

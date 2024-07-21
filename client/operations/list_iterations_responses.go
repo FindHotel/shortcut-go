@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListIterationsReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/iterations] listIterations", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListIterationsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list iterations o k response
+func (o *ListIterationsOK) Code() int {
+	return 200
+}
+
 func (o *ListIterationsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsOK %s", 200, payload)
 }
 
 func (o *ListIterationsOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsOK %s", 200, payload)
 }
 
 func (o *ListIterationsOK) GetPayload() []*models.IterationSlim {
@@ -151,12 +159,17 @@ func (o *ListIterationsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list iterations bad request response
+func (o *ListIterationsBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListIterationsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsBadRequest", 400)
 }
 
 func (o *ListIterationsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsBadRequest", 400)
 }
 
 func (o *ListIterationsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListIterationsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list iterations not found response
+func (o *ListIterationsNotFound) Code() int {
+	return 404
+}
+
 func (o *ListIterationsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsNotFound", 404)
 }
 
 func (o *ListIterationsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsNotFound", 404)
 }
 
 func (o *ListIterationsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListIterationsUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list iterations unprocessable entity response
+func (o *ListIterationsUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListIterationsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsUnprocessableEntity", 422)
 }
 
 func (o *ListIterationsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/iterations][%d] listIterationsUnprocessableEntity", 422)
 }
 
 func (o *ListIterationsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

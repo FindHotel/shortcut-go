@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// CreateCategoryParams Request parameters for creating a Category with a Milestone.
+// CreateCategoryParams Request parameters for creating a Category with a Objective.
 //
 // swagger:model CreateCategoryParams
 type CreateCategoryParams struct {

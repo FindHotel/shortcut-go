@@ -45,7 +45,7 @@ func (o *DeleteEpicReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/epics/{epic-public-id}] deleteEpic", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteEpicNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete epic no content response
+func (o *DeleteEpicNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteEpicNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicNoContent", 204)
 }
 
 func (o *DeleteEpicNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicNoContent", 204)
 }
 
 func (o *DeleteEpicNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteEpicBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete epic bad request response
+func (o *DeleteEpicBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteEpicBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicBadRequest", 400)
 }
 
 func (o *DeleteEpicBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicBadRequest", 400)
 }
 
 func (o *DeleteEpicBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteEpicNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete epic not found response
+func (o *DeleteEpicNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteEpicNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicNotFound", 404)
 }
 
 func (o *DeleteEpicNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicNotFound", 404)
 }
 
 func (o *DeleteEpicNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteEpicUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete epic unprocessable entity response
+func (o *DeleteEpicUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteEpicUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicUnprocessableEntity", 422)
 }
 
 func (o *DeleteEpicUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/epics/{epic-public-id}][%d] deleteEpicUnprocessableEntity", 422)
 }
 
 func (o *DeleteEpicUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

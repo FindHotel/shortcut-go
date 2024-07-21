@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListStoriesReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/projects/{project-public-id}/stories] listStories", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListStoriesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list stories o k response
+func (o *ListStoriesOK) Code() int {
+	return 200
+}
+
 func (o *ListStoriesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesOK %s", 200, payload)
 }
 
 func (o *ListStoriesOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesOK %s", 200, payload)
 }
 
 func (o *ListStoriesOK) GetPayload() []*models.StorySlim {
@@ -151,12 +159,17 @@ func (o *ListStoriesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list stories bad request response
+func (o *ListStoriesBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListStoriesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesBadRequest", 400)
 }
 
 func (o *ListStoriesBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesBadRequest", 400)
 }
 
 func (o *ListStoriesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListStoriesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list stories not found response
+func (o *ListStoriesNotFound) Code() int {
+	return 404
+}
+
 func (o *ListStoriesNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesNotFound", 404)
 }
 
 func (o *ListStoriesNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesNotFound", 404)
 }
 
 func (o *ListStoriesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListStoriesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list stories unprocessable entity response
+func (o *ListStoriesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListStoriesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesUnprocessableEntity", 422)
 }
 
 func (o *ListStoriesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/projects/{project-public-id}/stories][%d] listStoriesUnprocessableEntity", 422)
 }
 
 func (o *ListStoriesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

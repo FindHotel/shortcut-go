@@ -45,7 +45,7 @@ type CreateLinkedFile struct {
 
 	// The integration type of the file (e.g. google, dropbox, box).
 	// Required: true
-	// Enum: [google url dropbox box onedrive]
+	// Enum: ["google","url","dropbox","box","onedrive"]
 	Type *string `json:"type"`
 
 	// The UUID of the member that uploaded the file.

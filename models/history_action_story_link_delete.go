@@ -22,7 +22,7 @@ type HistoryActionStoryLinkDelete struct {
 
 	// The action of the entity referenced.
 	// Required: true
-	// Enum: [delete]
+	// Enum: ["delete"]
 	Action *string `json:"action"`
 
 	// The type of entity referenced.
@@ -43,7 +43,7 @@ type HistoryActionStoryLinkDelete struct {
 
 	// The verb describing the link's relationship.
 	// Required: true
-	// Enum: [blocks duplicates relates to]
+	// Enum: ["blocks","duplicates","relates to"]
 	Verb *string `json:"verb"`
 }
 

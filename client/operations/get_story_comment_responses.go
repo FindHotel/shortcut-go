@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetStoryCommentReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}] getStoryComment", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetStoryCommentOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get story comment o k response
+func (o *GetStoryCommentOK) Code() int {
+	return 200
+}
+
 func (o *GetStoryCommentOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentOK %s", 200, payload)
 }
 
 func (o *GetStoryCommentOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentOK %s", 200, payload)
 }
 
 func (o *GetStoryCommentOK) GetPayload() *models.StoryComment {
@@ -153,12 +161,17 @@ func (o *GetStoryCommentBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get story comment bad request response
+func (o *GetStoryCommentBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetStoryCommentBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentBadRequest", 400)
 }
 
 func (o *GetStoryCommentBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentBadRequest", 400)
 }
 
 func (o *GetStoryCommentBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetStoryCommentNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get story comment not found response
+func (o *GetStoryCommentNotFound) Code() int {
+	return 404
+}
+
 func (o *GetStoryCommentNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentNotFound", 404)
 }
 
 func (o *GetStoryCommentNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentNotFound", 404)
 }
 
 func (o *GetStoryCommentNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetStoryCommentUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get story comment unprocessable entity response
+func (o *GetStoryCommentUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetStoryCommentUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentUnprocessableEntity", 422)
 }
 
 func (o *GetStoryCommentUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] getStoryCommentUnprocessableEntity", 422)
 }
 
 func (o *GetStoryCommentUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

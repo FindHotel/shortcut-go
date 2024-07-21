@@ -141,7 +141,7 @@ type StorySlim struct {
 	// Required: true
 	MemberMentionIds []strfmt.UUID `json:"member_mention_ids"`
 
-	// Deprecated: use member_mention_ids.
+	// `Deprecated:` use `member_mention_ids`.
 	// Required: true
 	MentionIds []strfmt.UUID `json:"mention_ids"`
 
@@ -209,6 +209,9 @@ type StorySlim struct {
 	// The type of story (feature, bug, chore).
 	// Required: true
 	StoryType *string `json:"story_type"`
+
+	// synced item
+	SyncedItem *SyncedItem `json:"synced_item,omitempty"`
 
 	// An array of IDs of Tasks attached to the story.
 	// Required: true
@@ -404,6 +407,10 @@ func (m *StorySlim) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateStoryType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSyncedItem(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -960,6 +967,25 @@ func (m *StorySlim) validateStoryType(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *StorySlim) validateSyncedItem(formats strfmt.Registry) error {
+	if swag.IsZero(m.SyncedItem) { // not required
+		return nil
+	}
+
+	if m.SyncedItem != nil {
+		if err := m.SyncedItem.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("synced_item")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("synced_item")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *StorySlim) validateTaskIds(formats strfmt.Registry) error {
 
 	if err := validate.Required("task_ids", "body", m.TaskIds); err != nil {
@@ -1020,6 +1046,10 @@ func (m *StorySlim) ContextValidate(ctx context.Context, formats strfmt.Registry
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateSyncedItem(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -1031,6 +1061,11 @@ func (m *StorySlim) contextValidateCustomFields(ctx context.Context, formats str
 	for i := 0; i < len(m.CustomFields); i++ {
 
 		if m.CustomFields[i] != nil {
+
+			if swag.IsZero(m.CustomFields[i]) { // not required
+				return nil
+			}
+
 			if err := m.CustomFields[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("custom_fields" + "." + strconv.Itoa(i))
@@ -1051,6 +1086,11 @@ func (m *StorySlim) contextValidateLabels(ctx context.Context, formats strfmt.Re
 	for i := 0; i < len(m.Labels); i++ {
 
 		if m.Labels[i] != nil {
+
+			if swag.IsZero(m.Labels[i]) { // not required
+				return nil
+			}
+
 			if err := m.Labels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("labels" + "." + strconv.Itoa(i))
@@ -1069,6 +1109,7 @@ func (m *StorySlim) contextValidateLabels(ctx context.Context, formats strfmt.Re
 func (m *StorySlim) contextValidateStats(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Stats != nil {
+
 		if err := m.Stats.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("stats")
@@ -1087,6 +1128,11 @@ func (m *StorySlim) contextValidateStoryLinks(ctx context.Context, formats strfm
 	for i := 0; i < len(m.StoryLinks); i++ {
 
 		if m.StoryLinks[i] != nil {
+
+			if swag.IsZero(m.StoryLinks[i]) { // not required
+				return nil
+			}
+
 			if err := m.StoryLinks[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("story_links" + "." + strconv.Itoa(i))
@@ -1097,6 +1143,27 @@ func (m *StorySlim) contextValidateStoryLinks(ctx context.Context, formats strfm
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *StorySlim) contextValidateSyncedItem(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SyncedItem != nil {
+
+		if swag.IsZero(m.SyncedItem) { // not required
+			return nil
+		}
+
+		if err := m.SyncedItem.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("synced_item")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("synced_item")
+			}
+			return err
+		}
 	}
 
 	return nil

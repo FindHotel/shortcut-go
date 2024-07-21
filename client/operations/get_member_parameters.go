@@ -14,8 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/FindHotel/shortcut-go/models"
 )
 
 // NewGetMemberParams creates a new GetMemberParams object,
@@ -63,9 +61,6 @@ GetMemberParams contains all the parameters to send to the API endpoint
 */
 type GetMemberParams struct {
 
-	// GetMember.
-	GetMember *models.GetMember
-
 	/* MemberPublicID.
 
 	   The Member's unique ID.
@@ -73,6 +68,14 @@ type GetMemberParams struct {
 	   Format: uuid
 	*/
 	MemberPublicID strfmt.UUID
+
+	/* OrgPublicID.
+
+	   The unique ID of the Organization to limit the lookup to.
+
+	   Format: uuid
+	*/
+	OrgPublicID *strfmt.UUID
 
 	timeout    time.Duration
 	Context    context.Context
@@ -127,17 +130,6 @@ func (o *GetMemberParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithGetMember adds the getMember to the get member params
-func (o *GetMemberParams) WithGetMember(getMember *models.GetMember) *GetMemberParams {
-	o.SetGetMember(getMember)
-	return o
-}
-
-// SetGetMember adds the getMember to the get member params
-func (o *GetMemberParams) SetGetMember(getMember *models.GetMember) {
-	o.GetMember = getMember
-}
-
 // WithMemberPublicID adds the memberPublicID to the get member params
 func (o *GetMemberParams) WithMemberPublicID(memberPublicID strfmt.UUID) *GetMemberParams {
 	o.SetMemberPublicID(memberPublicID)
@@ -149,6 +141,17 @@ func (o *GetMemberParams) SetMemberPublicID(memberPublicID strfmt.UUID) {
 	o.MemberPublicID = memberPublicID
 }
 
+// WithOrgPublicID adds the orgPublicID to the get member params
+func (o *GetMemberParams) WithOrgPublicID(orgPublicID *strfmt.UUID) *GetMemberParams {
+	o.SetOrgPublicID(orgPublicID)
+	return o
+}
+
+// SetOrgPublicID adds the orgPublicId to the get member params
+func (o *GetMemberParams) SetOrgPublicID(orgPublicID *strfmt.UUID) {
+	o.OrgPublicID = orgPublicID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetMemberParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -156,15 +159,27 @@ func (o *GetMemberParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		return err
 	}
 	var res []error
-	if o.GetMember != nil {
-		if err := r.SetBodyParam(o.GetMember); err != nil {
-			return err
-		}
-	}
 
 	// path param member-public-id
 	if err := r.SetPathParam("member-public-id", o.MemberPublicID.String()); err != nil {
 		return err
+	}
+
+	if o.OrgPublicID != nil {
+
+		// query param org-public-id
+		var qrOrgPublicID strfmt.UUID
+
+		if o.OrgPublicID != nil {
+			qrOrgPublicID = *o.OrgPublicID
+		}
+		qOrgPublicID := qrOrgPublicID.String()
+		if qOrgPublicID != "" {
+
+			if err := r.SetQueryParam("org-public-id", qOrgPublicID); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

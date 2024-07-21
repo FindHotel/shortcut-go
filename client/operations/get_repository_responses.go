@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetRepositoryReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/repositories/{repo-public-id}] getRepository", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetRepositoryOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get repository o k response
+func (o *GetRepositoryOK) Code() int {
+	return 200
+}
+
 func (o *GetRepositoryOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryOK %s", 200, payload)
 }
 
 func (o *GetRepositoryOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryOK %s", 200, payload)
 }
 
 func (o *GetRepositoryOK) GetPayload() *models.Repository {
@@ -153,12 +161,17 @@ func (o *GetRepositoryBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get repository bad request response
+func (o *GetRepositoryBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetRepositoryBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryBadRequest", 400)
 }
 
 func (o *GetRepositoryBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryBadRequest", 400)
 }
 
 func (o *GetRepositoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetRepositoryNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get repository not found response
+func (o *GetRepositoryNotFound) Code() int {
+	return 404
+}
+
 func (o *GetRepositoryNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryNotFound", 404)
 }
 
 func (o *GetRepositoryNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryNotFound", 404)
 }
 
 func (o *GetRepositoryNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetRepositoryUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get repository unprocessable entity response
+func (o *GetRepositoryUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetRepositoryUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryUnprocessableEntity", 422)
 }
 
 func (o *GetRepositoryUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/repositories/{repo-public-id}][%d] getRepositoryUnprocessableEntity", 422)
 }
 
 func (o *GetRepositoryUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

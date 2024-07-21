@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetTaskReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}] getTask", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetTaskOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get task o k response
+func (o *GetTaskOK) Code() int {
+	return 200
+}
+
 func (o *GetTaskOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskOK %s", 200, payload)
 }
 
 func (o *GetTaskOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskOK %s", 200, payload)
 }
 
 func (o *GetTaskOK) GetPayload() *models.Task {
@@ -153,12 +161,17 @@ func (o *GetTaskBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get task bad request response
+func (o *GetTaskBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetTaskBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskBadRequest", 400)
 }
 
 func (o *GetTaskBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskBadRequest", 400)
 }
 
 func (o *GetTaskBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetTaskNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get task not found response
+func (o *GetTaskNotFound) Code() int {
+	return 404
+}
+
 func (o *GetTaskNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskNotFound", 404)
 }
 
 func (o *GetTaskNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskNotFound", 404)
 }
 
 func (o *GetTaskNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetTaskUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get task unprocessable entity response
+func (o *GetTaskUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetTaskUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskUnprocessableEntity", 422)
 }
 
 func (o *GetTaskUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/stories/{story-public-id}/tasks/{task-public-id}][%d] getTaskUnprocessableEntity", 422)
 }
 
 func (o *GetTaskUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

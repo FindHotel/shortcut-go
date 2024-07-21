@@ -30,7 +30,7 @@ type UpdateGroup struct {
 	Color *string `json:"color,omitempty"`
 
 	// The color key you wish to use for the Group in the system.
-	// Enum: [blue purple midnight-blue orange yellow-green brass gray fuchsia yellow pink sky-blue green red black slate turquoise]
+	// Enum: ["blue","purple","midnight-blue","orange","yellow-green","brass","gray","fuchsia","yellow","pink","sky-blue","green","red","black","slate","turquoise"]
 	ColorKey string `json:"color_key,omitempty"`
 
 	// The description of this Group.

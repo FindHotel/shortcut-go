@@ -37,7 +37,7 @@ type Group struct {
 
 	// The color key to be displayed with the Group.
 	// Required: true
-	// Enum: [blue purple midnight-blue orange yellow-green brass gray fuchsia yellow pink sky-blue green red black slate turquoise]
+	// Enum: ["blue","purple","midnight-blue","orange","yellow-green","brass","gray","fuchsia","yellow","pink","sky-blue","green","red","black","slate","turquoise"]
 	ColorKey *string `json:"color_key"`
 
 	// The description of the Group.
@@ -51,6 +51,10 @@ type Group struct {
 	// A string description of this resource.
 	// Required: true
 	EntityType *string `json:"entity_type"`
+
+	// global id
+	// Required: true
+	GlobalID *string `json:"global_id"`
 
 	// The id of the Group.
 	// Required: true
@@ -75,9 +79,13 @@ type Group struct {
 	// Required: true
 	NumEpicsStarted *int64 `json:"num_epics_started"`
 
-	// The total number of stories assigned ot the group.
+	// The total number of stories assigned to the group.
 	// Required: true
 	NumStories *int64 `json:"num_stories"`
+
+	// The number of stories assigned to the group which are in a backlog workflow state.
+	// Required: true
+	NumStoriesBacklog *int64 `json:"num_stories_backlog"`
 
 	// The number of stories assigned to the group which are in a started workflow state.
 	// Required: true
@@ -120,6 +128,10 @@ func (m *Group) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateGlobalID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
@@ -141,6 +153,10 @@ func (m *Group) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateNumStories(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNumStoriesBacklog(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -316,6 +332,15 @@ func (m *Group) validateEntityType(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Group) validateGlobalID(formats strfmt.Registry) error {
+
+	if err := validate.Required("global_id", "body", m.GlobalID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *Group) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("id", "body", m.ID); err != nil {
@@ -390,6 +415,15 @@ func (m *Group) validateNumStories(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Group) validateNumStoriesBacklog(formats strfmt.Registry) error {
+
+	if err := validate.Required("num_stories_backlog", "body", m.NumStoriesBacklog); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *Group) validateNumStoriesStarted(formats strfmt.Registry) error {
 
 	if err := validate.Required("num_stories_started", "body", m.NumStoriesStarted); err != nil {
@@ -425,6 +459,7 @@ func (m *Group) ContextValidate(ctx context.Context, formats strfmt.Registry) er
 func (m *Group) contextValidateDisplayIcon(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DisplayIcon != nil {
+
 		if err := m.DisplayIcon.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("display_icon")

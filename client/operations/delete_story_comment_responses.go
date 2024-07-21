@@ -45,7 +45,7 @@ func (o *DeleteStoryCommentReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}] deleteStoryComment", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteStoryCommentNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete story comment no content response
+func (o *DeleteStoryCommentNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteStoryCommentNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentNoContent", 204)
 }
 
 func (o *DeleteStoryCommentNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentNoContent", 204)
 }
 
 func (o *DeleteStoryCommentNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteStoryCommentBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete story comment bad request response
+func (o *DeleteStoryCommentBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteStoryCommentBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentBadRequest", 400)
 }
 
 func (o *DeleteStoryCommentBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentBadRequest", 400)
 }
 
 func (o *DeleteStoryCommentBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteStoryCommentNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete story comment not found response
+func (o *DeleteStoryCommentNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteStoryCommentNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentNotFound", 404)
 }
 
 func (o *DeleteStoryCommentNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentNotFound", 404)
 }
 
 func (o *DeleteStoryCommentNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteStoryCommentUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete story comment unprocessable entity response
+func (o *DeleteStoryCommentUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteStoryCommentUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentUnprocessableEntity", 422)
 }
 
 func (o *DeleteStoryCommentUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}][%d] deleteStoryCommentUnprocessableEntity", 422)
 }
 
 func (o *DeleteStoryCommentUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

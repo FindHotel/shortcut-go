@@ -23,7 +23,7 @@ type HistoryActionTaskCreate struct {
 
 	// The action of the entity referenced.
 	// Required: true
-	// Enum: [create]
+	// Enum: ["create"]
 	Action *string `json:"action"`
 
 	// Whether or not the Task is complete.

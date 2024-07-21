@@ -132,6 +132,11 @@ func (m *HistoryChangesStoryLink) ContextValidate(ctx context.Context, formats s
 func (m *HistoryChangesStoryLink) contextValidateObjectID(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ObjectID != nil {
+
+		if swag.IsZero(m.ObjectID) { // not required
+			return nil
+		}
+
 		if err := m.ObjectID.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("object_id")
@@ -148,6 +153,11 @@ func (m *HistoryChangesStoryLink) contextValidateObjectID(ctx context.Context, f
 func (m *HistoryChangesStoryLink) contextValidateSubjectID(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SubjectID != nil {
+
+		if swag.IsZero(m.SubjectID) { // not required
+			return nil
+		}
+
 		if err := m.SubjectID.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("subject_id")
@@ -164,6 +174,11 @@ func (m *HistoryChangesStoryLink) contextValidateSubjectID(ctx context.Context, 
 func (m *HistoryChangesStoryLink) contextValidateVerb(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Verb != nil {
+
+		if swag.IsZero(m.Verb) { // not required
+			return nil
+		}
+
 		if err := m.Verb.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("verb")

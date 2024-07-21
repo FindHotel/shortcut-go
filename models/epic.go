@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Epic An Epic is a collection of stories that together might make up a release, a milestone, or some other large initiative that you are working on.
+// Epic An Epic is a collection of stories that together might make up a release, a objective, or some other large initiative that you are working on.
 //
 // swagger:model Epic
 type Epic struct {
@@ -27,6 +27,10 @@ type Epic struct {
 	// True/false boolean that indicates whether the Epic is archived or not.
 	// Required: true
 	Archived *bool `json:"archived"`
+
+	// An array containing Group IDs and Group-owned story counts for the Epic's associated groups.
+	// Required: true
+	AssociatedGroups []*EpicAssociatedGroup `json:"associated_groups"`
 
 	// A nested array of threaded comments.
 	// Required: true
@@ -80,10 +84,14 @@ type Epic struct {
 	// Required: true
 	GlobalID *string `json:"global_id"`
 
-	// group id
+	// `Deprecated` The ID of the group to associate with the epic. Use `group_ids`.
 	// Required: true
 	// Format: uuid
 	GroupID *strfmt.UUID `json:"group_id"`
+
+	// An array of UUIDS for Groups to which this Epic is related.
+	// Required: true
+	GroupIds []strfmt.UUID `json:"group_ids"`
 
 	// An array of Group IDs that have been mentioned in the Epic description.
 	// Required: true
@@ -105,17 +113,21 @@ type Epic struct {
 	// Required: true
 	MemberMentionIds []strfmt.UUID `json:"member_mention_ids"`
 
-	// Deprecated: use member_mention_ids.
+	// `Deprecated:` use `member_mention_ids`.
 	// Required: true
 	MentionIds []strfmt.UUID `json:"mention_ids"`
 
-	// The ID of the Milestone this Epic is related to.
+	// `Deprecated` The ID of the Objective this Epic is related to. Use `objective_ids`.
 	// Required: true
 	MilestoneID *int64 `json:"milestone_id"`
 
 	// The name of the Epic.
 	// Required: true
 	Name *string `json:"name"`
+
+	// An array of IDs for Objectives to which this epic is related.
+	// Required: true
+	ObjectiveIds []int64 `json:"objective_ids"`
 
 	// An array of UUIDs for any members you want to add as Owners on this new Epic.
 	// Required: true
@@ -201,6 +213,10 @@ func (m *Epic) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateAssociatedGroups(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateComments(formats); err != nil {
 		res = append(res, err)
 	}
@@ -253,6 +269,10 @@ func (m *Epic) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateGroupIds(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateGroupMentionIds(formats); err != nil {
 		res = append(res, err)
 	}
@@ -282,6 +302,10 @@ func (m *Epic) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateObjectiveIds(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -368,6 +392,33 @@ func (m *Epic) validateArchived(formats strfmt.Registry) error {
 
 	if err := validate.Required("archived", "body", m.Archived); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *Epic) validateAssociatedGroups(formats strfmt.Registry) error {
+
+	if err := validate.Required("associated_groups", "body", m.AssociatedGroups); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.AssociatedGroups); i++ {
+		if swag.IsZero(m.AssociatedGroups[i]) { // not required
+			continue
+		}
+
+		if m.AssociatedGroups[i] != nil {
+			if err := m.AssociatedGroups[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("associated_groups" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("associated_groups" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -536,6 +587,23 @@ func (m *Epic) validateGroupID(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Epic) validateGroupIds(formats strfmt.Registry) error {
+
+	if err := validate.Required("group_ids", "body", m.GroupIds); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.GroupIds); i++ {
+
+		if err := validate.FormatOf("group_ids"+"."+strconv.Itoa(i), "body", "uuid", m.GroupIds[i].String(), formats); err != nil {
+			return err
+		}
+
+	}
+
+	return nil
+}
+
 func (m *Epic) validateGroupMentionIds(formats strfmt.Registry) error {
 
 	if err := validate.Required("group_mention_ids", "body", m.GroupMentionIds); err != nil {
@@ -644,6 +712,15 @@ func (m *Epic) validateMilestoneID(formats strfmt.Registry) error {
 func (m *Epic) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Epic) validateObjectiveIds(formats strfmt.Registry) error {
+
+	if err := validate.Required("objective_ids", "body", m.ObjectiveIds); err != nil {
 		return err
 	}
 
@@ -845,6 +922,10 @@ func (m *Epic) validateUpdatedAt(formats strfmt.Registry) error {
 func (m *Epic) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAssociatedGroups(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateComments(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -863,11 +944,41 @@ func (m *Epic) ContextValidate(ctx context.Context, formats strfmt.Registry) err
 	return nil
 }
 
+func (m *Epic) contextValidateAssociatedGroups(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.AssociatedGroups); i++ {
+
+		if m.AssociatedGroups[i] != nil {
+
+			if swag.IsZero(m.AssociatedGroups[i]) { // not required
+				return nil
+			}
+
+			if err := m.AssociatedGroups[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("associated_groups" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("associated_groups" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *Epic) contextValidateComments(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Comments); i++ {
 
 		if m.Comments[i] != nil {
+
+			if swag.IsZero(m.Comments[i]) { // not required
+				return nil
+			}
+
 			if err := m.Comments[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("comments" + "." + strconv.Itoa(i))
@@ -888,6 +999,11 @@ func (m *Epic) contextValidateLabels(ctx context.Context, formats strfmt.Registr
 	for i := 0; i < len(m.Labels); i++ {
 
 		if m.Labels[i] != nil {
+
+			if swag.IsZero(m.Labels[i]) { // not required
+				return nil
+			}
+
 			if err := m.Labels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("labels" + "." + strconv.Itoa(i))
@@ -906,6 +1022,7 @@ func (m *Epic) contextValidateLabels(ctx context.Context, formats strfmt.Registr
 func (m *Epic) contextValidateStats(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Stats != nil {
+
 		if err := m.Stats.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("stats")

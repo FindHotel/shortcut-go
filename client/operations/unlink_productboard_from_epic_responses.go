@@ -45,7 +45,7 @@ func (o *UnlinkProductboardFromEpicReader) ReadResponse(response runtime.ClientR
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/epics/{epic-public-id}/unlink-productboard] unlinkProductboardFromEpic", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *UnlinkProductboardFromEpicNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the unlink productboard from epic no content response
+func (o *UnlinkProductboardFromEpicNoContent) Code() int {
+	return 204
+}
+
 func (o *UnlinkProductboardFromEpicNoContent) Error() string {
-	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicNoContent ", 204)
+	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicNoContent", 204)
 }
 
 func (o *UnlinkProductboardFromEpicNoContent) String() string {
-	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicNoContent ", 204)
+	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicNoContent", 204)
 }
 
 func (o *UnlinkProductboardFromEpicNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *UnlinkProductboardFromEpicBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the unlink productboard from epic bad request response
+func (o *UnlinkProductboardFromEpicBadRequest) Code() int {
+	return 400
+}
+
 func (o *UnlinkProductboardFromEpicBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicBadRequest", 400)
 }
 
 func (o *UnlinkProductboardFromEpicBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicBadRequest", 400)
 }
 
 func (o *UnlinkProductboardFromEpicBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *UnlinkProductboardFromEpicNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the unlink productboard from epic not found response
+func (o *UnlinkProductboardFromEpicNotFound) Code() int {
+	return 404
+}
+
 func (o *UnlinkProductboardFromEpicNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicNotFound", 404)
 }
 
 func (o *UnlinkProductboardFromEpicNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicNotFound", 404)
 }
 
 func (o *UnlinkProductboardFromEpicNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *UnlinkProductboardFromEpicUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the unlink productboard from epic unprocessable entity response
+func (o *UnlinkProductboardFromEpicUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *UnlinkProductboardFromEpicUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicUnprocessableEntity", 422)
 }
 
 func (o *UnlinkProductboardFromEpicUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/epics/{epic-public-id}/unlink-productboard][%d] unlinkProductboardFromEpicUnprocessableEntity", 422)
 }
 
 func (o *UnlinkProductboardFromEpicUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *CreateStoryReactionReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions] createStoryReaction", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *CreateStoryReactionCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create story reaction created response
+func (o *CreateStoryReactionCreated) Code() int {
+	return 201
+}
+
 func (o *CreateStoryReactionCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionCreated %s", 201, payload)
 }
 
 func (o *CreateStoryReactionCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionCreated %s", 201, payload)
 }
 
 func (o *CreateStoryReactionCreated) GetPayload() []*models.StoryReaction {
@@ -151,12 +159,17 @@ func (o *CreateStoryReactionBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create story reaction bad request response
+func (o *CreateStoryReactionBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateStoryReactionBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionBadRequest", 400)
 }
 
 func (o *CreateStoryReactionBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionBadRequest", 400)
 }
 
 func (o *CreateStoryReactionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *CreateStoryReactionNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the create story reaction not found response
+func (o *CreateStoryReactionNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateStoryReactionNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionNotFound", 404)
 }
 
 func (o *CreateStoryReactionNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionNotFound", 404)
 }
 
 func (o *CreateStoryReactionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *CreateStoryReactionUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the create story reaction unprocessable entity response
+func (o *CreateStoryReactionUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *CreateStoryReactionUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionUnprocessableEntity", 422)
 }
 
 func (o *CreateStoryReactionUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions][%d] createStoryReactionUnprocessableEntity", 422)
 }
 
 func (o *CreateStoryReactionUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

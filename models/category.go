@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Category A Category can be used to associate Milestones.
+// Category A Category can be used to associate Objectives.
 //
 // swagger:model Category
 type Category struct {
@@ -42,6 +42,10 @@ type Category struct {
 	// Required: true
 	ExternalID *string `json:"external_id"`
 
+	// The Global ID of the Category.
+	// Required: true
+	GlobalID *string `json:"global_id"`
+
 	// The unique ID of the Category.
 	// Required: true
 	ID *int64 `json:"id"`
@@ -50,7 +54,7 @@ type Category struct {
 	// Required: true
 	Name *string `json:"name"`
 
-	// The type of entity this Category is associated with; currently Milestone is the only type of Category.
+	// The type of entity this Category is associated with; currently Milestone or Objective is the only type of Category.
 	// Required: true
 	Type *string `json:"type"`
 
@@ -81,6 +85,10 @@ func (m *Category) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateExternalID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGlobalID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -157,6 +165,15 @@ func (m *Category) validateEntityType(formats strfmt.Registry) error {
 func (m *Category) validateExternalID(formats strfmt.Registry) error {
 
 	if err := validate.Required("external_id", "body", m.ExternalID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Category) validateGlobalID(formats strfmt.Registry) error {
+
+	if err := validate.Required("global_id", "body", m.GlobalID); err != nil {
 		return err
 	}
 

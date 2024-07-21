@@ -25,7 +25,7 @@ type SearchResults struct {
 	Iterations *IterationSearchResults `json:"iterations,omitempty"`
 
 	// milestones
-	Milestones *MilestoneSearchResults `json:"milestones,omitempty"`
+	Milestones *ObjectiveSearchResults `json:"milestones,omitempty"`
 
 	// stories
 	Stories *StorySearchResults `json:"stories,omitempty"`
@@ -162,6 +162,11 @@ func (m *SearchResults) ContextValidate(ctx context.Context, formats strfmt.Regi
 func (m *SearchResults) contextValidateEpics(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Epics != nil {
+
+		if swag.IsZero(m.Epics) { // not required
+			return nil
+		}
+
 		if err := m.Epics.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("epics")
@@ -178,6 +183,11 @@ func (m *SearchResults) contextValidateEpics(ctx context.Context, formats strfmt
 func (m *SearchResults) contextValidateIterations(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Iterations != nil {
+
+		if swag.IsZero(m.Iterations) { // not required
+			return nil
+		}
+
 		if err := m.Iterations.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("iterations")
@@ -194,6 +204,11 @@ func (m *SearchResults) contextValidateIterations(ctx context.Context, formats s
 func (m *SearchResults) contextValidateMilestones(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Milestones != nil {
+
+		if swag.IsZero(m.Milestones) { // not required
+			return nil
+		}
+
 		if err := m.Milestones.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("milestones")
@@ -210,6 +225,11 @@ func (m *SearchResults) contextValidateMilestones(ctx context.Context, formats s
 func (m *SearchResults) contextValidateStories(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Stories != nil {
+
+		if swag.IsZero(m.Stories) { // not required
+			return nil
+		}
+
 		if err := m.Stories.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("stories")

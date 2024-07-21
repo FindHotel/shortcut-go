@@ -22,7 +22,7 @@ type HistoryActionStoryCommentCreate struct {
 
 	// The action of the entity referenced.
 	// Required: true
-	// Enum: [create]
+	// Enum: ["create"]
 	Action *string `json:"action"`
 
 	// The application URL of the Story Comment.

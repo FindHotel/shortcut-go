@@ -22,7 +22,7 @@ type HistoryActionTaskDelete struct {
 
 	// The action of the entity referenced.
 	// Required: true
-	// Enum: [delete]
+	// Enum: ["delete"]
 	Action *string `json:"action"`
 
 	// The description of the Task being deleted.

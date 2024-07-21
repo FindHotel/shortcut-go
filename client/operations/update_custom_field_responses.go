@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -54,7 +55,7 @@ func (o *UpdateCustomFieldReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/custom-fields/{custom-field-public-id}] updateCustomField", response, response.Code())
 	}
 }
 
@@ -97,12 +98,19 @@ func (o *UpdateCustomFieldOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update custom field o k response
+func (o *UpdateCustomFieldOK) Code() int {
+	return 200
+}
+
 func (o *UpdateCustomFieldOK) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldOK %s", 200, payload)
 }
 
 func (o *UpdateCustomFieldOK) String() string {
-	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldOK %s", 200, payload)
 }
 
 func (o *UpdateCustomFieldOK) GetPayload() *models.CustomField {
@@ -159,12 +167,17 @@ func (o *UpdateCustomFieldBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the update custom field bad request response
+func (o *UpdateCustomFieldBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateCustomFieldBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldBadRequest", 400)
 }
 
 func (o *UpdateCustomFieldBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldBadRequest", 400)
 }
 
 func (o *UpdateCustomFieldBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -210,12 +223,17 @@ func (o *UpdateCustomFieldNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the update custom field not found response
+func (o *UpdateCustomFieldNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateCustomFieldNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldNotFound", 404)
 }
 
 func (o *UpdateCustomFieldNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldNotFound", 404)
 }
 
 func (o *UpdateCustomFieldNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -262,12 +280,19 @@ func (o *UpdateCustomFieldConflict) IsCode(code int) bool {
 	return code == 409
 }
 
+// Code gets the status code for the update custom field conflict response
+func (o *UpdateCustomFieldConflict) Code() int {
+	return 409
+}
+
 func (o *UpdateCustomFieldConflict) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldConflict  %+v", 409, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldConflict %s", 409, payload)
 }
 
 func (o *UpdateCustomFieldConflict) String() string {
-	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldConflict  %+v", 409, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldConflict %s", 409, payload)
 }
 
 func (o *UpdateCustomFieldConflict) GetPayload() *models.DataConflictError {
@@ -324,12 +349,17 @@ func (o *UpdateCustomFieldUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the update custom field unprocessable entity response
+func (o *UpdateCustomFieldUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *UpdateCustomFieldUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldUnprocessableEntity", 422)
 }
 
 func (o *UpdateCustomFieldUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/custom-fields/{custom-field-public-id}][%d] updateCustomFieldUnprocessableEntity", 422)
 }
 
 func (o *UpdateCustomFieldUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

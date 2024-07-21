@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListMembersReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/members] listMembers", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListMembersOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list members o k response
+func (o *ListMembersOK) Code() int {
+	return 200
+}
+
 func (o *ListMembersOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersOK %s", 200, payload)
 }
 
 func (o *ListMembersOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersOK %s", 200, payload)
 }
 
 func (o *ListMembersOK) GetPayload() []*models.Member {
@@ -151,12 +159,17 @@ func (o *ListMembersBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list members bad request response
+func (o *ListMembersBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListMembersBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersBadRequest", 400)
 }
 
 func (o *ListMembersBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersBadRequest", 400)
 }
 
 func (o *ListMembersBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListMembersNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list members not found response
+func (o *ListMembersNotFound) Code() int {
+	return 404
+}
+
 func (o *ListMembersNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersNotFound", 404)
 }
 
 func (o *ListMembersNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersNotFound", 404)
 }
 
 func (o *ListMembersNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListMembersUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list members unprocessable entity response
+func (o *ListMembersUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListMembersUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersUnprocessableEntity", 422)
 }
 
 func (o *ListMembersUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/members][%d] listMembersUnprocessableEntity", 422)
 }
 
 func (o *ListMembersUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *GetStoryLinkReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/story-links/{story-link-public-id}] getStoryLink", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *GetStoryLinkOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get story link o k response
+func (o *GetStoryLinkOK) Code() int {
+	return 200
+}
+
 func (o *GetStoryLinkOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkOK %s", 200, payload)
 }
 
 func (o *GetStoryLinkOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkOK %s", 200, payload)
 }
 
 func (o *GetStoryLinkOK) GetPayload() *models.StoryLink {
@@ -153,12 +161,17 @@ func (o *GetStoryLinkBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get story link bad request response
+func (o *GetStoryLinkBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetStoryLinkBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkBadRequest", 400)
 }
 
 func (o *GetStoryLinkBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkBadRequest", 400)
 }
 
 func (o *GetStoryLinkBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *GetStoryLinkNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get story link not found response
+func (o *GetStoryLinkNotFound) Code() int {
+	return 404
+}
+
 func (o *GetStoryLinkNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkNotFound", 404)
 }
 
 func (o *GetStoryLinkNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkNotFound", 404)
 }
 
 func (o *GetStoryLinkNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *GetStoryLinkUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the get story link unprocessable entity response
+func (o *GetStoryLinkUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *GetStoryLinkUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkUnprocessableEntity", 422)
 }
 
 func (o *GetStoryLinkUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/story-links/{story-link-public-id}][%d] getStoryLinkUnprocessableEntity", 422)
 }
 
 func (o *GetStoryLinkUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

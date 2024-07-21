@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *UpdateFileReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/files/{file-public-id}] updateFile", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *UpdateFileOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update file o k response
+func (o *UpdateFileOK) Code() int {
+	return 200
+}
+
 func (o *UpdateFileOK) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileOK %s", 200, payload)
 }
 
 func (o *UpdateFileOK) String() string {
-	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileOK %s", 200, payload)
 }
 
 func (o *UpdateFileOK) GetPayload() *models.UploadedFile {
@@ -153,12 +161,17 @@ func (o *UpdateFileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the update file bad request response
+func (o *UpdateFileBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateFileBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileBadRequest", 400)
 }
 
 func (o *UpdateFileBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileBadRequest", 400)
 }
 
 func (o *UpdateFileBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *UpdateFileNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the update file not found response
+func (o *UpdateFileNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateFileNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileNotFound", 404)
 }
 
 func (o *UpdateFileNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileNotFound", 404)
 }
 
 func (o *UpdateFileNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *UpdateFileUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the update file unprocessable entity response
+func (o *UpdateFileUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *UpdateFileUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileUnprocessableEntity", 422)
 }
 
 func (o *UpdateFileUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/files/{file-public-id}][%d] updateFileUnprocessableEntity", 422)
 }
 
 func (o *UpdateFileUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

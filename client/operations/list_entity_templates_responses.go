@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListEntityTemplatesReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/entity-templates] listEntityTemplates", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListEntityTemplatesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list entity templates o k response
+func (o *ListEntityTemplatesOK) Code() int {
+	return 200
+}
+
 func (o *ListEntityTemplatesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesOK %s", 200, payload)
 }
 
 func (o *ListEntityTemplatesOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesOK %s", 200, payload)
 }
 
 func (o *ListEntityTemplatesOK) GetPayload() []*models.EntityTemplate {
@@ -151,12 +159,17 @@ func (o *ListEntityTemplatesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list entity templates bad request response
+func (o *ListEntityTemplatesBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListEntityTemplatesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesBadRequest", 400)
 }
 
 func (o *ListEntityTemplatesBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesBadRequest", 400)
 }
 
 func (o *ListEntityTemplatesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListEntityTemplatesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list entity templates not found response
+func (o *ListEntityTemplatesNotFound) Code() int {
+	return 404
+}
+
 func (o *ListEntityTemplatesNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesNotFound", 404)
 }
 
 func (o *ListEntityTemplatesNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesNotFound", 404)
 }
 
 func (o *ListEntityTemplatesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListEntityTemplatesUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list entity templates unprocessable entity response
+func (o *ListEntityTemplatesUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListEntityTemplatesUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesUnprocessableEntity", 422)
 }
 
 func (o *ListEntityTemplatesUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/entity-templates][%d] listEntityTemplatesUnprocessableEntity", 422)
 }
 
 func (o *ListEntityTemplatesUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

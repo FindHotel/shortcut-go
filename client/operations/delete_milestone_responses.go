@@ -45,7 +45,7 @@ func (o *DeleteMilestoneReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /api/v3/milestones/{milestone-public-id}] deleteMilestone", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *DeleteMilestoneNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the delete milestone no content response
+func (o *DeleteMilestoneNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteMilestoneNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneNoContent", 204)
 }
 
 func (o *DeleteMilestoneNoContent) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneNoContent ", 204)
+	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneNoContent", 204)
 }
 
 func (o *DeleteMilestoneNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *DeleteMilestoneBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete milestone bad request response
+func (o *DeleteMilestoneBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteMilestoneBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneBadRequest", 400)
 }
 
 func (o *DeleteMilestoneBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneBadRequest", 400)
 }
 
 func (o *DeleteMilestoneBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *DeleteMilestoneNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the delete milestone not found response
+func (o *DeleteMilestoneNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteMilestoneNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneNotFound", 404)
 }
 
 func (o *DeleteMilestoneNotFound) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneNotFound ", 404)
+	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneNotFound", 404)
 }
 
 func (o *DeleteMilestoneNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *DeleteMilestoneUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the delete milestone unprocessable entity response
+func (o *DeleteMilestoneUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *DeleteMilestoneUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneUnprocessableEntity", 422)
 }
 
 func (o *DeleteMilestoneUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneUnprocessableEntity ", 422)
+	return fmt.Sprintf("[DELETE /api/v3/milestones/{milestone-public-id}][%d] deleteMilestoneUnprocessableEntity", 422)
 }
 
 func (o *DeleteMilestoneUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

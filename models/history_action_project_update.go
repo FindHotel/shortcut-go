@@ -22,7 +22,7 @@ type HistoryActionProjectUpdate struct {
 
 	// The action of the entity referenced.
 	// Required: true
-	// Enum: [update]
+	// Enum: ["update"]
 	Action *string `json:"action"`
 
 	// The application URL of the Project.

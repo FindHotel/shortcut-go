@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListLabelEpicsReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/labels/{label-public-id}/epics] listLabelEpics", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListLabelEpicsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list label epics o k response
+func (o *ListLabelEpicsOK) Code() int {
+	return 200
+}
+
 func (o *ListLabelEpicsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsOK %s", 200, payload)
 }
 
 func (o *ListLabelEpicsOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsOK %s", 200, payload)
 }
 
 func (o *ListLabelEpicsOK) GetPayload() []*models.EpicSlim {
@@ -151,12 +159,17 @@ func (o *ListLabelEpicsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list label epics bad request response
+func (o *ListLabelEpicsBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListLabelEpicsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsBadRequest", 400)
 }
 
 func (o *ListLabelEpicsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsBadRequest", 400)
 }
 
 func (o *ListLabelEpicsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListLabelEpicsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list label epics not found response
+func (o *ListLabelEpicsNotFound) Code() int {
+	return 404
+}
+
 func (o *ListLabelEpicsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsNotFound", 404)
 }
 
 func (o *ListLabelEpicsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsNotFound", 404)
 }
 
 func (o *ListLabelEpicsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListLabelEpicsUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list label epics unprocessable entity response
+func (o *ListLabelEpicsUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListLabelEpicsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsUnprocessableEntity", 422)
 }
 
 func (o *ListLabelEpicsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/labels/{label-public-id}/epics][%d] listLabelEpicsUnprocessableEntity", 422)
 }
 
 func (o *ListLabelEpicsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

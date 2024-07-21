@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *CreateStoryLinkReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api/v3/story-links] createStoryLink", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *CreateStoryLinkCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create story link created response
+func (o *CreateStoryLinkCreated) Code() int {
+	return 201
+}
+
 func (o *CreateStoryLinkCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkCreated %s", 201, payload)
 }
 
 func (o *CreateStoryLinkCreated) String() string {
-	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkCreated %s", 201, payload)
 }
 
 func (o *CreateStoryLinkCreated) GetPayload() *models.StoryLink {
@@ -153,12 +161,17 @@ func (o *CreateStoryLinkBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create story link bad request response
+func (o *CreateStoryLinkBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateStoryLinkBadRequest) Error() string {
-	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkBadRequest", 400)
 }
 
 func (o *CreateStoryLinkBadRequest) String() string {
-	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkBadRequest ", 400)
+	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkBadRequest", 400)
 }
 
 func (o *CreateStoryLinkBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *CreateStoryLinkNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the create story link not found response
+func (o *CreateStoryLinkNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateStoryLinkNotFound) Error() string {
-	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkNotFound", 404)
 }
 
 func (o *CreateStoryLinkNotFound) String() string {
-	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkNotFound ", 404)
+	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkNotFound", 404)
 }
 
 func (o *CreateStoryLinkNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *CreateStoryLinkUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the create story link unprocessable entity response
+func (o *CreateStoryLinkUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *CreateStoryLinkUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkUnprocessableEntity", 422)
 }
 
 func (o *CreateStoryLinkUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /api/v3/story-links][%d] createStoryLinkUnprocessableEntity", 422)
 }
 
 func (o *CreateStoryLinkUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

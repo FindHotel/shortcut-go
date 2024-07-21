@@ -45,7 +45,7 @@ func (o *EnableIterationsReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/iterations/enable] enableIterations", response, response.Code())
 	}
 }
 
@@ -87,12 +87,17 @@ func (o *EnableIterationsNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the enable iterations no content response
+func (o *EnableIterationsNoContent) Code() int {
+	return 204
+}
+
 func (o *EnableIterationsNoContent) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsNoContent ", 204)
+	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsNoContent", 204)
 }
 
 func (o *EnableIterationsNoContent) String() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsNoContent ", 204)
+	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsNoContent", 204)
 }
 
 func (o *EnableIterationsNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -138,12 +143,17 @@ func (o *EnableIterationsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the enable iterations bad request response
+func (o *EnableIterationsBadRequest) Code() int {
+	return 400
+}
+
 func (o *EnableIterationsBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsBadRequest", 400)
 }
 
 func (o *EnableIterationsBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsBadRequest", 400)
 }
 
 func (o *EnableIterationsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -189,12 +199,17 @@ func (o *EnableIterationsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the enable iterations not found response
+func (o *EnableIterationsNotFound) Code() int {
+	return 404
+}
+
 func (o *EnableIterationsNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsNotFound", 404)
 }
 
 func (o *EnableIterationsNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsNotFound", 404)
 }
 
 func (o *EnableIterationsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,12 +255,17 @@ func (o *EnableIterationsUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the enable iterations unprocessable entity response
+func (o *EnableIterationsUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *EnableIterationsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsUnprocessableEntity", 422)
 }
 
 func (o *EnableIterationsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/iterations/enable][%d] enableIterationsUnprocessableEntity", 422)
 }
 
 func (o *EnableIterationsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

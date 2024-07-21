@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -27,8 +28,9 @@ type Identity struct {
 	// Required: true
 	Name *string `json:"name"`
 
-	// The type of Identity; currently only type is github.
+	// The service this Identity is for.
 	// Required: true
+	// Enum: ["slack","github","gitlab","bitbucket"]
 	Type *string `json:"type"`
 }
 
@@ -72,9 +74,49 @@ func (m *Identity) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
+var identityTypeTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["slack","github","gitlab","bitbucket"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		identityTypeTypePropEnum = append(identityTypeTypePropEnum, v)
+	}
+}
+
+const (
+
+	// IdentityTypeSlack captures enum value "slack"
+	IdentityTypeSlack string = "slack"
+
+	// IdentityTypeGithub captures enum value "github"
+	IdentityTypeGithub string = "github"
+
+	// IdentityTypeGitlab captures enum value "gitlab"
+	IdentityTypeGitlab string = "gitlab"
+
+	// IdentityTypeBitbucket captures enum value "bitbucket"
+	IdentityTypeBitbucket string = "bitbucket"
+)
+
+// prop value enum
+func (m *Identity) validateTypeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, identityTypeTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (m *Identity) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

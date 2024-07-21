@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *UpdateEpicCommentReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}] updateEpicComment", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *UpdateEpicCommentOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the update epic comment o k response
+func (o *UpdateEpicCommentOK) Code() int {
+	return 200
+}
+
 func (o *UpdateEpicCommentOK) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentOK %s", 200, payload)
 }
 
 func (o *UpdateEpicCommentOK) String() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentOK %s", 200, payload)
 }
 
 func (o *UpdateEpicCommentOK) GetPayload() *models.ThreadedComment {
@@ -153,12 +161,17 @@ func (o *UpdateEpicCommentBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the update epic comment bad request response
+func (o *UpdateEpicCommentBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateEpicCommentBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentBadRequest", 400)
 }
 
 func (o *UpdateEpicCommentBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentBadRequest ", 400)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentBadRequest", 400)
 }
 
 func (o *UpdateEpicCommentBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -204,12 +217,17 @@ func (o *UpdateEpicCommentNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the update epic comment not found response
+func (o *UpdateEpicCommentNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateEpicCommentNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentNotFound", 404)
 }
 
 func (o *UpdateEpicCommentNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentNotFound ", 404)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentNotFound", 404)
 }
 
 func (o *UpdateEpicCommentNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,12 +273,17 @@ func (o *UpdateEpicCommentUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the update epic comment unprocessable entity response
+func (o *UpdateEpicCommentUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *UpdateEpicCommentUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentUnprocessableEntity", 422)
 }
 
 func (o *UpdateEpicCommentUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentUnprocessableEntity ", 422)
+	return fmt.Sprintf("[PUT /api/v3/epics/{epic-public-id}/comments/{comment-public-id}][%d] updateEpicCommentUnprocessableEntity", 422)
 }
 
 func (o *UpdateEpicCommentUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

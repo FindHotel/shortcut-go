@@ -9,12 +9,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new operations API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new operations API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new operations API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -25,8 +51,32 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
+
+// This client is generated with a few options you might find useful for your swagger spec.
+//
+// Feel free to add you own set of options.
+
+// WithContentType allows the client to force the Content-Type header
+// to negotiate a specific Consumer from the server.
+//
+// You may use this option to set arbitrary extensions to your MIME media type.
+func WithContentType(mime string) ClientOption {
+	return func(r *runtime.ClientOperation) {
+		r.ConsumesMediaTypes = []string{mime}
+	}
+}
+
+// WithContentTypeApplicationJSON sets the Content-Type header to "application/json".
+func WithContentTypeApplicationJSON(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"application/json"}
+}
+
+// WithContentTypeMultipartFormData sets the Content-Type header to "multipart/form-data".
+func WithContentTypeMultipartFormData(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"multipart/form-data"}
+}
 
 // ClientService is the interface for Client methods
 type ClientService interface {
@@ -52,11 +102,15 @@ type ClientService interface {
 
 	CreateMultipleStories(params *CreateMultipleStoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMultipleStoriesCreated, error)
 
+	CreateObjective(params *CreateObjectiveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateObjectiveCreated, error)
+
 	CreateProject(params *CreateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectCreated, error)
 
 	CreateStory(params *CreateStoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateStoryCreated, error)
 
 	CreateStoryComment(params *CreateStoryCommentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateStoryCommentCreated, error)
+
+	CreateStoryFromTemplate(params *CreateStoryFromTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateStoryFromTemplateCreated, error)
 
 	CreateStoryLink(params *CreateStoryLinkParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateStoryLinkCreated, error)
 
@@ -85,6 +139,8 @@ type ClientService interface {
 	DeleteMilestone(params *DeleteMilestoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMilestoneNoContent, error)
 
 	DeleteMultipleStories(params *DeleteMultipleStoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMultipleStoriesNoContent, error)
+
+	DeleteObjective(params *DeleteObjectiveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteObjectiveNoContent, error)
 
 	DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectNoContent, error)
 
@@ -132,6 +188,8 @@ type ClientService interface {
 
 	GetIteration(params *GetIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIterationOK, error)
 
+	GetKeyResult(params *GetKeyResultParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKeyResultOK, error)
+
 	GetLabel(params *GetLabelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLabelOK, error)
 
 	GetLinkedFile(params *GetLinkedFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLinkedFileOK, error)
@@ -139,6 +197,8 @@ type ClientService interface {
 	GetMember(params *GetMemberParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMemberOK, error)
 
 	GetMilestone(params *GetMilestoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMilestoneOK, error)
+
+	GetObjective(params *GetObjectiveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetObjectiveOK, error)
 
 	GetProject(params *GetProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectOK, error)
 
@@ -157,6 +217,8 @@ type ClientService interface {
 	ListCategories(params *ListCategoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListCategoriesOK, error)
 
 	ListCategoryMilestones(params *ListCategoryMilestonesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListCategoryMilestonesOK, error)
+
+	ListCategoryObjectives(params *ListCategoryObjectivesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListCategoryObjectivesOK, error)
 
 	ListCustomFields(params *ListCustomFieldsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListCustomFieldsOK, error)
 
@@ -192,11 +254,17 @@ type ClientService interface {
 
 	ListMilestones(params *ListMilestonesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMilestonesOK, error)
 
+	ListObjectiveEpics(params *ListObjectiveEpicsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListObjectiveEpicsOK, error)
+
+	ListObjectives(params *ListObjectivesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListObjectivesOK, error)
+
 	ListProjects(params *ListProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListProjectsOK, error)
 
 	ListRepositories(params *ListRepositoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListRepositoriesOK, error)
 
 	ListStories(params *ListStoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListStoriesOK, error)
+
+	ListStoryComment(params *ListStoryCommentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListStoryCommentOK, error)
 
 	ListWorkflows(params *ListWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListWorkflowsOK, error)
 
@@ -208,11 +276,15 @@ type ClientService interface {
 
 	SearchMilestones(params *SearchMilestonesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SearchMilestonesOK, error)
 
+	SearchObjectives(params *SearchObjectivesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SearchObjectivesOK, error)
+
 	SearchStories(params *SearchStoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SearchStoriesOK, error)
 
 	SearchStoriesOld(params *SearchStoriesOldParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SearchStoriesOldCreated, error)
 
 	StoryHistory(params *StoryHistoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StoryHistoryOK, error)
+
+	UnlinkCommentThreadFromSlack(params *UnlinkCommentThreadFromSlackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnlinkCommentThreadFromSlackCreated, error)
 
 	UnlinkProductboardFromEpic(params *UnlinkProductboardFromEpicParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnlinkProductboardFromEpicNoContent, error)
 
@@ -232,6 +304,8 @@ type ClientService interface {
 
 	UpdateIteration(params *UpdateIterationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIterationOK, error)
 
+	UpdateKeyResult(params *UpdateKeyResultParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKeyResultOK, error)
+
 	UpdateLabel(params *UpdateLabelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateLabelOK, error)
 
 	UpdateLinkedFile(params *UpdateLinkedFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateLinkedFileOK, error)
@@ -239,6 +313,8 @@ type ClientService interface {
 	UpdateMilestone(params *UpdateMilestoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateMilestoneOK, error)
 
 	UpdateMultipleStories(params *UpdateMultipleStoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateMultipleStoriesOK, error)
+
+	UpdateObjective(params *UpdateObjectiveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateObjectiveOK, error)
 
 	UpdateProject(params *UpdateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProjectOK, error)
 
@@ -623,7 +699,7 @@ func (a *Client) CreateLinkedFile(params *CreateLinkedFileParams, authInfo runti
 /*
 CreateMilestone creates milestone
 
-Create Milestone allows you to create a new Milestone in Shortcut.
+(Deprecated: Use 'Create Objective') Create Milestone allows you to create a new Milestone in Shortcut.
 */
 func (a *Client) CreateMilestone(params *CreateMilestoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMilestoneCreated, error) {
 	// TODO: Validate the params before sending
@@ -664,7 +740,7 @@ func (a *Client) CreateMilestone(params *CreateMilestoneParams, authInfo runtime
 /*
 CreateMultipleStories creates multiple stories
 
-Create Multiple Stories allows you to create multiple stories in a single request using the same syntax as [Create Story](https://shortcut.com/api/#create-story).
+Create Multiple Stories allows you to create multiple stories in a single request using the same syntax as [Create Story](https://developer.shortcut.com/api/rest/v3#create-story).
 */
 func (a *Client) CreateMultipleStories(params *CreateMultipleStoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMultipleStoriesCreated, error) {
 	// TODO: Validate the params before sending
@@ -699,6 +775,47 @@ func (a *Client) CreateMultipleStories(params *CreateMultipleStoriesParams, auth
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for createMultipleStories: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateObjective creates objective
+
+Create Objective allows you to create a new Objective in Shortcut.
+*/
+func (a *Client) CreateObjective(params *CreateObjectiveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateObjectiveCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateObjectiveParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "createObjective",
+		Method:             "POST",
+		PathPattern:        "/api/v3/objectives",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &CreateObjectiveReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateObjectiveCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createObjective: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -746,7 +863,7 @@ func (a *Client) CreateProject(params *CreateProjectParams, authInfo runtime.Cli
 /*
 CreateStory creates story
 
-Create Story is used to add a new story to your Shortcut.
+Create Story is used to add a new story to your Shortcut Workspace.
 */
 func (a *Client) CreateStory(params *CreateStoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateStoryCreated, error) {
 	// TODO: Validate the params before sending
@@ -822,6 +939,47 @@ func (a *Client) CreateStoryComment(params *CreateStoryCommentParams, authInfo r
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for createStoryComment: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateStoryFromTemplate creates story from template
+
+Create Story From Template is used to add a new story derived from a template to your Shortcut Workspace.
+*/
+func (a *Client) CreateStoryFromTemplate(params *CreateStoryFromTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateStoryFromTemplateCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateStoryFromTemplateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "createStoryFromTemplate",
+		Method:             "POST",
+		PathPattern:        "/api/v3/stories/from-template",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &CreateStoryFromTemplateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateStoryFromTemplateCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createStoryFromTemplate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1321,7 +1479,7 @@ func (a *Client) DeleteLinkedFile(params *DeleteLinkedFileParams, authInfo runti
 /*
 DeleteMilestone deletes milestone
 
-Delete Milestone can be used to delete any Milestone.
+(Deprecated: Use 'Delete Objective') Delete Milestone can be used to delete any Milestone.
 */
 func (a *Client) DeleteMilestone(params *DeleteMilestoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMilestoneNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1397,6 +1555,47 @@ func (a *Client) DeleteMultipleStories(params *DeleteMultipleStoriesParams, auth
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for deleteMultipleStories: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+DeleteObjective deletes objective
+
+Delete Objective can be used to delete any Objective.
+*/
+func (a *Client) DeleteObjective(params *DeleteObjectiveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteObjectiveNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteObjectiveParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "deleteObjective",
+		Method:             "DELETE",
+		PathPattern:        "/api/v3/objectives/{objective-public-id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &DeleteObjectiveReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteObjectiveNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteObjective: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -2338,6 +2537,47 @@ func (a *Client) GetIteration(params *GetIterationParams, authInfo runtime.Clien
 }
 
 /*
+GetKeyResult gets key result
+
+Get Key Result returns information about a chosen Key Result.
+*/
+func (a *Client) GetKeyResult(params *GetKeyResultParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKeyResultOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKeyResultParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKeyResult",
+		Method:             "GET",
+		PathPattern:        "/api/v3/key-results/{key-result-public-id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetKeyResultReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKeyResultOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKeyResult: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetLabel gets label
 
 Get Label returns information about the selected Label.
@@ -2463,7 +2703,7 @@ func (a *Client) GetMember(params *GetMemberParams, authInfo runtime.ClientAuthI
 /*
 GetMilestone gets milestone
 
-Get Milestone returns information about a chosen Milestone.
+(Deprecated: Use 'Get Objective') Get Milestone returns information about a chosen Milestone.
 */
 func (a *Client) GetMilestone(params *GetMilestoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMilestoneOK, error) {
 	// TODO: Validate the params before sending
@@ -2498,6 +2738,47 @@ func (a *Client) GetMilestone(params *GetMilestoneParams, authInfo runtime.Clien
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getMilestone: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetObjective gets objective
+
+Get Objective returns information about a chosen Objective.
+*/
+func (a *Client) GetObjective(params *GetObjectiveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetObjectiveOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetObjectiveParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getObjective",
+		Method:             "GET",
+		PathPattern:        "/api/v3/objectives/{objective-public-id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetObjectiveReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetObjectiveOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getObjective: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -2867,6 +3148,47 @@ func (a *Client) ListCategoryMilestones(params *ListCategoryMilestonesParams, au
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listCategoryMilestones: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ListCategoryObjectives lists category objectives
+
+Returns a list of all Objectives with the Category.
+*/
+func (a *Client) ListCategoryObjectives(params *ListCategoryObjectivesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListCategoryObjectivesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListCategoryObjectivesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listCategoryObjectives",
+		Method:             "GET",
+		PathPattern:        "/api/v3/categories/{category-public-id}/objectives",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListCategoryObjectivesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListCategoryObjectivesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listCategoryObjectives: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -3484,7 +3806,7 @@ func (a *Client) ListMembers(params *ListMembersParams, authInfo runtime.ClientA
 /*
 ListMilestoneEpics lists milestone epics
 
-List all of the Epics within the Milestone.
+(Deprecated: Use 'List Objective Epics') List all of the Epics within the Milestone.
 */
 func (a *Client) ListMilestoneEpics(params *ListMilestoneEpicsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMilestoneEpicsOK, error) {
 	// TODO: Validate the params before sending
@@ -3525,7 +3847,7 @@ func (a *Client) ListMilestoneEpics(params *ListMilestoneEpicsParams, authInfo r
 /*
 ListMilestones lists milestones
 
-List Milestones returns a list of all Milestones and their attributes.
+(Deprecated: Use 'List Objectives') List Milestones returns a list of all Milestones and their attributes.
 */
 func (a *Client) ListMilestones(params *ListMilestonesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMilestonesOK, error) {
 	// TODO: Validate the params before sending
@@ -3560,6 +3882,88 @@ func (a *Client) ListMilestones(params *ListMilestonesParams, authInfo runtime.C
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listMilestones: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ListObjectiveEpics lists objective epics
+
+List all of the Epics within the Objective.
+*/
+func (a *Client) ListObjectiveEpics(params *ListObjectiveEpicsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListObjectiveEpicsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListObjectiveEpicsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listObjectiveEpics",
+		Method:             "GET",
+		PathPattern:        "/api/v3/objectives/{objective-public-id}/epics",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListObjectiveEpicsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListObjectiveEpicsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listObjectiveEpics: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ListObjectives lists objectives
+
+List Objectives returns a list of all Objectives and their attributes.
+*/
+func (a *Client) ListObjectives(params *ListObjectivesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListObjectivesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListObjectivesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listObjectives",
+		Method:             "GET",
+		PathPattern:        "/api/v3/objectives",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListObjectivesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListObjectivesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listObjectives: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -3683,6 +4087,47 @@ func (a *Client) ListStories(params *ListStoriesParams, authInfo runtime.ClientA
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listStories: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ListStoryComment lists story comment
+
+Lists Comments associated with a Story
+*/
+func (a *Client) ListStoryComment(params *ListStoryCommentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListStoryCommentOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListStoryCommentParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listStoryComment",
+		Method:             "GET",
+		PathPattern:        "/api/v3/stories/{story-public-id}/comments",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListStoryCommentReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListStoryCommentOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listStoryComment: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -3892,6 +4337,47 @@ func (a *Client) SearchMilestones(params *SearchMilestonesParams, authInfo runti
 }
 
 /*
+SearchObjectives searches objectives
+
+Search Objectives lets you search Objectives based on desired parameters. Since ordering of results can change over time (due to search ranking decay, new Objectives being created), the `next` value from the previous response can be used as the path and query string for the next page to ensure stable ordering.
+*/
+func (a *Client) SearchObjectives(params *SearchObjectivesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SearchObjectivesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSearchObjectivesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "searchObjectives",
+		Method:             "GET",
+		PathPattern:        "/api/v3/search/objectives",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &SearchObjectivesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SearchObjectivesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for searchObjectives: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 SearchStories searches stories
 
 Search Stories lets you search Stories based on desired parameters. Since ordering of stories can change over time (due to search ranking decay, new stories being created), the `next` value from the previous response can be used as the path and query string for the next page to ensure stable ordering.
@@ -4009,6 +4495,47 @@ func (a *Client) StoryHistory(params *StoryHistoryParams, authInfo runtime.Clien
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for storyHistory: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UnlinkCommentThreadFromSlack unlinks comment thread from slack
+
+Unlinks a Comment from its linked Slack thread (Comment replies and Slack replies will no longer be synced)
+*/
+func (a *Client) UnlinkCommentThreadFromSlack(params *UnlinkCommentThreadFromSlackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnlinkCommentThreadFromSlackCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUnlinkCommentThreadFromSlackParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "unlinkCommentThreadFromSlack",
+		Method:             "POST",
+		PathPattern:        "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/unlink-from-slack",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &UnlinkCommentThreadFromSlackReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UnlinkCommentThreadFromSlackCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for unlinkCommentThreadFromSlack: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -4378,6 +4905,47 @@ func (a *Client) UpdateIteration(params *UpdateIterationParams, authInfo runtime
 }
 
 /*
+UpdateKeyResult updates key result
+
+Update Key Result allows updating a Key Result's name or initial, observed, or target values.
+*/
+func (a *Client) UpdateKeyResult(params *UpdateKeyResultParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKeyResultOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateKeyResultParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "updateKeyResult",
+		Method:             "PUT",
+		PathPattern:        "/api/v3/key-results/{key-result-public-id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &UpdateKeyResultReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateKeyResultOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateKeyResult: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 UpdateLabel updates label
 
 Update Label allows you to replace a Label name with another name. If you try to name a Label something that already exists, you will receive a 422 response.
@@ -4462,7 +5030,7 @@ func (a *Client) UpdateLinkedFile(params *UpdateLinkedFileParams, authInfo runti
 /*
 UpdateMilestone updates milestone
 
-Update Milestone can be used to update Milestone properties.
+(Deprecated: Use 'Update Objective') Update Milestone can be used to update Milestone properties.
 */
 func (a *Client) UpdateMilestone(params *UpdateMilestoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateMilestoneOK, error) {
 	// TODO: Validate the params before sending
@@ -4538,6 +5106,47 @@ func (a *Client) UpdateMultipleStories(params *UpdateMultipleStoriesParams, auth
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for updateMultipleStories: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateObjective updates objective
+
+Update Objective can be used to update Objective properties.
+*/
+func (a *Client) UpdateObjective(params *UpdateObjectiveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateObjectiveOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateObjectiveParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "updateObjective",
+		Method:             "PUT",
+		PathPattern:        "/api/v3/objectives/{objective-public-id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &UpdateObjectiveReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateObjectiveOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateObjective: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

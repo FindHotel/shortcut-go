@@ -30,7 +30,7 @@ type CreateStoryLink struct {
 
 	// The type of link.
 	// Required: true
-	// Enum: [blocks duplicates relates to]
+	// Enum: ["blocks","duplicates","relates to"]
 	Verb *string `json:"verb"`
 }
 

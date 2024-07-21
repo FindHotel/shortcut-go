@@ -822,6 +822,11 @@ func (m *HistoryChangesStory) ContextValidate(ctx context.Context, formats strfm
 func (m *HistoryChangesStory) contextValidateArchived(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Archived != nil {
+
+		if swag.IsZero(m.Archived) { // not required
+			return nil
+		}
+
 		if err := m.Archived.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("archived")
@@ -838,6 +843,11 @@ func (m *HistoryChangesStory) contextValidateArchived(ctx context.Context, forma
 func (m *HistoryChangesStory) contextValidateBlocked(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Blocked != nil {
+
+		if swag.IsZero(m.Blocked) { // not required
+			return nil
+		}
+
 		if err := m.Blocked.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("blocked")
@@ -854,6 +864,11 @@ func (m *HistoryChangesStory) contextValidateBlocked(ctx context.Context, format
 func (m *HistoryChangesStory) contextValidateBlocker(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Blocker != nil {
+
+		if swag.IsZero(m.Blocker) { // not required
+			return nil
+		}
+
 		if err := m.Blocker.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("blocker")
@@ -870,6 +885,11 @@ func (m *HistoryChangesStory) contextValidateBlocker(ctx context.Context, format
 func (m *HistoryChangesStory) contextValidateBranchIds(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.BranchIds != nil {
+
+		if swag.IsZero(m.BranchIds) { // not required
+			return nil
+		}
+
 		if err := m.BranchIds.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("branch_ids")
@@ -886,6 +906,11 @@ func (m *HistoryChangesStory) contextValidateBranchIds(ctx context.Context, form
 func (m *HistoryChangesStory) contextValidateCommitIds(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CommitIds != nil {
+
+		if swag.IsZero(m.CommitIds) { // not required
+			return nil
+		}
+
 		if err := m.CommitIds.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("commit_ids")
@@ -902,6 +927,11 @@ func (m *HistoryChangesStory) contextValidateCommitIds(ctx context.Context, form
 func (m *HistoryChangesStory) contextValidateCompleted(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Completed != nil {
+
+		if swag.IsZero(m.Completed) { // not required
+			return nil
+		}
+
 		if err := m.Completed.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("completed")
@@ -918,6 +948,11 @@ func (m *HistoryChangesStory) contextValidateCompleted(ctx context.Context, form
 func (m *HistoryChangesStory) contextValidateCustomFieldValueIds(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CustomFieldValueIds != nil {
+
+		if swag.IsZero(m.CustomFieldValueIds) { // not required
+			return nil
+		}
+
 		if err := m.CustomFieldValueIds.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("custom_field_value_ids")
@@ -934,6 +969,11 @@ func (m *HistoryChangesStory) contextValidateCustomFieldValueIds(ctx context.Con
 func (m *HistoryChangesStory) contextValidateDeadline(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Deadline != nil {
+
+		if swag.IsZero(m.Deadline) { // not required
+			return nil
+		}
+
 		if err := m.Deadline.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("deadline")
@@ -950,6 +990,11 @@ func (m *HistoryChangesStory) contextValidateDeadline(ctx context.Context, forma
 func (m *HistoryChangesStory) contextValidateDescription(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Description != nil {
+
+		if swag.IsZero(m.Description) { // not required
+			return nil
+		}
+
 		if err := m.Description.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("description")
@@ -966,6 +1011,11 @@ func (m *HistoryChangesStory) contextValidateDescription(ctx context.Context, fo
 func (m *HistoryChangesStory) contextValidateEpicID(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.EpicID != nil {
+
+		if swag.IsZero(m.EpicID) { // not required
+			return nil
+		}
+
 		if err := m.EpicID.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("epic_id")
@@ -982,6 +1032,11 @@ func (m *HistoryChangesStory) contextValidateEpicID(ctx context.Context, formats
 func (m *HistoryChangesStory) contextValidateEstimate(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Estimate != nil {
+
+		if swag.IsZero(m.Estimate) { // not required
+			return nil
+		}
+
 		if err := m.Estimate.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("estimate")
@@ -998,6 +1053,11 @@ func (m *HistoryChangesStory) contextValidateEstimate(ctx context.Context, forma
 func (m *HistoryChangesStory) contextValidateFollowerIds(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.FollowerIds != nil {
+
+		if swag.IsZero(m.FollowerIds) { // not required
+			return nil
+		}
+
 		if err := m.FollowerIds.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("follower_ids")
@@ -1014,6 +1074,11 @@ func (m *HistoryChangesStory) contextValidateFollowerIds(ctx context.Context, fo
 func (m *HistoryChangesStory) contextValidateGroupID(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GroupID != nil {
+
+		if swag.IsZero(m.GroupID) { // not required
+			return nil
+		}
+
 		if err := m.GroupID.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("group_id")
@@ -1030,6 +1095,11 @@ func (m *HistoryChangesStory) contextValidateGroupID(ctx context.Context, format
 func (m *HistoryChangesStory) contextValidateIterationID(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.IterationID != nil {
+
+		if swag.IsZero(m.IterationID) { // not required
+			return nil
+		}
+
 		if err := m.IterationID.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("iteration_id")
@@ -1046,6 +1116,11 @@ func (m *HistoryChangesStory) contextValidateIterationID(ctx context.Context, fo
 func (m *HistoryChangesStory) contextValidateLabelIds(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LabelIds != nil {
+
+		if swag.IsZero(m.LabelIds) { // not required
+			return nil
+		}
+
 		if err := m.LabelIds.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("label_ids")
@@ -1062,6 +1137,11 @@ func (m *HistoryChangesStory) contextValidateLabelIds(ctx context.Context, forma
 func (m *HistoryChangesStory) contextValidateMentionIds(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MentionIds != nil {
+
+		if swag.IsZero(m.MentionIds) { // not required
+			return nil
+		}
+
 		if err := m.MentionIds.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("mention_ids")
@@ -1078,6 +1158,11 @@ func (m *HistoryChangesStory) contextValidateMentionIds(ctx context.Context, for
 func (m *HistoryChangesStory) contextValidateName(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Name != nil {
+
+		if swag.IsZero(m.Name) { // not required
+			return nil
+		}
+
 		if err := m.Name.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("name")
@@ -1094,6 +1179,11 @@ func (m *HistoryChangesStory) contextValidateName(ctx context.Context, formats s
 func (m *HistoryChangesStory) contextValidateObjectStoryLinkIds(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ObjectStoryLinkIds != nil {
+
+		if swag.IsZero(m.ObjectStoryLinkIds) { // not required
+			return nil
+		}
+
 		if err := m.ObjectStoryLinkIds.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("object_story_link_ids")
@@ -1110,6 +1200,11 @@ func (m *HistoryChangesStory) contextValidateObjectStoryLinkIds(ctx context.Cont
 func (m *HistoryChangesStory) contextValidateOwnerIds(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OwnerIds != nil {
+
+		if swag.IsZero(m.OwnerIds) { // not required
+			return nil
+		}
+
 		if err := m.OwnerIds.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("owner_ids")
@@ -1126,6 +1221,11 @@ func (m *HistoryChangesStory) contextValidateOwnerIds(ctx context.Context, forma
 func (m *HistoryChangesStory) contextValidateProjectID(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ProjectID != nil {
+
+		if swag.IsZero(m.ProjectID) { // not required
+			return nil
+		}
+
 		if err := m.ProjectID.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("project_id")
@@ -1142,6 +1242,11 @@ func (m *HistoryChangesStory) contextValidateProjectID(ctx context.Context, form
 func (m *HistoryChangesStory) contextValidateRequestedByID(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RequestedByID != nil {
+
+		if swag.IsZero(m.RequestedByID) { // not required
+			return nil
+		}
+
 		if err := m.RequestedByID.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("requested_by_id")
@@ -1158,6 +1263,11 @@ func (m *HistoryChangesStory) contextValidateRequestedByID(ctx context.Context, 
 func (m *HistoryChangesStory) contextValidateStarted(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Started != nil {
+
+		if swag.IsZero(m.Started) { // not required
+			return nil
+		}
+
 		if err := m.Started.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("started")
@@ -1174,6 +1284,11 @@ func (m *HistoryChangesStory) contextValidateStarted(ctx context.Context, format
 func (m *HistoryChangesStory) contextValidateStoryType(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.StoryType != nil {
+
+		if swag.IsZero(m.StoryType) { // not required
+			return nil
+		}
+
 		if err := m.StoryType.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("story_type")
@@ -1190,6 +1305,11 @@ func (m *HistoryChangesStory) contextValidateStoryType(ctx context.Context, form
 func (m *HistoryChangesStory) contextValidateSubjectStoryLinkIds(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SubjectStoryLinkIds != nil {
+
+		if swag.IsZero(m.SubjectStoryLinkIds) { // not required
+			return nil
+		}
+
 		if err := m.SubjectStoryLinkIds.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("subject_story_link_ids")
@@ -1206,6 +1326,11 @@ func (m *HistoryChangesStory) contextValidateSubjectStoryLinkIds(ctx context.Con
 func (m *HistoryChangesStory) contextValidateTaskIds(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TaskIds != nil {
+
+		if swag.IsZero(m.TaskIds) { // not required
+			return nil
+		}
+
 		if err := m.TaskIds.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("task_ids")
@@ -1222,6 +1347,11 @@ func (m *HistoryChangesStory) contextValidateTaskIds(ctx context.Context, format
 func (m *HistoryChangesStory) contextValidateWorkflowStateID(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.WorkflowStateID != nil {
+
+		if swag.IsZero(m.WorkflowStateID) { // not required
+			return nil
+		}
+
 		if err := m.WorkflowStateID.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("workflow_state_id")

@@ -24,6 +24,10 @@ type Iteration struct {
 	// Required: true
 	AppURL *string `json:"app_url"`
 
+	// An array containing Group IDs and Group-owned story counts for the Iteration's associated groups.
+	// Required: true
+	AssociatedGroups []*IterationAssociatedGroup `json:"associated_groups"`
+
 	// The instant when this iteration was created.
 	// Required: true
 	// Format: date-time
@@ -33,7 +37,7 @@ type Iteration struct {
 	// Required: true
 	Description *string `json:"description"`
 
-	// The date this iteration begins.
+	// The date this iteration ends.
 	// Required: true
 	// Format: date-time
 	EndDate *strfmt.DateTime `json:"end_date"`
@@ -74,7 +78,7 @@ type Iteration struct {
 	// Required: true
 	MemberMentionIds []strfmt.UUID `json:"member_mention_ids"`
 
-	// Deprecated: use member_mention_ids.
+	// `Deprecated:` use `member_mention_ids`.
 	// Required: true
 	MentionIds []strfmt.UUID `json:"mention_ids"`
 
@@ -106,6 +110,10 @@ func (m *Iteration) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAppURL(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAssociatedGroups(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -191,6 +199,33 @@ func (m *Iteration) validateAppURL(formats strfmt.Registry) error {
 
 	if err := validate.Required("app_url", "body", m.AppURL); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *Iteration) validateAssociatedGroups(formats strfmt.Registry) error {
+
+	if err := validate.Required("associated_groups", "body", m.AssociatedGroups); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.AssociatedGroups); i++ {
+		if swag.IsZero(m.AssociatedGroups[i]) { // not required
+			continue
+		}
+
+		if m.AssociatedGroups[i] != nil {
+			if err := m.AssociatedGroups[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("associated_groups" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("associated_groups" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -447,6 +482,10 @@ func (m *Iteration) validateUpdatedAt(formats strfmt.Registry) error {
 func (m *Iteration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAssociatedGroups(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLabels(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -461,11 +500,41 @@ func (m *Iteration) ContextValidate(ctx context.Context, formats strfmt.Registry
 	return nil
 }
 
+func (m *Iteration) contextValidateAssociatedGroups(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.AssociatedGroups); i++ {
+
+		if m.AssociatedGroups[i] != nil {
+
+			if swag.IsZero(m.AssociatedGroups[i]) { // not required
+				return nil
+			}
+
+			if err := m.AssociatedGroups[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("associated_groups" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("associated_groups" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *Iteration) contextValidateLabels(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Labels); i++ {
 
 		if m.Labels[i] != nil {
+
+			if swag.IsZero(m.Labels[i]) { // not required
+				return nil
+			}
+
 			if err := m.Labels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("labels" + "." + strconv.Itoa(i))
@@ -484,6 +553,7 @@ func (m *Iteration) contextValidateLabels(ctx context.Context, formats strfmt.Re
 func (m *Iteration) contextValidateStats(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Stats != nil {
+
 		if err := m.Stats.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("stats")

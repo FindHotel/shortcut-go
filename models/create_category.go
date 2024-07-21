@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -34,10 +33,8 @@ type CreateCategory struct {
 	// Min Length: 1
 	Name *string `json:"name"`
 
-	// The type of entity this Category is associated with; currently Milestone is the only type of Category.
-	// Required: true
-	// Enum: [milestone]
-	Type *string `json:"type"`
+	// The type of entity this Category is associated with; currently Milestone or Objective is the only type of Category.
+	Type interface{} `json:"type,omitempty"`
 }
 
 // Validate validates this create category
@@ -53,10 +50,6 @@ func (m *CreateCategory) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -101,46 +94,6 @@ func (m *CreateCategory) validateName(formats strfmt.Registry) error {
 	}
 
 	if err := validate.MinLength("name", "body", *m.Name, 1); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var createCategoryTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["milestone"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		createCategoryTypeTypePropEnum = append(createCategoryTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// CreateCategoryTypeMilestone captures enum value "milestone"
-	CreateCategoryTypeMilestone string = "milestone"
-)
-
-// prop value enum
-func (m *CreateCategory) validateTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, createCategoryTypeTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *CreateCategory) validateType(formats strfmt.Registry) error {
-
-	if err := validate.Required("type", "body", m.Type); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

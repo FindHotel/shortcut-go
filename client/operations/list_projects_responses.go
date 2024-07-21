@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *ListProjectsReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api/v3/projects] listProjects", response, response.Code())
 	}
 }
 
@@ -91,12 +92,19 @@ func (o *ListProjectsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list projects o k response
+func (o *ListProjectsOK) Code() int {
+	return 200
+}
+
 func (o *ListProjectsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsOK %s", 200, payload)
 }
 
 func (o *ListProjectsOK) String() string {
-	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsOK %s", 200, payload)
 }
 
 func (o *ListProjectsOK) GetPayload() []*models.Project {
@@ -151,12 +159,17 @@ func (o *ListProjectsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the list projects bad request response
+func (o *ListProjectsBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListProjectsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsBadRequest", 400)
 }
 
 func (o *ListProjectsBadRequest) String() string {
-	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsBadRequest ", 400)
+	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsBadRequest", 400)
 }
 
 func (o *ListProjectsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -202,12 +215,17 @@ func (o *ListProjectsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list projects not found response
+func (o *ListProjectsNotFound) Code() int {
+	return 404
+}
+
 func (o *ListProjectsNotFound) Error() string {
-	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsNotFound", 404)
 }
 
 func (o *ListProjectsNotFound) String() string {
-	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsNotFound ", 404)
+	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsNotFound", 404)
 }
 
 func (o *ListProjectsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -253,12 +271,17 @@ func (o *ListProjectsUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list projects unprocessable entity response
+func (o *ListProjectsUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListProjectsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsUnprocessableEntity", 422)
 }
 
 func (o *ListProjectsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsUnprocessableEntity ", 422)
+	return fmt.Sprintf("[GET /api/v3/projects][%d] listProjectsUnprocessableEntity", 422)
 }
 
 func (o *ListProjectsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

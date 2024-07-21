@@ -34,7 +34,7 @@ type UnusableEntitlementError struct {
 
 	// The tag for violating an entitlement action.
 	// Required: true
-	// Enum: [entitlement-violation]
+	// Enum: ["entitlement-violation"]
 	ReasonTag *string `json:"reason_tag"`
 }
 

@@ -15,8 +15,6 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	"github.com/FindHotel/shortcut-go/models"
 )
 
 // NewListEpicStoriesParams creates a new ListEpicStoriesParams object,
@@ -64,9 +62,6 @@ ListEpicStoriesParams contains all the parameters to send to the API endpoint
 */
 type ListEpicStoriesParams struct {
 
-	// GetEpicStories.
-	GetEpicStories *models.GetEpicStories
-
 	/* EpicPublicID.
 
 	   The unique ID of the Epic.
@@ -74,6 +69,12 @@ type ListEpicStoriesParams struct {
 	   Format: int64
 	*/
 	EpicPublicID int64
+
+	/* IncludesDescription.
+
+	   A true/false boolean indicating whether to return Stories with their descriptions.
+	*/
+	IncludesDescription *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -128,17 +129,6 @@ func (o *ListEpicStoriesParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithGetEpicStories adds the getEpicStories to the list epic stories params
-func (o *ListEpicStoriesParams) WithGetEpicStories(getEpicStories *models.GetEpicStories) *ListEpicStoriesParams {
-	o.SetGetEpicStories(getEpicStories)
-	return o
-}
-
-// SetGetEpicStories adds the getEpicStories to the list epic stories params
-func (o *ListEpicStoriesParams) SetGetEpicStories(getEpicStories *models.GetEpicStories) {
-	o.GetEpicStories = getEpicStories
-}
-
 // WithEpicPublicID adds the epicPublicID to the list epic stories params
 func (o *ListEpicStoriesParams) WithEpicPublicID(epicPublicID int64) *ListEpicStoriesParams {
 	o.SetEpicPublicID(epicPublicID)
@@ -150,6 +140,17 @@ func (o *ListEpicStoriesParams) SetEpicPublicID(epicPublicID int64) {
 	o.EpicPublicID = epicPublicID
 }
 
+// WithIncludesDescription adds the includesDescription to the list epic stories params
+func (o *ListEpicStoriesParams) WithIncludesDescription(includesDescription *bool) *ListEpicStoriesParams {
+	o.SetIncludesDescription(includesDescription)
+	return o
+}
+
+// SetIncludesDescription adds the includesDescription to the list epic stories params
+func (o *ListEpicStoriesParams) SetIncludesDescription(includesDescription *bool) {
+	o.IncludesDescription = includesDescription
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ListEpicStoriesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -157,15 +158,27 @@ func (o *ListEpicStoriesParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		return err
 	}
 	var res []error
-	if o.GetEpicStories != nil {
-		if err := r.SetBodyParam(o.GetEpicStories); err != nil {
-			return err
-		}
-	}
 
 	// path param epic-public-id
 	if err := r.SetPathParam("epic-public-id", swag.FormatInt64(o.EpicPublicID)); err != nil {
 		return err
+	}
+
+	if o.IncludesDescription != nil {
+
+		// query param includes_description
+		var qrIncludesDescription bool
+
+		if o.IncludesDescription != nil {
+			qrIncludesDescription = *o.IncludesDescription
+		}
+		qIncludesDescription := swag.FormatBool(qrIncludesDescription)
+		if qIncludesDescription != "" {
+
+			if err := r.SetQueryParam("includes_description", qIncludesDescription); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

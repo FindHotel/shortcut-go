@@ -20,12 +20,9 @@ import (
 // swagger:model StorySearchResults
 type StorySearchResults struct {
 
-	// cursors
-	Cursors []string `json:"cursors"`
-
 	// A list of search results.
 	// Required: true
-	Data []*Story `json:"data"`
+	Data []*StorySearchResult `json:"data"`
 
 	// The URL path and query string for the next page of search results.
 	// Required: true
@@ -122,6 +119,11 @@ func (m *StorySearchResults) contextValidateData(ctx context.Context, formats st
 	for i := 0; i < len(m.Data); i++ {
 
 		if m.Data[i] != nil {
+
+			if swag.IsZero(m.Data[i]) { // not required
+				return nil
+			}
+
 			if err := m.Data[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("data" + "." + strconv.Itoa(i))

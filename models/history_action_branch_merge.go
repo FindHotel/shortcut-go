@@ -22,7 +22,7 @@ type HistoryActionBranchMerge struct {
 
 	// The action of the entity referenced.
 	// Required: true
-	// Enum: [merge]
+	// Enum: ["merge"]
 	Action *string `json:"action"`
 
 	// The type of entity referenced.

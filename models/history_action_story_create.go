@@ -23,7 +23,7 @@ type HistoryActionStoryCreate struct {
 
 	// The action of the entity referenced.
 	// Required: true
-	// Enum: [create]
+	// Enum: ["create"]
 	Action *string `json:"action"`
 
 	// The application URL of the Story.
@@ -99,7 +99,7 @@ type HistoryActionStoryCreate struct {
 
 	// The type of Story; either feature, bug, or chore.
 	// Required: true
-	// Enum: [feature chore bug]
+	// Enum: ["feature","chore","bug"]
 	StoryType *string `json:"story_type"`
 
 	// An array of Story IDs that are the subject of a Story Link relationship.
