@@ -34,7 +34,7 @@ type PullRequestLabel struct {
 
 	// The unique ID of the VCS Label.
 	// Required: true
-	ID *int64 `json:"id"`
+	ID *string `json:"id"`
 
 	// The name of the VCS label.
 	// Required: true
